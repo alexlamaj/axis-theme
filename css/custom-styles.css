@@ -1180,7 +1180,7 @@ body {
 
 
 
-    padding: 200px 120px 100px 120px;
+    padding: 200px 120px 140px 120px;
 
     display: flex;
 
@@ -1560,12 +1560,11 @@ body {
 
 
 
-    padding: 200px 250px 160px 250px;
+    padding: 200px 120px 140px 120px;
 
 
 
 }
-
 
 
 .home-header-text {
@@ -2148,7 +2147,7 @@ body {
 
 
 
-    padding: 200px 120px 100px 120px;
+    padding: 200px 120px 140px 120px;
 
     display: flex;
 
@@ -7010,4 +7009,14 @@ svg:hover > path {
 
 
 
+}
+
+@media screen and (min-width: 1560px) {
+
+    .page-layout {
+
+        padding: 200px 250px 160px 250px;
+
+    }
+    
 }
