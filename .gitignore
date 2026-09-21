@@ -1,0 +1,6 @@
+# Ignore VS Code settings and SFTP password file
+.vscode/
+
+# Ignore OS junk files
+.DS_Store
+Thumbs.db
