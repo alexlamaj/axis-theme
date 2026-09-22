@@ -2140,16 +2140,15 @@ body {
 
     .mobile-header-pr-logo {
 
-
+        width: calc(100% - 10px);
 
         display: flex;
 
         flex-direction: row;
 
+        justify-content: space-between;
+
         align-items: center;
-
-        gap: 20px;
-
 
 
     }
@@ -2190,7 +2189,7 @@ body {
 
         width: 350px;
 
-        height: 100vh;
+        height: 100%;
 
         background-color: var(--color-background);
 
@@ -2218,7 +2217,7 @@ body {
 
     .header-drawer-pr-content {
 
-
+        margin-left: 40px;
 
         height: 100%;
 
@@ -2226,11 +2225,11 @@ body {
 
         flex-direction: column;
 
-        justify-content: space-between;
+        justify-content: center;
 
         align-items: start;
 
-
+        gap: 30px;
 
     }
 
@@ -2268,8 +2267,11 @@ body {
 
         align-items: start;
 
-        gap: 20px;
+        gap: 25px;
 
+        margin: 0px;
+    
+        padding: 0px;
 
 
     }
@@ -3030,7 +3032,7 @@ body {
 
         width: 65%;
 
-        height: 550px;
+        height: 600px;
 
         padding: 20px 30px;
 

@@ -4947,7 +4947,7 @@ svg:hover > path {
 
     .mobile-header-logo {
 
-
+        width: calc(100% - 70px);
 
         padding: 10px 35px;
 
@@ -4988,6 +4988,7 @@ svg:hover > path {
     .header-drawer-content {
 
 
+        margin-left: 40px;
 
         height: 100%;
 
@@ -4995,10 +4996,11 @@ svg:hover > path {
 
         flex-direction: column;
 
-        justify-content: space-between;
+        justify-content: center;
 
         align-items: start;
 
+        gap: 30px;
 
 
     }
@@ -5039,7 +5041,9 @@ svg:hover > path {
 
         gap: 25px;
 
+        margin: 0px;
 
+        padding: 0px;
 
     }
 
