@@ -4923,7 +4923,39 @@ svg:hover > path {
 
     }
 
+    .axis-mobile-logo-width {
 
+        width: 90px;
+        height: 60px;
+
+    }
+
+    .axis-mobile-logo-width img {
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+
+    }
+
+    .axis-mobile-logo-width-slider {
+
+        width: 100px;
+        height: 65px;
+
+    }
+
+    .axis-mobile-logo-width-slider img {
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+
+    }
 
     .mobile-header {
 

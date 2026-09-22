@@ -34,7 +34,7 @@
 
                 <button class="close-drawer"><?php echo axis_icon('left-arrow-white'); ?></button>
 
-                <div><?php echo axis_icon('axis-logo'); ?></div>
+                <div class="axis-mobile-logo-width-slider"><?php echo axis_icon('axis-logo'); ?></div>
 
             </div>
 
@@ -140,7 +140,7 @@
 
             <button class="mobile-toggle"><?php echo axis_icon('hamburger-icon'); ?></button>
 
-            <a href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('axis-logo') ?></a>
+            <a class="axis-mobile-logo-width" href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('axis-logo') ?></a>
 
         </div>
 
