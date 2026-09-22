@@ -2635,7 +2635,7 @@ body {
 
 
 
-    width: 60%;
+    width: 80%;
 
     margin: auto;
 
@@ -7052,6 +7052,12 @@ svg:hover > path {
     .page-layout {
 
         padding: 200px 250px 160px 250px;
+
+    }
+
+    .single-post-wrapper {
+
+        width: 60%;
 
     }
     
