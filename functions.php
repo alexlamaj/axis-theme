@@ -837,7 +837,6 @@ function handle_career_form_submission() {
         wp_die('Please fill in all required fields with a valid email address');
     }
 
-    /*
     $attachments = array();
     $file_url = 'No Files Uploaded!';
 
@@ -867,7 +866,7 @@ function handle_career_form_submission() {
         wp_die('Please upload a CV!');
 
     }
-        */
+    
 
     $post_id = wp_insert_post(array(
         'post_type' => 'application',
@@ -886,7 +885,7 @@ function handle_career_form_submission() {
 
     }
 
-    $to = 'info@axismedical.gr';
+    $to = 'alamaj@fondivita.com';
     $subject = 'New Career Application: ' . $first_name . ' ' . $last_name;
 
     $message = 'First Name: ' . $first_name . "\n";
@@ -901,7 +900,7 @@ function handle_career_form_submission() {
         'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
     );
 
-    $sent = wp_mail($to, $subject, $message, $headers, /*$attachments*/);
+    $sent = wp_mail($to, $subject, $message, $headers, $attachments);
 
     if (!$sent) {
         error_log('wp_mail failed to send career application for ' . $email);
@@ -950,7 +949,7 @@ function handle_contact_form_submission() {
 
     }
 
-    $to = 'info@axismedical.gr';
+    $to = 'alamaj@fondivita.com';
     $subject_email = 'New Contact Form Submission: ' . $first_name . ' ' . $last_name;
 
     $message = 'First Name: ' . $first_name . "\n";
