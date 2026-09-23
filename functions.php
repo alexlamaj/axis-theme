@@ -823,6 +823,10 @@ function axis_render_contact_meta($post) {
 // Application Submission Email Alert //
 function handle_career_form_submission() {
 
+    // --- TEMPORARY CHECK: SEE IF FUNCTION EVEN RUNS ---
+    wp_die('PHP FUNCTION IS RUNNING SUCCESSFULLY!');
+    // --------------------------------------------------
+
     if (!isset($_POST['axis_career_nonce']) || !wp_verify_nonce($_POST['axis_career_nonce'], 'submit_career_form')) {
         wp_die('Security check failed! Please refresh and try again!');
     }
