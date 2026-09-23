@@ -891,14 +891,31 @@ function handle_career_form_submission() {
         'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
     );
 
+    // --- START TEMP DEBUG BLOCK ---
+    global $phpmailer, $ts_mail_error;
+    $ts_mail_error = '';
+
+    add_action('wp_mail_failed', function($wp_error) {
+        global $ts_mail_error;
+        $ts_mail_error = $wp_error->get_error_message();
+    });
+
     $sent = wp_mail($to, $subject, $message, $headers, $attachments);
 
     if (!$sent) {
-        error_log('wp_mail failed to send career application for ' . $email);
+        global $ts_mail_error;
+        echo '<h1>MAIL FAILED TO SEND</h1>';
+        echo '<p><strong>WordPress Mail Error:</strong> ' . esc_html($ts_mail_error) . '</p>';
+        if (isset($phpmailer->ErrorInfo)) {
+            echo '<p><strong>PHPMailer Error Info:</strong> ' . esc_html($phpmailer->ErrorInfo) . '</p>';
+        }
+        exit;
+    } else {
+        echo '<h1>MAIL REPORTED AS SENT BY WORDPRESS!</h1>';
+        echo '<p>WordPress thinks the mail left successfully. Destination was: ' . esc_html($to) . '</p>';
+        exit;
     }
-
-    wp_redirect(add_query_arg('success', '1', wp_get_referer()));
-    exit;
+    // --- END TEMP DEBUG BLOCK ---
 
 }
 add_action('admin_post_submit_career_form', 'handle_career_form_submission');
