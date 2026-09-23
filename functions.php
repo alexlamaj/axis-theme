@@ -876,7 +876,7 @@ function handle_career_form_submission() {
         update_post_meta($post_id, '_applicant_cv', $file_url);
     }
 
-    $to = 'info@axismedical.gr';
+    $to = 'alamaj@axismedical.gr';
     $subject = 'New Career Application: ' . $first_name . ' ' . $last_name;
 
     $message  = 'First Name: ' . $first_name . "\n";
@@ -938,7 +938,7 @@ function handle_contact_form_submission() {
         update_post_meta($post_id, '_contact_message', $message_txt);
     }
 
-    $to = 'info@axismedical.gr';
+    $to = 'alamaj@axismedical.gr';
     $subject_email = 'New Contact Form Submission: ' . $first_name . ' ' . $last_name;
 
     $message  = 'First Name: ' . $first_name . "\n";
