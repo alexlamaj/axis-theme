@@ -828,9 +828,9 @@ function handle_career_form_submission() {
     }
 
     $first_name = isset($_POST['applicant_first_name']) ? sanitize_text_field($_POST['applicant_first_name']) : '';
-    $last_name = isset($_POST['applicant_last_name']) ? sanitize_text_field($_POST['applicant_last_name']) : '';
-    $email = isset($_POST['applicant_email']) ? sanitize_email($_POST['applicant_email']) : '';
-    $phone = isset($_POST['applicant_phone']) ? sanitize_text_field($_POST['applicant_phone']) : '';
+    $last_name  = isset($_POST['applicant_last_name']) ? sanitize_text_field($_POST['applicant_last_name']) : '';
+    $email      = isset($_POST['applicant_email']) ? sanitize_email($_POST['applicant_email']) : '';
+    $phone      = isset($_POST['applicant_phone']) ? sanitize_text_field($_POST['applicant_phone']) : '';
     $profession = isset($_POST['applicant_profession']) ? sanitize_text_field($_POST['applicant_profession']) : '';
 
     if (empty($first_name) || empty($last_name) || empty($email) || !is_email($email)) {
@@ -838,57 +838,48 @@ function handle_career_form_submission() {
     }
 
     $attachments = array();
-    $file_url = 'No Files Uploaded!';
+    $file_url    = 'No Files Uploaded!';
 
     if (!empty($_FILES['applicant_cv']['name'])) {
 
         require_once(ABSPATH . 'wp-admin/includes/file.php');
 
-        $uploaded_file = $_FILES['applicant_cv'];
+        $uploaded_file    = $_FILES['applicant_cv'];
         $upload_overrides = array('test_form' => false);
 
         $movefile = wp_handle_upload($uploaded_file, $upload_overrides);
 
         if ($movefile && !isset($movefile['error'])) {
-
             $file_path   = $movefile['file'];
             $file_url    = $movefile['url'];
             $attachments = array($file_path);
-
         } else {
-
-            wp_die('Error Uploading CV: ' . $movefile['error']);
-
+            wp_die('Error Uploading CV: ' . esc_html($movefile['error']));
         }
 
     } else {
-
         wp_die('Please upload a CV!');
-
     }
-    
 
     $post_id = wp_insert_post(array(
-        'post_type' => 'application',
-        'post_title' => $first_name . ' ' . $last_name,
+        'post_type'   => 'application',
+        'post_title'  => $first_name . ' ' . $last_name,
         'post_status' => 'publish'
     ));
 
     if ($post_id) {
-
         update_post_meta($post_id, '_applicant_first_name', $first_name);
         update_post_meta($post_id, '_applicant_last_name', $last_name);
         update_post_meta($post_id, '_applicant_email', $email);
         update_post_meta($post_id, '_applicant_phone', $phone);
         update_post_meta($post_id, '_applicant_profession', $profession);
         update_post_meta($post_id, '_applicant_cv', $file_url);
-
     }
 
-    $to = 'alamaj@fondivita.com';
+    $to = 'info@axismedical.gr';
     $subject = 'New Career Application: ' . $first_name . ' ' . $last_name;
 
-    $message = 'First Name: ' . $first_name . "\n";
+    $message  = 'First Name: ' . $first_name . "\n";
     $message .= 'Last Name: ' . $last_name . "\n";
     $message .= 'Email Address: ' . $email . "\n";
     $message .= 'Phone Number: ' . $phone . "\n";
@@ -906,7 +897,7 @@ function handle_career_form_submission() {
         error_log('wp_mail failed to send career application for ' . $email);
     }
 
-    wp_redirect(add_query_arg('submission', 'success', wp_get_referer()));
+    wp_redirect(add_query_arg('success', '1', wp_get_referer()));
     exit;
 
 }
@@ -921,11 +912,11 @@ function handle_contact_form_submission() {
         wp_die('Security check failed! Please refresh and try again!');
     }
 
-    $first_name = isset($_POST['contact_first_name']) ? sanitize_text_field($_POST['contact_first_name']) : '';
-    $last_name = isset($_POST['contact_last_name']) ? sanitize_text_field($_POST['contact_last_name']) : '';
-    $company = isset($_POST['contact_company']) ? sanitize_text_field($_POST['contact_company']) : '';
-    $subject = isset($_POST['contact_subject']) ? sanitize_text_field($_POST['contact_subject']) : '';
-    $email = isset($_POST['contact_email']) ? sanitize_email($_POST['contact_email']) : '';
+    $first_name  = isset($_POST['contact_first_name']) ? sanitize_text_field($_POST['contact_first_name']) : '';
+    $last_name   = isset($_POST['contact_last_name']) ? sanitize_text_field($_POST['contact_last_name']) : '';
+    $company     = isset($_POST['contact_company']) ? sanitize_text_field($_POST['contact_company']) : '';
+    $subject     = isset($_POST['contact_subject']) ? sanitize_text_field($_POST['contact_subject']) : '';
+    $email       = isset($_POST['contact_email']) ? sanitize_email($_POST['contact_email']) : '';
     $message_txt = isset($_POST['contact_message']) ? sanitize_textarea_field($_POST['contact_message']) : '';
 
     if (empty($first_name) || empty($last_name) || empty($email) || !is_email($email)) {
@@ -933,26 +924,24 @@ function handle_contact_form_submission() {
     }
 
     $post_id = wp_insert_post(array(
-        'post_type' => 'contact',
-        'post_title' => $subject . ' ' . $last_name . ' ' . $first_name,
+        'post_type'   => 'contact',
+        'post_title'  => $subject . ' - ' . $last_name . ' ' . $first_name,
         'post_status' => 'publish'
     ));
 
     if ($post_id) {
-
         update_post_meta($post_id, '_contact_first_name', $first_name);
         update_post_meta($post_id, '_contact_last_name', $last_name);
         update_post_meta($post_id, '_contact_company', $company);
         update_post_meta($post_id, '_contact_subject', $subject);
         update_post_meta($post_id, '_contact_email', $email);
         update_post_meta($post_id, '_contact_message', $message_txt);
-
     }
 
-    $to = 'alamaj@fondivita.com';
+    $to = 'info@axismedical.gr';
     $subject_email = 'New Contact Form Submission: ' . $first_name . ' ' . $last_name;
 
-    $message = 'First Name: ' . $first_name . "\n";
+    $message  = 'First Name: ' . $first_name . "\n";
     $message .= 'Last Name: ' . $last_name . "\n";
     $message .= 'Company: ' . ($company ? $company : 'No Company Mentioned') . "\n";
     $message .= 'Subject: ' . $subject . "\n";
@@ -970,13 +959,12 @@ function handle_contact_form_submission() {
         error_log('wp_mail failed to send contact submission for ' . $email);
     }
 
-    wp_redirect(add_query_arg('submission', 'success', wp_get_referer()));
+    wp_redirect(add_query_arg('success', '1', wp_get_referer()));
     exit;
 
 }
 add_action('admin_post_submit_contact_form', 'handle_contact_form_submission');
 add_action('admin_post_nopriv_submit_contact_form', 'handle_contact_form_submission');
-
 
 // Load Elementor Templates //
 
