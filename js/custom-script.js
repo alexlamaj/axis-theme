@@ -839,4 +839,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    const contactSuccess = document.getElementById('contactSuccessMsg');
+
+    if (!contactForm) {
+        return;
+    }
+
+    contactForm.addEventListener('submit', function (e) {
+
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        formData.append('action', 'submit_contact_form');
+
+        const ajaxUrl = typeof demo_ajax_obj !== 'undefined' ? demo_ajax_obj.ajax_url : '/wp-admin/admin-ajax.php';
+
+        fetch(ajaxUrl, {
+
+            method: 'POST',
+            body: formData
+
+        }).then(res => res.json()).then(response => {
+
+            if (response.success) {
+
+                if (contactSuccess) {
+                    contactSuccess.style.display = 'flex';
+                }
+
+                contactForm.reset();
+                contactSuccess.style.display = 'none';
+
+            } else {
+
+                alert(response.data || 'Error submitting contact message! Please try again!');
+
+            }
+
+        }).catch(() => {
+
+            alert('Network error!');
+
+        });
+
+    });
+
 });

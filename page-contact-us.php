@@ -35,24 +35,16 @@
 
 
                 <!-- Success Message -->
-
-                <?php if (isset($_GET['success']) && $_GET['success'] === 'contact') : ?>
-
-                    <div class="success-message">
-
-                        <?php echo axis_icon('success-icon'); ?>
-
-                        <div class="success-text"><?php _e('Message Sent!', 'axis-theme'); ?></div>
-
-                    </div>
-
-                <?php endif; ?>
+                <div id="contactSuccessMsg" class="success-message" style="display: none">
+                    <?php echo axis_icon('success-icon'); ?>
+                    <div class="success-text"><?php _e('Message Sent!', 'axis-theme'); ?></div>
+                </div>
 
 
 
                 <!-- Contact Form -->
 
-                <form class="form" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST" enctype="multipart/form-data">
+                <form class="form" id="contactForm" enctype="multipart/form-data">
 
 
 

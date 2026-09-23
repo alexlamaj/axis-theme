@@ -915,6 +915,68 @@ add_action('wp_ajax_nopriv_submit_career_form', 'handle_career_form_submission')
 /////////////////////////////////////////////////////////////////////////
 
 // Contact Sumbission Email Alert //
+function handle_contact_form_submission() {
+
+    if (!isset($_POST['axis_contact_nonce']) || !wp_verify_nonce($_POST['axis_contact_nonce'], 'submit_contact_form')) {
+        wp_send_json_error('Security Check Failed!');
+    }
+
+    $first_name = isset($_POST['contact_first_name']) ? sanitize_text_field($_POST['contact_first_name']) : '';
+    $last_name = isset($_POST['contact_last_name']) ? sanitize_text_field($_POST['contact_last_name']) : '';
+    $company = isset($_POST['contact_company']) ? sanitize_text_field($_POST['contact_company']) : '';
+    $subject = isset($_POST['contact_subject']) ? sanitize_text_field($_POST['contact_subject']) : '';
+    $email = isset($_POST['contact_email']) ? sanitize_email($_POST['contact_email']) : '';
+    $message_txt = isset($_POST['contact_message']) ? sanitize_textarea_field($_POST['contact_message']) : '';
+
+    if (empty($first_name) || empty($last_name) || empty($email) || !is_email($email)) {
+        wp_send_json_error('Please fill in all required fields!');
+    }
+
+    $post_id = wp_insert_post(array(
+        'post_type' => 'contact',
+        'post_title' => $first_name . ' ' . $last_name,
+        'post_status' => 'publish'
+    ));
+
+    if ($post_id) {
+
+        update_post_meta($post_id, '_contact_first_name', $first_name);
+        update_post_meta($post_id, '_contact_last_name', $last_name);
+        update_post_meta($post_id, '_contact_company', $company);
+        update_post_meta($post_id, '_contact_subject', $subject);
+        update_post_meta($post_id, '_contact_email', $email);
+        update_post_meta($post_id, '_contact_message', $message_txt);
+
+    }
+
+    $to = 'info@axismedical.gr';
+    $subject_email = 'New Contact Message: ' . $subject;
+
+    $message = "First Name: " . $first_name . "\n";
+    $message .= "Last Name: " . $last_name . "\n";
+    $message .= "Company: " . (($company) ? $company : 'No Company Provided!') . "\n";
+    $message .= "Email Address: " . $email . "\n";
+    $message .= "Message: " . $message_txt . "\n";
+
+    $headers = array(
+        'Content-Type: text/plain; charset=UTF-8',
+        'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
+    );
+
+    $sent = wp_mail($to, $subject_email, $message, $headers);
+
+    if (!$sent) {
+
+        error_log('wp_mail failed to send contact message for ' . $email);
+        wp_send_json_error('Contact Message saved, but email verification failed!');
+
+    }
+
+    wp_send_json_success('Your contact message has been submitted successfully!');
+
+}
+add_action('wp_ajax_submit_contact_form', 'handle_contact_form_submission');
+add_action('wp_ajax_nopriv_submit_contact_form', 'handle_contact_form_submission');
 /////////////////////////////////////////////////////////////////////////
 
 // Load Elementor Templates //
