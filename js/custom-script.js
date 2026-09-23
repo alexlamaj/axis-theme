@@ -525,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(() => {
                 if (feedback) {
-                    feedback.classList.add('error'); // Fixed syntax error here
+                    feedback.classList.add('error');
                     feedback.textContent = 'Network Error. Please try again later';
                 }
             });
