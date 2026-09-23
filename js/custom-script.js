@@ -788,3 +788,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
+// Applications and Contact Forms Subsmissions AJAX //
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Career Form
+    const careerForm = document.getElementById('careerForm');
+    const careerSuccess = document.getElementById('careerSuccessMsg');
+
+    if (!careerForm) {
+        return;
+    }
+
+    careerForm.addEventListener('submit', function (e) {
+
+        e.preventDefault();
+
+        const formData = new FormData(careerForm);
+        formData.append('action', 'submit_career_form');
+
+        const ajaxUrl = typeof demo_ajax_obj !== 'undefined' ? demo_ajax_obj.ajax_url : '/wp-admin/admin-ajax.php';
+
+        fetch(ajaxUrl, {
+
+            method: 'POST',
+            body: formData
+        
+        }).then(res => res.json()).then(response => {
+
+            if (response.success) {
+
+                if (careerSuccess) {
+                    careerSuccess.style.display = 'flex';
+                }
+                
+                careerForm.reset();
+                careerForm.style.display = 'none';
+
+            } else {
+
+                alert(response.data || 'Error submitting application! Please try again!');
+
+            }
+
+        }).catch(() => {
+
+            alert('Network error!');
+
+        });
+
+    });
+
+});
