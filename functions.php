@@ -900,11 +900,19 @@ function handle_career_form_submission() {
         'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
     );
 
-    wp_mail($to, $subject, $message, $headers, $attachments);
+    $sent = wp_mail($to, $subject, $message, $headers);
 
-    wp_redirect(add_query_arg('submission', 'success', wp_get_referer()));
 
-    exit;
+
+    if ($sent) {
+
+        wp_send_json_success('Thank you! Your request was submitted successfully!');
+
+    } else {
+
+        wp_send_json_error('Server email delivery failed! Please try again later.');
+
+    }
 
 }
 add_action('admin_post_submit_career_form', 'handle_career_form_submission');
@@ -962,11 +970,19 @@ function handle_contact_form_submission() {
         'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
     );
 
-    wp_mail($to, $subject_email, $message, $headers);
+    $sent = wp_mail($to, $subject, $message, $headers);
 
-    wp_redirect(add_query_arg('submission', 'success', wp_get_referer()));
 
-    exit;
+
+    if ($sent) {
+
+        wp_send_json_success('Thank you! Your request was submitted successfully!');
+
+    } else {
+
+        wp_send_json_error('Server email delivery failed! Please try again later.');
+
+    }
 
 }
 add_action('admin_post_submit_contact_form', 'handle_contact_form_submission');
