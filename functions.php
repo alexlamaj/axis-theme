@@ -528,7 +528,9 @@ function axis_careers_form_sub() {
 
 
 
-    if (!isset($_POST['axis_career_nonce']) || !wp_verify_nonce($_POST['axis_career_nonce'], 'submit_career_form')) wp_die('Security Check failed!');
+    if (!isset($_POST['axis_career_nonce']) || !wp_verify_nonce($_POST['axis_career_nonce'], 'submit_career_form')) {
+        wp_die('Security Check failed!');
+    }
 
 
 
@@ -883,7 +885,7 @@ function handle_career_form_submission() {
     }
 
     $to = 'info@axismedical.gr';
-    $subject = 'New Career Application' . $first_name . ' ' . $last_name;
+    $subject = 'New Career Application: ' . $first_name . ' ' . $last_name;
 
     $message = 'First Name: ' . $first_name . "\n";
     $message .= 'Last Name: ' . $last_name . "\n";
@@ -894,6 +896,7 @@ function handle_career_form_submission() {
 
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
+        'From: Axis Medical <info@axismedical.gr>',
         'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
     );
 
@@ -955,6 +958,7 @@ function handle_contact_form_submission() {
 
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
+        'From: Axis Medical <info@axismedical.gr>',
         'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
     );
 
@@ -1571,6 +1575,7 @@ function demo_request_submission() {
 
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
+        'From: Axis Medical <info@axismedical.gr>',
         'Reply-To: ' . $name . ' <' . $email . '>'
     );
 
