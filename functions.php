@@ -837,6 +837,7 @@ function handle_career_form_submission() {
         wp_die('Please fill in all required fields with a valid email address');
     }
 
+    /*
     $attachments = array();
     $file_url = 'No Files Uploaded!';
 
@@ -866,6 +867,7 @@ function handle_career_form_submission() {
         wp_die('Please upload a CV!');
 
     }
+        */
 
     $post_id = wp_insert_post(array(
         'post_type' => 'application',
@@ -896,11 +898,10 @@ function handle_career_form_submission() {
 
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
-        'From: Axis Medical <info@axismedical.gr>',
         'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
     );
 
-    $sent = wp_mail($to, $subject, $message, $headers, $attachments);
+    $sent = wp_mail($to, $subject, $message, $headers, /*$attachments*/);
 
     if (!$sent) {
         error_log('wp_mail failed to send career application for ' . $email);
@@ -961,7 +962,6 @@ function handle_contact_form_submission() {
 
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
-        'From: Axis Medical <info@axismedical.gr>',
         'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
     );
 
