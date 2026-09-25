@@ -1,6 +1,8 @@
 <?php get_header(); ?>
 
-
+/*
+Template Name: Contact Us Page
+*/
 
 <main class="main-layout site-main-content">
 

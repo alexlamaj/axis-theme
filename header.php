@@ -124,7 +124,13 @@
 
 
 
-        <a href="<?php echo esc_url(home_url('/contact-us/')); ?>" class="btn-outline"><?php _e('Contact Us', 'axis-theme'); ?></a>
+        <a href="<?php 
+                if ( function_exists('pll_current_language') && pll_current_language() === 'el' ) {
+                    echo esc_url( home_url( '/el/επικοινωνία/' ) );
+                } else {
+                    echo esc_url( home_url( '/contact-us/' ) );
+                }
+        ?>" class="btn-outline"><?php _e('Contact Us', 'axis-theme'); ?></a>
 
 
 

@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         '.axis-footer',
 
-        'img',
+        'img:not(.lang-flag)',
 
         'p',
 

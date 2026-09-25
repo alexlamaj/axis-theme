@@ -1,6 +1,8 @@
 <?php get_header(); ?>
 
-
+/*
+Template Name: Company Page
+*/
 
 <main class="main-layout site-main-content">
 
@@ -56,7 +58,14 @@
 
             <div class="elementor-custom-tab custom-tab-active">
 
-                <?php echo axis_get_elementor_templates(483); ?>
+                <?php
+                    if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                        echo axis_get_elementor_templates(10895);
+                    } else {
+                        echo axis_get_elementor_templates(483);
+                    }
+                ?>
+
 
             </div>
 
@@ -66,7 +75,13 @@
 
             <div class="elementor-custom-tab">
 
-                <?php echo axis_get_elementor_templates(485); ?>
+                <?php
+                    if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                        echo axis_get_elementor_templates(10887);
+                    } else {
+                        echo axis_get_elementor_templates(485);
+                    }
+                ?>
 
             </div>
 
@@ -76,7 +91,13 @@
 
             <div class="elementor-custom-tab">
 
-                <?php echo axis_get_elementor_templates(484); ?>
+                <?php
+                    if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                        echo axis_get_elementor_templates(10892);
+                    } else {
+                        echo axis_get_elementor_templates(484);
+                    }
+                ?>
 
             </div>
 
@@ -86,14 +107,26 @@
 
             <div class="elementor-custom-tab">
 
-                <?php echo axis_get_elementor_templates(486); ?>
+                <?php
+                    if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                        echo axis_get_elementor_templates(10890);
+                    } else {
+                        echo axis_get_elementor_templates(486);
+                    }
+                ?>
 
             </div>
 
             <!-- Company - Certifications Template -->
             <div class="elementor-custom-tab">
 
-                <?php echo axis_get_elementor_templates(10127); ?>
+                <?php
+                    if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                        echo axis_get_elementor_templates(10884);
+                    } else {
+                        echo axis_get_elementor_templates(10127);
+                    }
+                ?>
 
             </div>
 

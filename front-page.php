@@ -38,7 +38,13 @@
 
                         <div class="slide-heading-sub"><?php _e('Architecture & Building', 'axis-theme'); ?></div>
 
-                        <a href="<?php echo esc_url(home_url('/turn-key-solutions/')); ?>" class="btn-outline"><?php _e('Learn More', 'axis-theme'); ?></a>
+                        <a href="<?php
+                            if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                                echo esc_url(home_url('/el/ολιστική-λύση'));
+                            } else {
+                                echo esc_url(home_url('/turn-key-solutions/'));
+                            }
+                        ?>" class="btn-outline"><?php _e('Learn More', 'axis-theme'); ?></a>
 
 
 
@@ -188,7 +194,13 @@
 
                         <div class="text-20"><?php _e('Axis Medical is a planning, construction, and trading company with many years of experience in the construction market. Our General Commercial Register Number is 128456304000. We specialize in healthcare sector such as Healthcare Facilities, Operating Theatres, Intensive Care Units (ICU), IVF Units, and more', 'axis-theme'); ?></div>
 
-                        <a href="<?php echo esc_url(home_url('/company/')); ?>" class="btn-submit"><?php _e('View More', 'axis-theme'); ?></a>
+                        <a href="<?php
+                            if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                                echo esc_url(home_url('/el/εταιρία/'));
+                            } else {
+                                echo esc_url(home_url('/company/'));
+                            }
+                        ?>" class="btn-submit"><?php _e('View More', 'axis-theme'); ?></a>
 
                     </div>
 
@@ -306,7 +318,13 @@
 
 
 
-                            <a href="<?php echo esc_url(home_url('/services/')); ?>" class="post-link"><?php _e('Learn More', 'axis-theme'); ?></a>
+                            <a href="<?php
+                                if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                                    echo esc_url(home_url('/el/υπηρεσίες/'));
+                                } else {
+                                    echo esc_url(home_url('/services/'));
+                                }
+                            ?>" class="post-link"><?php _e('Learn More', 'axis-theme'); ?></a>
 
 
 
@@ -338,7 +356,13 @@
 
 
 
-                            <a href="<?php echo esc_url(home_url('/services/')); ?>" class="post-link"><?php _e('Learn More', 'axis-theme'); ?></a>
+                            <a href="<?php
+                                if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                                    echo esc_url(home_url('/el/υπηρεσίες/'));
+                                } else {
+                                    echo esc_url(home_url('/services/'));
+                                }
+                            ?>" class="post-link"><?php _e('Learn More', 'axis-theme'); ?></a>
 
 
 
@@ -370,7 +394,13 @@
 
 
 
-                            <a href="<?php echo esc_url(home_url('/services/')); ?>" class="post-link"><?php _e('Learn More', 'axis-theme'); ?></a>
+                            <a href="<?php
+                                if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                                    echo esc_url(home_url('/el/υπηρεσίες/'));
+                                } else {
+                                    echo esc_url(home_url('/services/'));
+                                }
+                            ?>" class="post-link"><?php _e('Learn More', 'axis-theme'); ?></a>
 
 
 
@@ -446,7 +476,13 @@
 
 
 
-                        <a href="<?php echo esc_url(home_url('/project/')); ?>" class="btn-submit"><?php _e('View All', 'axis-theme'); ?></a>
+                        <a href="<?php
+                                if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                                    echo esc_url(home_url('/el/project/'));
+                                } else {
+                                    echo esc_url(home_url('/project/'));
+                                }
+                            ?>" class="btn-submit"><?php _e('View All', 'axis-theme'); ?></a>
 
 
 
@@ -568,7 +604,13 @@
 
 
 
-                <div style="display: flex; justify-content: center; align-items: center;"><a href="<?php echo esc_url(home_url('/blog/')); ?>" class="btn-submit"><?php _e('View All', 'axis-theme'); ?></a></div>
+                <div style="display: flex; justify-content: center; align-items: center;"><a href="<?php
+                                if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                                    echo esc_url(home_url('/el/blog-2/'));
+                                } else {
+                                    echo esc_url(home_url('/blog/'));
+                                }
+                            ?>" class="btn-submit"><?php _e('View All', 'axis-theme'); ?></a></div>
 
 
 

@@ -1,6 +1,8 @@
 <?php get_header(); ?>
 
-
+/*
+Template Name: Careers Page
+*/
 
 <main class="main-layout site-main-content">
 

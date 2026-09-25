@@ -1626,83 +1626,39 @@ add_action('after_setup_theme', 'axis_load_theme_textdomain');
 
 
 // Language Switcher Template //
-
 function axis_language_switcher() {
 
-
-
     $languages = apply_filters('wpml_active_languages', NULL, array(
-
         'skip_missing' => 0,
-
-        'orderby' => 'code'
-
+        'orderby'      => 'code'
     ));
-
-
 
     if (!empty($languages)) : ?>
 
+        <div class="floating-lang">
 
+            <div class="lang-card">
 
-            <div class="floating-lang">
+                <?php foreach($languages as $lang) :
 
+                    $code = ($lang['language_code'] === 'el') ? 'GR' : strtoupper($lang['language_code']);
+                    $active_class = $lang['active'] ? 'lang-active' : '';
 
+                ?>
 
-                <div class="lang-card">
+                    <a href="<?php echo esc_url($lang['url']); ?>" class="lang-item <?php echo esc_attr($active_class); ?>">
+                        <img src="<?php echo esc_url($lang['country_flag_url']); ?>" alt="<?php echo esc_attr($code); ?>" class="lang-flag">
+                        <span class="lang-code"><?php echo esc_html($code); ?></span>
+                    </a>
 
-
-
-                    <?php foreach($languages as $lang) :
-
-                        $code = ($lang['language_code'] === 'el') ? 'GR' : strtoupper($lang['language_code']);
-
-                    ?>
-
-
-
-                    <?php if ($lang['active']) : ?>
-
-                        <span class="lang-item lang-active">
-
-                            <img src="<?php echo esc_url($lang['country_flag_url']); ?>" alt="<?php echo esc_attr($code) ?>" class="lang-flag">
-
-                            <span class="lang-code"><?php echo esc_html($code); ?></span>
-
-                        </span>
-
-
-
-                    <?php endif; ?>
-
-
-
-                    <?php if ($lang !== end($languages)) : ?>
-
-                        <span class="lang-separator"></span>
-
-                    <?php endif ?>
-
-
-
-                    <?php endforeach; ?>
-
-
-
-                </div>
-
-
+                <?php endforeach; ?>
 
             </div>
 
-
+        </div>
 
     <?php endif;
 
-
-
 }
-
 add_action('wp_footer', 'axis_language_switcher');
-
 /////////////////////////////////////////////////////////////////////////
