@@ -418,36 +418,26 @@ function axis_icon($slug, $custom_class = '') {
 
 /////////////////////////////////////////////////////////////////////////
 
-
-
-// Fix MAMP buffer handler //
-
-remove_action('shutdown', 'wp_ob_end_flush_all', 1);
-
-
-
-/////////////////////////////////////////////////////////////////////////
-
-
-
 // Identify Post Taxonomies for Custom Post Type pages (News and Projects) //
 
 function axis_post_categories() {
 
+    $post_id   = get_the_ID();
+    $post_type = get_post_type($post_id);
 
+    if (!$post_type) return;
 
-    $taxonomy = get_object_taxonomies(get_post_type());
+    $taxonomies = get_object_taxonomies($post_type);
 
-    
+    $exclude = array('language', 'post_translations', 'term_language', 'term_translations', 'post_format');
+    $valid_taxonomies = array_diff($taxonomies, $exclude);
 
-    if (!empty($taxonomy)) {
+    if (!empty($valid_taxonomies)) {
 
-        the_terms(get_the_ID(), $taxonomy[0], '', ' ');
+        $target_taxonomy = in_array('category', $valid_taxonomies) ? 'category' : reset($valid_taxonomies);
+        the_terms($post_id, $target_taxonomy, '', ' ');
 
     }
-
-
-
 }
 
 /////////////////////////////////////////////////////////////////////////
