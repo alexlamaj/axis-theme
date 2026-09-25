@@ -26,7 +26,7 @@
 
                     
 
-                    <?php echo axis_icon('Rectangle 1'); ?>
+                    <?php echo axis_icon('OT_WHITE'); ?>
 
 
 
@@ -208,7 +208,7 @@
 
                     <div class="section-column">
 
-                        <div class="section-image"><?php echo axis_icon('DSCN3493'); ?></div>
+                        <div class="section-image"><?php echo axis_icon('IATREIO_54_alogo'); ?></div>
 
                     </div>
 
