@@ -26,7 +26,7 @@
 
                     
 
-                    <?php echo axis_icon('OT_WHITE'); ?>
+                    <?php echo axis_icon('DSC03536'); ?>
 
 
 
