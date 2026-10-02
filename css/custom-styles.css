@@ -1316,28 +1316,6 @@ body {
 
     height: 100%;
 
-    opacity: 0;
-
-    visibility: hidden;
-
-
-
-}
-
-
-
-.slide-active {
-
-
-
-    opacity: 1;
-
-    visibility: visible;
-
-    z-index: 1;
-
-
-
 }
 
 
@@ -1375,8 +1353,6 @@ body {
     object-fit: cover;
 
     object-position: center;
-
-
 
 }
 
@@ -1451,110 +1427,6 @@ body {
 
 
 }
-
-
-
-.slider-btn {
-
-
-
-    position: absolute;
-
-    top: 45%;
-
-    padding: 5px;
-
-    background-color: rgba(255, 255, 255, 0.7);
-
-    backdrop-filter: blur(12px);
-
-    border: none;
-
-    border-radius: var(--border-radius-lg);
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    cursor: pointer;
-
-    z-index: 10;
-
-
-
-}
-
-
-
-.slider-btn:hover {
-
-
-
-    background-color: var(--color-background);
-
-    transition: all 0.2s ease;
-
-
-
-}
-
-
-
-.slider-btn:active {
-
-
-
-    transform: translateY(3px);
-
-    transition: all 0.3s;
-
-
-
-}
-
-
-
-.slider-btn svg {
-
-
-
-    display: block;
-
-    object-fit: cover;
-
-    object-position: center;
-
-
-
-}
-
-
-
-.prev-slide {
-
-
-
-    left: 40px;
-
-
-
-}
-
-
-
-.next-slide {
-
-
-
-    right: 40px;
-
-
-
-}
-
-
 
 .page-layout {
 
@@ -2425,10 +2297,9 @@ body {
 
     gap: 10px;
 
-
+    z-index: 20;
 
 }
-
 
 
 .btn-drop {
@@ -2511,17 +2382,22 @@ body {
 
     position: absolute;
 
-    transform: translateY(8px);
+    top: calc(100% + 20px);
+    left: 50%;
 
-    transition: all 0.3s ease-in-out;
+    transform: translateY(8px) translateX(-50%);
 
-    z-index: 100;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
 
-
+    pointer-events: none;
 
 }
 
+.subcat-dropdown.open {
 
+    z-index: 100;
+
+}
 
 .subcat-dropdown.open .dropdown-menu {
 
@@ -2531,9 +2407,9 @@ body {
 
     visibility: visible;
 
-    transform: translateY(0px);
+    transform: translateY(0px) translateX(-50%);
 
-    top: calc(100% + 20px);
+    pointer-events: auto;
 
 
 

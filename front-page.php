@@ -8,61 +8,33 @@
 
     <!-- Slider -->
 
-    <div class="hero-slider" id="hero-slider">
+    <div class="hero-slider">
 
+        <div class="slide">
 
+            <div class="slide-background">
 
-        <div class="slider-wrapper">
+                <?php echo axis_icon('DSC03536'); ?>
 
+                <div class="slide-content">
 
+                    <div class="slide-heading"><?php _e('Turn-Key Solutions in Healthcare Units', 'axis-theme'); ?></div>
 
-            <!-- Slide 1 -->
+                    <div class="slide-heading-sub"><?php _e('Architecture & Building', 'axis-theme'); ?></div>
 
-            <div class="slide slide-active" data-index="0">
-
-
-
-                <div class="slide-background">
-
-                    
-
-                    <?php echo axis_icon('DSC03536'); ?>
-
-
-
-                    <div class="slide-content">
-
-
-
-                        <div class="slide-heading"><?php _e('Turn-Key Solutions in Healthcare Units', 'axis-theme'); ?></div>
-
-                        <div class="slide-heading-sub"><?php _e('Architecture & Building', 'axis-theme'); ?></div>
-
-                        <a href="<?php
-                            if (function_exists('pll_current_language') && pll_current_language() === 'el') {
-                                echo esc_url(home_url('/el/ολιστική-λύση'));
-                            } else {
-                                echo esc_url(home_url('/turn-key-solutions/'));
-                            }
-                        ?>" class="btn-outline"><?php _e('Learn More', 'axis-theme'); ?></a>
-
-
-
-                    </div>
-
-
+                    <a href="<?php
+                        if (function_exists('pll_current_language') && pll_current_language() === 'el') {
+                            echo esc_url(home_url('/el/ολιστική-λύση'));
+                        } else {
+                            echo esc_url(home_url('/turn-key-solutions/'));
+                        }
+                    ?>" class="btn-outline"><?php _e('Learn More', 'axis-theme'); ?></a>
 
                 </div>
 
-
-
             </div>
 
-        
-
         </div>
-
-
 
     </div>
 
