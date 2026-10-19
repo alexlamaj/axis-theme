@@ -22,9 +22,15 @@ function axis_theme_setup() {
 
         'footer_nav' => __('Footer Nav Menu', 'axis-theme'),
 
-        'useful_links' => __('Useful Links', 'axis-theme')
+        'useful_links' => __('Useful Links', 'axis-theme'),
 
+        'or_nav' => __('Operating Rooms Nav', 'axis-theme'),
 
+        'or_footer' => __('OR Footer Nav', 'axis-theme'),
+
+        'axis_nav' => __('Healthcare Nav', 'axis-theme'),
+
+        'policies' => __('Policies', 'axis-theme')
 
     ));
 
@@ -66,10 +72,36 @@ add_action('wp_enqueue_scripts', 'axis_enqueue_scripts');
 
 /////////////////////////////////////////////////////////////////////////
 
+// CSS and JavaScript Implementation for Operating Rooms Sub-Sites //
+function axis_enqueue_or_assets() {
 
+    $current_template = get_page_template_slug();
+
+    if ($current_template && strpos($current_template, 'operating-rooms/') === 0) {
+
+        wp_enqueue_style(
+            'axis-or-css',
+            get_template_directory_uri() . '/css/custom-styles-or.css',
+            array(),
+            time(),
+            'all'
+        );
+
+        wp_enqueue_script(
+            'axis-or-js',
+            get_template_directory_uri() . '/js/custom-script-or.js',
+            array(),
+            time(),
+            true
+        );
+
+    }
+
+}
+add_action('wp_enqueue_scripts', 'axis_enqueue_or_assets');
+/////////////////////////////////////////////////////////////////////////
 
 // Custom Post Types for Projects Page and News Page //
-
 function axis_register_custom_post_types() {
 
 
@@ -223,13 +255,11 @@ function axis_register_custom_post_types() {
 
 
 }
-
 add_action('init', 'axis_register_custom_post_types');
 
 
 
 // Custom Meta Box for Projects (Client and Location) //
-
 function axis_projects_meta_boxes() {
 
 
@@ -263,7 +293,6 @@ add_action('add_meta_boxes', 'axis_projects_meta_boxes');
 
 
 // Render the input fields for Client and Location //
-
 function axis_render_project_meta_box($post) {
 
 
@@ -309,7 +338,6 @@ function axis_render_project_meta_box($post) {
 
 
 // Saving the values of Client and Location //
-
 function axis_save_project_meta($post_id) {
 
 
@@ -345,15 +373,298 @@ function axis_save_project_meta($post_id) {
 };
 
 add_action('save_post', 'axis_save_project_meta');
-
 /////////////////////////////////////////////////////////////////////////
 
+// CPT for Operating Rooms Registration //
+function axis_operating_rooms_cpt() {
+
+    $labels = array(
+        'name'               => _x( 'Operating Rooms', 'Post Type General Name', 'axis-theme' ),
+        'singular_name'      => _x( 'Operating Room', 'Post Type Singular Name', 'axis-theme' ),
+        'menu_name'          => __( 'Operating Rooms', 'axis-theme' ),
+        'name_admin_bar'     => __( 'Operating Room', 'axis-theme' ),
+        'all_items'          => __( 'All Operating Rooms', 'axis-theme' ),
+        'add_new_item'       => __( 'Add New Operating Room', 'axis-theme' ),
+        'new_item'           => __( 'New Operating Room', 'axis-theme' ),
+        'edit_item'          => __( 'Edit Operating Room', 'axis-theme' ),
+        'update_item'        => __( 'Update Operating Room', 'axis-theme' ),
+        'view_item'          => __( 'View Operating Room', 'axis-theme' ),
+        'search_items'       => __( 'Search Operating Rooms', 'axis-theme' ),
+        'not_found'          => __( 'Not found', 'axis-theme' ),
+        'not_found_in_trash' => __( 'Not found in trash', 'axis-theme' ),
+    );
+
+    $args = array(
+        'label'               => __( 'Operating Room', 'axis-theme' ),
+        'labels'              => $labels,
+        'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
+        'hierarchical'        => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-portfolio',
+        'show_in_admin_bar'   => true,
+        'show_in_nav_menus'   => true,
+        'can_export'          => true,
+        'has_archive'         => true,
+        'rewrite'             => array( 'slug' => 'operating-rooms' ),
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'capability_type'     => 'post',
+        'show_in_rest'        => true,
+    );
+
+    register_post_type( 'operating-room', $args );
+
+}
+add_action( 'init', 'axis_operating_rooms_cpt', 0 );
 
 
+// Operating Rooms CPT Meta Boxes //
+function or_cpt_meta_boxes() {
 
+    add_meta_box( 'or_details_meta_box', __( 'Operating Room Details', 'axis-theme' ), 'or_cpt_render_details_meta_box', 'operating-room', 'normal', 'high' );
+    add_meta_box( 'or_systems_meta_box', __( 'Systems Used', 'axis-theme' ), 'or_cpt_render_systems_meta_box', 'operating-room', 'normal', 'default' );
+    add_meta_box( 'or_gallery_meta_box', __( 'Gallery', 'axis-theme' ), 'or_cpt_render_gallery_meta_box', 'operating-room', 'normal', 'default' );
+
+}
+add_action( 'add_meta_boxes', 'or_cpt_meta_boxes' );
+
+
+// Render Details Meta Box //
+function or_cpt_render_details_meta_box( $post ) {
+
+    wp_nonce_field( 'save_or_meta', 'or_meta_nonce' );
+
+    $client   = get_post_meta( $post->ID, '_or_client', true );
+    $location = get_post_meta( $post->ID, '_or_location', true );
+    $sector   = get_post_meta( $post->ID, '_or_sector', true );
+    ?>
+
+    <p>
+        <label for="or_client"><strong><?php _e( 'Client', 'axis-theme' ); ?></strong></label><br>
+        <input type="text" id="or_client" name="or_client" value="<?php echo esc_attr( $client ); ?>" class="widefat">
+    </p>
+    <p>
+        <label for="or_location"><strong><?php _e( 'Location', 'axis-theme' ); ?></strong></label><br>
+        <input type="text" id="or_location" name="or_location" value="<?php echo esc_attr( $location ); ?>" class="widefat">
+    </p>
+    <p>
+        <strong><?php _e( 'Sector', 'axis-theme' ); ?></strong><br>
+        <label>
+            <input type="radio" name="or_sector" value="Private" <?php checked( $sector, 'Private' ); ?>>
+            <?php _e( 'Private', 'axis-theme' ); ?>
+        </label>
+        &nbsp;&nbsp;
+        <label>
+            <input type="radio" name="or_sector" value="Public" <?php checked( $sector, 'Public' ); ?>>
+            <?php _e( 'Public', 'axis-theme' ); ?>
+        </label>
+    </p>
+
+    <?php
+
+}
+
+
+// Render Systems Meta Box //
+function or_cpt_render_systems_meta_box( $post ) {
+
+    $saved_systems = get_post_meta( $post->ID, '_or_systems', true );
+    if ( ! is_array( $saved_systems ) ) {
+        $saved_systems = array();
+    }
+
+    $available_systems = array(
+        'VAELMA Modular Walls',
+        'Ceiling',
+        'Floor System',
+        'Hermetic Doors',
+        'Lights',
+        'Laminar Flow System',
+        'Medical Gases',
+        'Control Panel',
+        'Integration System',
+        'Scrub Units',
+    );
+
+    echo '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">';
+    foreach ( $available_systems as $system ) {
+        $checked = in_array( $system, $saved_systems, true ) ? 'checked="checked"' : '';
+        echo '<label>';
+        echo '<input type="checkbox" name="or_systems[]" value="' . esc_attr( $system ) . '" ' . $checked . '> ';
+        echo esc_html( $system );
+        echo '</label>';
+    }
+
+    echo '</div>';
+
+}
+
+
+// Render Gallery Meta Box //
+function or_cpt_render_gallery_meta_box( $post ) {
+
+    $gallery_ids = get_post_meta( $post->ID, '_or_gallery', true );
+    $gallery_arr = ! empty( $gallery_ids ) ? explode( ',', $gallery_ids ) : array();
+    ?>
+
+    <div id="or_gallery_container" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+    <?php
+    if ( ! empty( $gallery_arr ) ) {
+        foreach ( $gallery_arr as $img_id ) {
+            $image_url = wp_get_attachment_image_url( $img_id, 'thumbnail' );
+            if ( $image_url ) {
+                echo '<div class="gallery-image-wrapper" data-id="' . esc_attr( $img_id ) . '" style="position: relative; display: inline-block;">';
+                echo '<img src="' . esc_url( $image_url ) . '" style="width:100px; height:100px; object-fit:cover; border:1px solid #ccc; border-radius:4px;" />';
+                echo '<a href="#" class="remove-gallery-image" style="position:absolute; top:2px; right:2px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;">&times;</a>';
+                echo '</div>';
+            }
+        }
+    }
+    ?>
+    </div>
+    <input type="hidden" id="or_gallery_ids" name="or_gallery_ids" value="<?php echo esc_attr( $gallery_ids ); ?>">
+    <button type="button" class="button button-secondary" id="or_gallery_upload_btn"><?php _e( 'Add Media Gallery', 'axis-theme' ); ?></button>
+
+    <?php
+
+}
+
+
+// Save Custom Meta Box Data //
+function custom_save_or_meta_data( $post_id ) {
+
+    if ( ! isset( $_POST['or_meta_nonce'] ) || ! wp_verify_nonce( $_POST['or_meta_nonce'], 'save_or_meta' ) ) {
+        return;
+    }
+
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    if ( isset( $_POST['post_type'] ) && 'operating-room' === $_POST['post_type'] ) {
+
+        if ( ! current_user_can( 'edit_post', $post_id ) ) {
+            return;
+        }
+
+    }
+
+    if ( isset( $_POST['or_client'] ) ) {
+        update_post_meta( $post_id, '_or_client', sanitize_text_field( $_POST['or_client'] ) );
+    }
+
+    if ( isset( $_POST['or_location'] ) ) {
+        update_post_meta( $post_id, '_or_location', sanitize_text_field( $_POST['or_location'] ) );
+    }
+
+    if ( isset( $_POST['or_sector'] ) ) {
+
+        $sector = in_array( $_POST['or_sector'], array( 'Private', 'Public' ), true ) ? $_POST['or_sector'] : '';
+        update_post_meta( $post_id, '_or_sector', $sector );
+
+    }
+
+    if ( isset( $_POST['or_systems'] ) && is_array( $_POST['or_systems'] ) ) {
+
+        $sanitized_systems = array_map( 'sanitize_text_field', $_POST['or_systems'] );
+        update_post_meta( $post_id, '_or_systems', $sanitized_systems );
+
+    } else {
+
+        delete_post_meta( $post_id, '_or_systems' );
+
+    }
+
+    if ( isset( $_POST['or_gallery_ids'] ) ) {
+
+        $raw_ids   = explode( ',', $_POST['or_gallery_ids'] );
+        $clean_ids = array_filter( array_map( 'absint', $raw_ids ) );
+        update_post_meta( $post_id, '_or_gallery', implode( ',', $clean_ids ) );
+
+    }
+}
+add_action( 'save_post_operating-room', 'custom_save_or_meta_data' );
+
+
+// 7. Enqueue Admin Scripts for WP Media Uploader
+function custom_enqueue_or_admin_scripts( $hook ) {
+
+    global $post_type;
+
+    if ( ( 'post.php' === $hook || 'post-new.php' === $hook ) && 'operating-room' === $post_type ) {
+        wp_enqueue_media();
+
+        $custom_js = "
+        jQuery(document).ready(function($) {
+            var frame;
+            var container = $('#or_gallery_container');
+            var input = $('#or_gallery_ids');
+
+            $('#or_gallery_upload_btn').on('click', function(e) {
+                e.preventDefault();
+
+                if (frame) {
+                    frame.open();
+                    return;
+                }
+
+                frame = wp.media({
+                    title: 'Select Operating Room Images',
+                    button: { text: 'Add to Gallery' },
+                    multiple: true
+                });
+
+                frame.on('select', function() {
+                    var selection = frame.state().get('selection');
+                    var currentIds = input.val() ? input.val().split(',') : [];
+
+                    selection.each(function(attachment) {
+                        attachment = attachment.toJSON();
+                        var idStr = attachment.id.toString();
+
+                        if (currentIds.indexOf(idStr) === -1) {
+                            currentIds.push(idStr);
+                            var imgUrl = attachment.sizes && attachment.sizes.thumbnail ? attachment.sizes.thumbnail.url : attachment.url;
+                            container.append(
+                                '<div class=\"gallery-image-wrapper\" data-id=\"' + attachment.id + '\" style=\"position:relative; display:inline-block;\">' +
+                                '<img src=\"' + imgUrl + '\" style=\"width:100px; height:100px; object-fit:cover; border:1px solid #ccc; border-radius:4px;\" />' +
+                                '<a href=\"#\" class=\"remove-gallery-image\" style=\"position:absolute; top:2px; right:2px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;\">&times;</a>' +
+                                '</div>'
+                            );
+                        }
+                    });
+
+                    input.val(currentIds.join(','));
+                });
+
+                frame.open();
+            });
+
+            container.on('click', '.remove-gallery-image', function(e) {
+                e.preventDefault();
+                var wrapper = $(this).closest('.gallery-image-wrapper');
+                var idToRemove = wrapper.data('id').toString();
+                wrapper.remove();
+
+                var currentIds = input.val().split(',').filter(Boolean);
+                var updatedIds = currentIds.filter(function(id) { return id !== idToRemove; });
+                input.val(updatedIds.join(','));
+            });
+        });
+        ";
+
+        wp_add_inline_script( 'media-editor', $custom_js );
+
+    }
+
+}
+add_action( 'admin_enqueue_scripts', 'custom_enqueue_or_admin_scripts' );
+/////////////////////////////////////////////////////////////////////////
 
 // Fetch Media Library //
-
 function axis_icon($slug, $custom_class = '') {
 
 

@@ -1,0 +1,440 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+:root {
+
+    --color-background: #F5F5F5;
+    --color-primary: #FFBA08;
+    --color-secondary: #FAA307;
+    --color-black: #222222;
+
+    --shadow-main: 0px 0px 20px rgba(0, 0, 0, 0.2);
+
+    --border-radius-sm: 10px;
+    --border-radius-md: 20px;
+    --border-radius-lg: 50px;
+
+}
+
+.axis-header-or {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: var(--color-background);
+
+}
+
+.axis-header-or.is-sticky {
+
+    position: fixed;
+    top: -150px;
+    transform: translateY(150px);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: var(--shadow-main);
+
+}
+
+.or-header-content {
+
+    width: 100%;
+    padding: 15px 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.or-header-logo {
+
+    width: 140px;
+    height: 70px;
+
+}
+
+.or-header-logo a img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+
+}
+
+.or-menu {
+
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+
+}
+
+.or-menu li a {
+
+    padding: 5px 12px;
+    background-color: var(--color-background);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    color: var(--color-black);
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+
+}
+
+.or-menu li a:hover {
+
+    background-color: rgba(34, 34, 34, 0.1);
+
+}
+
+.or-menu li a:active {
+
+    background-color: var(--color-black);
+    color: var(--color-background);
+
+}
+
+.or-mobile-header {
+
+    display: none;
+
+}
+
+.or-header-drawer {
+
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 350px;
+    height: 100%;
+    background-color: var(--color-background);
+    border: none;
+    box-shadow: var(--shadow-main);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-100%);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: tranform, opacity, visibility;
+    z-index: 20000;
+
+}
+
+.or-header-drawer.active {
+
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+
+}
+
+.drawer-content {
+
+    width: 100%;
+    height: 100%;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 60px;
+
+}
+
+.or-close-toggle {
+
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+}
+
+.or-close-toggle svg {
+
+    width: 36px;
+    height: 36px;
+
+}
+
+.or-close-toggle:active svg * {
+
+    fill: var(--color-primary) !important;
+    stroke: var(--color-primary) !important;
+
+}
+
+.axis-footer-or {
+
+    width: 100%;
+    height: 500px;
+    padding: 50px 100px;
+    margin-top: 200px;
+    box-sizing: border-box;
+    background-color: var(--color-black);
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.top-footer-content {
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+
+}
+
+.bottom-footer-content {
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.footer-column {
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+}
+
+.or-footer-logo {
+
+    width: 180px;
+    height: 90px;
+
+}
+
+.or-footer-logo img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+
+}
+
+.socials {
+
+    gap: 20px;
+
+}
+
+.socials a svg {
+
+    width: 28px;
+    height: 28px;
+
+}
+
+.or-contact {
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.fheading {
+
+    color : var(--color-background);
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.or-fmenu {
+
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.or-fmenu li a, .or-link {
+
+    color: var(--color-background);
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+
+}
+
+.or-fmenu li a:hover, .or-link:hover {
+
+    color: var(--color-primary);
+
+}
+
+.or-fmenu li a:active, .or-link:active {
+
+    color: var(--color-secondary);
+
+}
+
+.policies {
+
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.copyright, .designed, .policies li a {
+
+    color: var(--color-background);
+    font-size: 14px;
+    font-weight: 300;
+    text-decoration: none;
+
+}
+
+.policies li a:hover {
+
+    color: var(--color-primary);
+
+}
+
+.policies li a:active {
+
+    color: var(--color-secondary)''
+
+}
+
+@media screen and (max-width: 797px) {
+
+    .or-header-content {
+
+        display: none;
+
+    }
+    
+    .or-mobile-header {
+
+        width: 100%;
+        padding: 10px 25px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .or-axis-logo {
+
+        width: 120px;
+        height: 55px;
+
+    }
+
+    .or-axis-logo img {
+
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+
+    }
+
+    .or-mobile-toggle {
+
+        padding: 0px;
+        margin: 0px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+
+    }
+
+    .or-mobile-toggle svg * {
+
+        fill: var(--color-black) !important;
+        stroke: var(--color-black) !important;
+
+    }
+
+    .or-mobile-toggle:active svg * {
+
+        fill: var(--color-primary) !important;
+        stroke: var(--color-primary) !important;
+
+    }
+
+    .or-menu {
+
+        flex-direction: column;
+        align-items: start;
+
+    }
+
+    .or-menu li a {
+
+        font-size: 20px;
+
+    }
+
+    .axis-footer-or {
+
+        padding: 25px;
+        height: 100%;
+        gap: 60px;
+
+    }
+
+    .top-footer-content {
+
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 60px;
+
+    }
+
+    .footer-column {
+
+        gap: 25px;
+
+    }
+
+    .bottom-footer-content {
+
+        flex-direction: column;
+        align-items: start;
+        gap: 20px;
+
+    }
+
+    .copyright, .designed, .policies li a {
+
+        font-size: 12px;
+
+    }
+
+}

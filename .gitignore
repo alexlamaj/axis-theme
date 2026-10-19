@@ -1,5 +1,6 @@
 # Ignore VS Code settings and SFTP password file
 .vscode/
+data/
 
 # Ignore OS junk files
 .DS_Store
