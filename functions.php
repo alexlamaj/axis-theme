@@ -76,8 +76,10 @@ add_action('wp_enqueue_scripts', 'axis_enqueue_scripts');
 function axis_enqueue_or_assets() {
 
     $current_template = get_page_template_slug();
+    $or_template = ($current_template && strpos($current_template, 'operating-rooms/') === 0);
+    $or_cpt = is_singular('operating-room') || is_post_type_archive('operating-room');
 
-    if ($current_template && strpos($current_template, 'operating-rooms/') === 0) {
+    if ($or_template || $or_cpt) {
 
         wp_enqueue_style(
             'axis-or-css',

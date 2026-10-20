@@ -556,7 +556,7 @@
 
 .or-subheading {
 
-    width: 300px;
+    width: 400px;
     color: var(--color-black);
     font-size: 20px;
     font-weight: 400;
@@ -880,6 +880,313 @@
 .feature-btn:active {
 
     background-color: var(--color-secondary);
+
+}
+
+.or-grid {
+
+    width: 100%;
+    margin: 100px 0px;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 20px;
+
+}
+
+.project-card {
+
+    position: relative;
+    min-height: 200px;
+    display: block;
+    grid-column: span 5;
+    overflow: hidden;
+    background-color: #222222;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+
+}
+
+.project-card:nth-child(4n + 1), .project-card:nth-child(4n + 4) {
+
+    grid-column: span 6;
+    aspect-ratio: 382 / 197;
+
+}
+
+.project-card::after {
+
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 100%);
+    pointer-events: none;
+
+}
+
+.systems {
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.system-pill {
+
+    padding: 4px 14px;
+    background-color: white;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-main);
+    color: var(--color-black);
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+
+}
+
+.project-details {
+
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    max-width: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+
+}
+
+.project-title {
+
+    color: var(--color-background);
+    font-size: 22px;
+    font-weight: 600;
+
+}
+
+.project-client {
+
+    color: var(--color-background);
+    font-size: 16px;
+    font-weight: 400;
+
+}
+
+.single-post-wrapper {
+
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+.single-thumbnail {
+
+    position: relative;
+    width: 100%;
+    height: 420px;
+    background-color: var(--color-black);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    overflow: hidden;
+
+}
+
+.single-thumbnail::after {
+
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(34, 34, 34, 0.5);
+    pointer-events: none;
+
+}
+
+.single-title {
+
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+    max-width: calc(100% - 100px);
+    color: var(--color-background);
+    font-size: 36px;
+    font-weight: 600;
+    z-index: 10;
+
+}
+
+.main-post-content {
+
+    width: 100%;
+    padding: 100px 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+
+}
+
+.meta-content {
+
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 35px;
+
+}
+
+.meta-el {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.meta-label {
+
+    color: var(--color-black);
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.6;
+
+}
+
+.meta-value {
+
+    color: var(--color-black);
+    font-size: 21px;
+    font-weight: 600;
+
+}
+
+.post-content-column {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+}
+
+.or-post-content * {
+
+    width: 100%;
+    padding: 0px !important;
+    margin: 0px !important; 
+    color: var(--color-black);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.3;
+    line-height: 1.4;
+
+}
+
+.post-systems {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.post-systems-text {
+
+    color: var(--color-black);
+    font-size: 23px;
+    font-weight: 600;
+
+}
+
+.post-systems-container {
+
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+}
+
+.post-pill {
+
+    padding: 5px 16px;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-black);
+    border-radius: var(--border-radius-lg);
+    color: var(--color-black);
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+
+}
+
+.post-pill:hover {
+
+    background-color: var(--color-black);
+    color: var(--color-background);
+    box-shadow: var(--shadow-main);
+    cursor: pointer;
+
+}
+
+.post-gallery {
+
+    width: 100%;
+    padding: 0px 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+}
+
+.gallery-heading {
+
+    color: var(--color-black);
+    font-size: 23px;
+    font-weight: 600;
+
+}
+
+.gallery-grid {
+
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+}
+
+.gallery-item {
+
+    width: 100%;
+    height: 400px;
+
+}
+
+.gallery-item img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+    border-radius: var(--border-radius-md);
 
 }
 
@@ -1258,6 +1565,61 @@
 
     }
 
+    .or-grid {
+
+        width: 100%;
+        margin: 80px 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+    }
+
+    .project-card {
+
+        min-height: 250px;
+        grid-column: 0;
+
+    }
+
+    .systems {
+
+        max-width: calc(100% - 20px);
+        top: 10px;
+        right: 10px;
+        flex-wrap: wrap;
+        gap: 5px;
+
+    }
+
+    .system-pill {
+
+        padding: 3px 10px;
+        font-size: 13px;
+
+    }
+
+    .project-details {
+
+        left: 20px;
+        bottom: 20px;
+        max-width: calc(100% - 40px);
+        gap: 8px;
+
+    }
+
+    .project-title {
+
+        font-size: 18px;
+
+    }
+
+    .project-client {
+
+        font-size: 14px;
+
+    }
+
 }
 
 @media screen and (min-width: 1560px) {
@@ -1301,6 +1663,52 @@
     .scard {
 
         height: 300px;
+
+    }
+
+    .systems {
+
+        top: 20px;
+        right: 20px;
+
+    }
+
+    .project-details {
+
+        left: 35px;
+        bottom: 35px;
+        max-width: calc(100% - 70px);
+
+    }
+
+    .project-title {
+
+        font-size: 24px;
+
+    }
+
+    .single-title {
+
+        left: 100px;
+        max-width: calc(100% - 200px);
+
+    }
+
+    .main-post-content {
+
+        padding: 100px;
+
+    }
+
+    .single-title {
+
+        font-size: 42px;
+
+    }
+
+    .post-gallery {
+
+        padding: 0px 100px;
 
     }
 

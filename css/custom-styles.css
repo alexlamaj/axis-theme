@@ -5415,13 +5415,17 @@ body {
 
     .floating-lang {
 
-
-
         bottom: 15px;
 
-        left: 15px;
+        right: 15px;
 
+        left: auto;
 
+    }
+
+    .lang-card {
+
+        flex-direction: column;
 
     }
 
