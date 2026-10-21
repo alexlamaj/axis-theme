@@ -591,7 +591,7 @@ function custom_save_or_meta_data( $post_id ) {
 add_action( 'save_post_operating-room', 'custom_save_or_meta_data' );
 
 
-// 7. Enqueue Admin Scripts for WP Media Uploader
+// Enqueue Admin Scripts for WP Media Uploader //
 function custom_enqueue_or_admin_scripts( $hook ) {
 
     global $post_type;

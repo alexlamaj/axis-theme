@@ -48,7 +48,7 @@ get_header('or');
 
     <div class="cc-content">
 
-        <div class="cc-heading">Certified Management Systems</div>
+        <div class="cc-heading"><?php _e('Certified Management Systems', 'axis-theme'); ?></div>
 
         <div class="certifications">
 
@@ -98,20 +98,20 @@ get_header('or');
 
     <div class="cc-content">
 
-        <div class="cc-heading">Projects in Greece and Abroad</div>
+        <div class="cc-heading"><?php _e('Projects in Greece and Abroad', 'axis-theme'); ?></div>
 
         <div class="countries">
 
-            <div class="country">Germany</div>
-            <div class="country">Libya</div>
-            <div class="country">England</div>
-            <div class="country">Norway</div>
-            <div class="country">S. Arabia</div>
-            <div class="country">Egypt</div>
-            <div class="country">Russia</div>
-            <div class="country">Indonesia</div>
-            <div class="country">Skopje</div>
-            <div class="country">Albania</div>
+            <div class="country"><?php _e('Germany', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('Libya', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('England', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('Norway', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('S. Arabia', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('Egypt', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('Russia', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('Indonesia', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('Skopje', 'axis-theme'); ?></div>
+            <div class="country"><?php _e('Albania', 'axis-theme'); ?></div>
 
         </div>
 
@@ -120,5 +120,70 @@ get_header('or');
 </section>
 
 <!-- Selected Operating Room Projects -->
+<section class="or-layout">
+
+    <div class="or-page-header">
+        <div class="or-subheading"><?php _e('New, hybrid and digital theaters for public and private hospitals.', 'axis-theme'); ?></div>
+        <div class="or-heading"><?php _e('Recent OR Projects', 'axis-theme'); ?></div>
+    </div>
+
+    <?php
+
+    if (!function_exists('axis_render_tk_project_card')) :
+
+        function axis_render_tk_project_card($post_id) {
+
+            $client = get_post_meta($post_id, '_or_client', true) ?: 'Confidential';
+            $bg_image = get_the_post_thumbnail_url($post_id, 'large');
+
+            ?>
+
+            <a href="<?php echo esc_url(get_the_permalink($post_id)); ?>" class="tk-project-card" style="background-image: url('<?php echo esc_url($bg_image); ?>');">
+                <div class="tk-project-details">
+                    <div class="tk-project-title"><?php echo esc_html(get_the_title($post_id)); ?></div>
+                    <div class="tk-project-client"><?php echo esc_html($client); ?></div>
+                </div>
+            </a>
+
+            <?php
+
+        }
+    
+    endif;
+
+    $latest = new WP_Query(array(
+        'post_type' => 'operating-room',
+        'posts_per_page' => 3,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'no_rows_found' => true,
+        'fields' => 'ids',
+    ));
+    
+    $ids = $latest->posts;
+    wp_reset_postdata();
+    ?>
+
+    <?php if ($ids) : ?>
+
+        <div class="or-latest">
+
+            <div class="latest-main">
+                <?php axis_render_tk_project_card($ids[0]); ?>
+            </div>
+
+            <?php if (count($ids) > 1) : ?>
+                <div class="latest-side">
+                    <?php foreach (array_slice($ids, 1) as $id) : ?>
+                        <?php axis_render_tk_project_card($id); ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        
+        </div>
+
+    <?php endif; ?>
+
+</section>
 
 <?php get_footer('or'); ?>
