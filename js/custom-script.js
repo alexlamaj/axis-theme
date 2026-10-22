@@ -1,3 +1,16 @@
+// Front Page Animation Header //
+document.addEventListener('DOMContentLoaded', () => {
+
+    const page = document.querySelector('.front-page');
+
+    if (page) {
+        requestAnimationFrame(() => {
+            page.classList.add('is-loaded');
+        });
+    }
+
+});
+
 // Dropdown Filter Menu (Projects) //
 
 const dropdown = document.querySelector('.subcat-dropdown');
@@ -193,74 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
-
-
-
-// Mobile Header Toggle (Products) //
-
-document.addEventListener('DOMContentLoaded', () => {
-
-
-
-    const openProductHeader = document.querySelector('.mobile-pr-toggle');
-
-    const closeProductHeader = document.querySelector('.close-pr-drawer');
-
-    const headerProductModal = document.querySelector('.header-product-drawer');
-
-
-
-    if (openProductHeader && headerProductModal) {
-
-
-
-        openProductHeader.addEventListener('click', () => {
-
-
-
-            headerProductModal.classList.add('mobile-header-pr-active');
-
-            document.documentElement.style.overflow = 'hidden';
-
-            document.body.style.overflow = 'hidden';
-
-
-
-        });
-
-
-
-    }
-
-
-
-    if (closeProductHeader && headerProductModal) {
-
-
-
-        closeProductHeader.addEventListener('click', () => {
-
-
-
-            headerProductModal.classList.remove('mobile-header-pr-active');
-
-            document.documentElement.style.overflow = '';
-
-            document.body.style.overflow = '';
-
-
-
-        });
-
-
-
-    }
-
-
-
-});
-
-
 
 // Assay List Display //
 
@@ -612,42 +557,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
 
             headerContainer.classList.remove('is-sticky');
-
-        }
-
-
-
-    });
-
-
-
-});
-
-
-
-// Sticky Product Header Animation //
-
-document.addEventListener('DOMContentLoaded', function () {
-
-
-
-    const productHeaderContainer = document.querySelector('.axis-product-header');
-
-    const scrollThreshold = 900;
-
-
-
-    window.addEventListener('scroll', function () {
-
-
-
-        if (window.scrollY > scrollThreshold) {
-
-            productHeaderContainer.classList.add('is-sticky');
-
-        } else {
-
-            productHeaderContainer.classList.remove('is-sticky');
 
         }
 

@@ -15,6 +15,29 @@
 
 }
 
+html {
+
+    scroll-behavior: smooth;
+    scroll-padding-top: 120px;
+
+}
+
+section, article {
+
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+
+}
+
+section.is-visible, article.is-visible {
+
+    opacity: 1;
+    transform: translateY(0);
+
+}
+
 .axis-header-or {
 
     position: absolute;
@@ -588,7 +611,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 100%);
     pointer-events: none;
 
 }
@@ -965,6 +988,407 @@
 
 }
 
+.sol-hero {
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+
+}
+
+.sol-left {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+
+}
+
+.sol-title {
+
+    color: var(--color-black);
+    font-size: 36px;
+    font-weight: 600;
+
+}
+
+.sol-sub {
+
+    color: var(--color-black);
+    font-size: 23px;
+    font-weight: 400;
+
+}
+
+.sol-stats {
+
+    padding: 15px;
+    border-left: 3px solid var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.sol1 {
+
+    color: var(--color-black);
+    font-size: 26px;
+    font-weight: 600;
+
+}
+
+.sol2 {
+
+    max-width: 150px;
+    color: var(--color-black);
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.6;
+
+}
+
+.sol-image {
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.sol-image svg {
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.sol-btn {
+
+    max-width: fit-content;
+    padding: 6px 18px;
+    box-sizing: border-box;
+    background-color: var(--color-black);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    color: var(--color-background);
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+
+}
+
+.sol-btn:hover {
+
+    background-color: var(--color-primary);
+
+}
+
+.sol-btn:active {
+
+    background-color: var(--color-secondary);
+
+}
+
+.sol-navigation {
+
+    width: 100%;
+    padding: 25px 0px;
+    margin-top: 60px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(34, 34, 34, 0.3);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.3);
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
+
+.sol-navlink {
+
+    padding: 5px 15px;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    color: var(--color-black);
+    font-size: 16px;
+    font-weight: 400;
+
+}
+
+.sol-navlink:hover {
+
+    background-color: rgba(34, 34, 34, 0.1);
+
+}
+
+.sol-navlink:active {
+
+    background-color: var(--color-black);
+    color: var(--color-background);
+
+}
+
+.sol-section {
+
+    width: 100%;
+    padding: 60px 0px;
+    box-sizing: border-box;
+    border-top: 2px solid var(--color-primary);
+
+}
+
+.section-title {
+
+    color: var(--color-black);
+    font-size: 26px;
+    font-weight: 600;
+
+}
+
+.section-content {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+}
+
+.overview-row {
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 100px;
+
+}
+
+.overview-text {
+
+    width: 100%;
+    color: var(--color-black);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+
+}
+
+.sol-list {
+
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.sol-list li {
+
+    color: var(--color-black);
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    list-style-type: disc;
+    
+}
+
+.sol-specs {
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 100px;
+    row-gap: 40px;
+
+}
+
+.sol-spec {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.sol-spec-title {
+
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--color-black);
+    color: var(--color-black);
+    font-size: 23px;
+    font-weight: 600;
+
+}
+
+.sol-spec-row {
+
+    width: 100%;
+    padding: 20px 0px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(34, 34, 34, 0.3);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+
+}
+
+.sol-spec-row1 {
+
+    width: 65%;
+    color: var(--color-black);
+    font-size: 16px;
+    font-weight: 500;
+
+}
+
+.sol-spec-row2 {
+
+    width: 100%;
+    color: var(--color-black);
+    font-size: 14px;
+    font-weight: 400;
+
+}
+
+.materials-items {
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px;
+
+}
+
+.material-item {
+
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+
+}
+
+.material-item.is-visible {
+
+    opacity: 1;
+    transform: translateY(0);
+
+}
+
+.material-image {
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.material-image svg {
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.material-heading {
+
+    color: var(--color-black);
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.material-text {
+
+    color: var(--color-black);
+    font-size: 14px;
+    font-weight: 400;
+
+}
+
+.instal-items {
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px;
+
+}
+
+.instal-item {
+
+    width: 100%;
+    max-width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+
+}
+
+.instal-item.is-visible {
+
+    opacity: 1;
+    transform: translateY(0);
+
+}
+
+.instal-id {
+
+    max-width: fit-content;
+    padding: 8px 20px;
+    border: 1px solid var(--color-black);
+    border-radius: var(--border-radius-lg);
+    color: var(--color-black);
+    font-size: 20px;
+    font-weight: 400;
+
+}
+
+.instal-heading {
+
+    color: var(--color-black);
+    font-size: 23px;
+    font-weight: 600;
+
+}
+
+.instal-text {
+
+    color: var(--color-black);
+    font-size: 16px;
+    font-weight: 400;
+
+}
+
+.sol-gallery {
+
+    width: 100%;
+
+}
+
 .or-grid {
 
     width: 100%;
@@ -989,6 +1413,27 @@
     border: none;
     border-radius: var(--border-radius-md);
     text-decoration: none;
+
+}
+
+.project-card:hover::after, .tk-project-card:hover::after {
+
+   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.1) 100%);
+   transition: background 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+
+}
+
+.project-card:hover .project-details, .tk-project-card:hover .tk-project-details {
+
+    transform: translateX(12px);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+}
+
+.project-card:hover .systems {
+
+    transform: translateX(-12px);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 
 }
 
@@ -1019,6 +1464,7 @@
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
+    z-index: 5;
 
 }
 
@@ -1687,6 +2133,169 @@
 
     }
 
+    .sol-hero {
+
+        flex-direction: column;
+        gap: 60px;
+
+    }
+
+    .sol-left {
+
+        gap: 20px;
+
+    }
+
+    .sol-title {
+
+        font-size: 30px;
+
+    }
+
+    .sol-sub {
+
+        font-size: 20px;
+
+    }
+
+    .sol-stats {
+
+        padding: 10px;
+        border-left: 2px solid var(--color-primary);
+
+    }
+
+    .sol1 {
+
+        font-size: 24px;
+
+    }
+    
+    .sol-navigation {
+
+        padding: 20px 0px;
+        margin-top: 50px;
+        align-items: center;
+        gap: 15px;
+        overflow-x: auto;
+
+    }
+
+    .sol-navlink {
+
+        padding: 4px 14px;
+        font-size: 14px;
+        text-align: center;
+
+    }
+
+    .section-title {
+
+        font-size: 24px;
+
+    }
+    
+    .overview-row {
+
+        flex-direction: column;
+        gap: 30px;
+
+    }
+
+    .overview-text {
+
+        font-size: 16px;
+
+    }
+
+    .sol-list {
+
+       padding: 0px 25px;
+       box-sizing: border-box;
+
+    }
+
+    .sol-list li {
+
+        font-size: 16px;
+
+    }
+
+    .sol-specs {
+
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+
+    }
+
+    .sol-spec-title {
+
+        padding-bottom: 4px;
+        font-size: 20px;
+
+    }
+
+    .sol-spec-row {
+
+        gap: 20px;
+
+    }
+
+    .materials-items {
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 40px;
+        row-gap: 30px;
+
+    }
+
+    .material-item {
+
+        max-width: 180px;
+
+    }
+
+    .material-heading {
+
+        font-size: 18px;
+
+    }
+
+    .material-text {
+
+        font-size: 13px;
+
+    }
+
+    .instal-items {
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 40px;
+        row-gap: 30px;
+
+    }
+
+    .instal-item {
+
+        max-width: 220px;
+
+    }
+
+    .instal-heading {
+
+        font-size: 18px;
+
+    }
+
+    .instal-text {
+
+        font-size: 14px;
+
+    }
+
     .or-grid {
 
         width: 100%;
@@ -1915,6 +2524,106 @@
     .scard {
 
         height: 300px;
+
+    }
+
+    .sol-hero {
+
+        gap: 150px;
+
+    }
+
+    .sol-left {
+
+        gap: 40px;
+
+    }
+
+    .sol-title {
+
+        font-size: 42px;
+
+    }
+
+    .sol-sub {
+
+        font-size: 26px;
+
+    }
+
+    .sol1 {
+
+        font-size: 30px;
+
+    }
+
+    .sol2 {
+
+        font-size: 16px;
+
+    }
+
+    .sol-btn {
+
+        padding: 8px 20px;
+        font-size: 18px;
+
+    }
+
+    .sol-section {
+
+        padding: 80px 0px;
+
+    }
+
+    .section-content {
+
+        gap: 50px;
+
+    }
+
+    .overview-row {
+
+        gap: 150px;
+
+    }
+
+    .sol-specs {
+
+        column-gap: 150px;
+
+    }
+
+    .sol-specs {
+
+        gap: 25px;
+
+    }
+
+    .sol-spec-row {
+
+        padding: 25px 0px;
+        gap: 40px;
+
+    }
+
+    .sol-spec-row1 {
+
+        width: 100%;
+
+    }
+
+    .material-item {
+
+        max-width: 220px;
+        gap: 20px;
+
+    }
+
+    .instal-item {
+
+        max-width: 300px;
+        gap: 20px;
 
     }
 

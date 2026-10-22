@@ -34,7 +34,7 @@ get_header('or');
         <div class="scard">
 
             <div class="scard-title">Construction & Renovation</div>
-            <div class="scard-text">New theatres, and existing ones converted into hybrid or digital rooms.</div>
+            <div class="scard-text">New rooms, and existing ones converted into hybrid or digital rooms.</div>
 
             <ul class="scard-list">
                 <li>All nine systems supplied and installed by one team</li>
@@ -50,7 +50,7 @@ get_header('or');
             <div class="scard-text">We test the finished room and support certification before handover.</div>
 
             <ul class="scard-list">
-                <li>Commissioning of the completed theatre</li>
+                <li>Commissioning of the completed room</li>
                 <li>GMP and GACP certification support where the project requires it</li>
             </ul>
 
@@ -184,7 +184,7 @@ get_header('or');
                 </div>
 
                 <div class="feature-content">
-                    <div class="feature-text"><?php _e('Operating theatres have the strictest discharge requirements in a hospital. The floor is how they are met.', 'axis-theme'); ?></div>
+                    <div class="feature-text"><?php _e('Operating rooms have the strictest discharge requirements in a hospital. The floor is how they are met.', 'axis-theme'); ?></div>
                     <ul class="feature-list">
                         <li><?php _e('Antistatic floors: dissipative, homogeneous flexible flooring in sheets or tiles', 'axis-theme'); ?></li>
                         <li><?php _e('Antistatic charge limited to under 2 kV; resistance 10⁶ to 10⁸ Ω (EN 1081); complies with EN 649', 'axis-theme'); ?></li>
@@ -220,7 +220,7 @@ get_header('or');
                 </div>
 
                 <div class="feature-content">
-                    <div class="feature-text"><?php _e('Operating theatres and ICUs need doors that seal, so contamination stays out and equipment works safely.', 'axis-theme'); ?></div>
+                    <div class="feature-text"><?php _e('Operating rooms and ICUs need doors that seal, so contamination stays out and equipment works safely.', 'axis-theme'); ?></div>
                     <ul class="feature-list">
                         <li><?php _e('Antibacterial nanolaminate leaf, stated to kill 99.9% of bacteria within 24 hours', 'axis-theme'); ?></li>
                         <li><?php _e('Canopy design keeps dust and moisture out', 'axis-theme'); ?></li>
@@ -358,7 +358,7 @@ get_header('or');
                 <div class="feature-content">
                     <div class="feature-text"><?php _e('The OPT Control Panel gives the surgical team a single, familiar source of information.', 'axis-theme'); ?></div>
                     <ul class="feature-list">
-                        <li><?php _e('Central device for control signals, alarms and information in the theatre', 'axis-theme'); ?></li>
+                        <li><?php _e('Central device for control signals, alarms and information in the room', 'axis-theme'); ?></li>
                         <li><?php _e('One familiar interface for medical staff', 'axis-theme'); ?></li>
                         <li><?php _e('Technical staff can inspect and maintain several subsystems without breaking the integrity of the wall', 'axis-theme'); ?></li>
                     </ul>
@@ -386,10 +386,10 @@ get_header('or');
                 </div>
 
                 <div class="feature-content">
-                    <div class="feature-text"><?php _e('One big screen for the theatre\'s video, images and patient data.', 'axis-theme'); ?></div>
+                    <div class="feature-text"><?php _e('One big screen for the room\'s video, images and patient data.', 'axis-theme'); ?></div>
                     <ul class="feature-list">
                         <li><?php _e('Captures, stores and shares video and audio', 'axis-theme'); ?></li>
-                        <li><?php _e('Gives access to PACS, KIS and RIS from the theatre', 'axis-theme'); ?></li>
+                        <li><?php _e('Gives access to PACS, KIS and RIS from the room', 'axis-theme'); ?></li>
                         <li><?php _e('Two-way conferencing to a remote station', 'axis-theme'); ?></li>
                         <li><?php _e('Complex routing set up as scenarios, each started with one button', 'axis-theme'); ?></li>
                         <li><?php _e('HL7 CONNECT to the hospital information system; DICOM CONNECT stores video and images in PACS', 'axis-theme'); ?></li>

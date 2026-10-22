@@ -36,7 +36,7 @@ get_header('or');
 
         <div class="intro-item">
             <div class="intro-title"><?php _e('3    Certify', 'axis-theme'); ?></div>
-            <div class="intro-text"><?php _e('We commission the finished theatre and support certification, then hand it over ready for the first operation.', 'axis-theme'); ?></div>
+            <div class="intro-text"><?php _e('We commission the finished room and support certification, then hand it over ready for the first operation.', 'axis-theme'); ?></div>
         </div>
 
     </div>
@@ -123,7 +123,7 @@ get_header('or');
 <section class="or-layout">
 
     <div class="or-page-header">
-        <div class="or-subheading"><?php _e('New, hybrid and digital theaters for public and private hospitals.', 'axis-theme'); ?></div>
+        <div class="or-subheading"><?php _e('New, hybrid and digital rooms for public and private hospitals.', 'axis-theme'); ?></div>
         <div class="or-heading"><?php _e('Recent OR Projects', 'axis-theme'); ?></div>
     </div>
 

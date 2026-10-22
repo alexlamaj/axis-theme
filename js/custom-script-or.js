@@ -115,3 +115,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+// Ease Out Animations //
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Strict Scroll for Links
+    document.querySelectorAll('.sol-navlink').forEach(link => {
+
+        link.addEventListener('click', (e) => {
+
+            const targetId = link.getAttribute('href');
+            if (!targetId || targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({behavior: 'smooth'});
+            }
+
+        });
+
+    });
+
+    // Intersection Observer for Animations //
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.05
+    };
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                const target = entry.target;
+                target.classList.add('is-visible');
+
+                const items = target.querySelectorAll('.material-item, .instal-item');
+                items.forEach((item, index) => {
+                    item.style.transitionDelay = `${index * 0.15}s`;
+                    item.classList.add('is-visible');
+                });
+
+                observer.unobserve(target);
+
+            }
+
+        });
+
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(el => scrollObserver.observe(el));
+    document.querySelectorAll('article').forEach(el => scrollObserver.observe(el));
+    
+});
