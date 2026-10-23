@@ -171,3 +171,78 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('article').forEach(el => scrollObserver.observe(el));
     
 });
+
+// Contact Input Dropdown //
+document.addEventListener('DOMContentLoaded', () => {
+
+    const inputContainer = document.querySelector('.input-container');
+    if (!inputContainer) return;
+
+    const inputDropdown = inputContainer.querySelector('.input-dropdown');
+    const input = inputContainer.querySelector('input');
+    const items = inputDropdown.querySelectorAll('li');
+
+    input.addEventListener('click', () => {
+        inputDropdown.classList.add('is-open');
+    });
+
+    document.addEventListener('click', (e) => {
+
+        if (!inputContainer.contains(e.target)) {
+            inputDropdown.classList.remove('is-open');
+        }
+
+    });
+
+    items.forEach(item => {
+
+        item.addEventListener('click', () => {
+
+            input.value = item.textContent.trim();
+            inputDropdown.classList.remove('is-open');
+
+        });
+
+    });
+
+});
+
+// OR Contact Form AJAX Submission //
+document.addEventListener('DOMContentLoaded', () => {
+
+    const orForm = document.getElementById('orContactForm');
+    if (!orForm) return;
+
+    orForm.addEventListener('submit', function (e) {
+
+        e.preventDefault();
+        const formData = new FormData(orForm);
+        formData.append('action', 'submit_or_contact_form');
+
+        const ajaxUrl = typeof demo_ajax_obj !== 'undefined' ? demo_ajax_obj.ajax_url : '/wp-admin/admin-ajax.php';
+
+        fetch(ajaxUrl, {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json()).then(response => {
+
+            if (response.success) {
+
+                orForm.reset();
+                orForm.style.display = 'none';
+
+            } else {
+
+                alert(response.data || 'Error submitting application! Please try again!');
+
+            }
+
+        }).catch(() => {
+
+            alert('Network error!');
+
+        });
+
+    });
+
+});

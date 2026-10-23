@@ -60,7 +60,9 @@ function axis_enqueue_scripts() {
 
         'ajax_url' => admin_url('admin-ajax.php'),
 
-        'nonce' => wp_create_nonce('demo_request_nonce')
+        'nonce' => wp_create_nonce('demo_request_nonce'),
+
+        'or_nonce' => wp_create_nonce('or_contact_nonce')
 
     ));
 
@@ -1280,6 +1282,50 @@ function handle_contact_form_submission() {
 }
 add_action('wp_ajax_submit_contact_form', 'handle_contact_form_submission');
 add_action('wp_ajax_nopriv_submit_contact_form', 'handle_contact_form_submission');
+/////////////////////////////////////////////////////////////////////////
+
+// OR Contact Form Submission //
+function handle_or_contact_form_submission() {
+
+    check_ajax_referer('or_contact_nonce', 'security');
+
+    $full_name = isset($_POST['or_full_name']) ? sanitize_text_field($_POST['or_full_name']) : '';
+    $or_subject = isset($_POST['or_subject']) ? sanitize_text_field($_POST['or_subject']) : '';
+    $company = isset($_POST['or_company']) ? sanitize_text_field($_POST['or_company']) : '';
+    $email = isset($_POST['or_email']) ? sanitize_email($_POST['or_email']) : '';
+    $phone = isset($_POST['or_phone']) ? sanitize_text_field($_POST['or_phone']) : '';
+    $txt = isset($_POST['or_message']) ? sanitize_textarea_field($_POST['or_message']) : '';
+
+    if (empty($full_name) || empty($or_subject) || empty($email) || empty($phone) || !is_email($email)) {
+        wp_send_json_error('Please fill in all required fields!');
+    }
+
+    $to = 'info@axismedical.gr';
+    $subject = 'OR Contact Message from: ' . $full_name;
+
+    $message = "Full Name: " . $full_name . "\n";
+    $message .= "Subject Plan: " . $or_subject . "\n";
+    $message .= "Company / Hospital: " . $company . "\n";
+    $message .= "Email Address: " . $email . "\n";
+    $message .= "Phone Number: " . $phone . "\n";
+    $message .= "Message: " . $txt . "\n";
+
+    $headers = array(
+        'Content-Type: text/plain; charset=UTF-8',
+        'Reply-To: ' . $full_name . ' <' . $email . '>'
+    );
+
+    $sent = wp_mail($to, $subject, $message, $headers);
+
+    if (!$sent) {
+        wp_send_json_error('Message saved, but email verification failed!');
+    }
+
+    wp_send_json_success('Your message has been submitted successfully!');
+
+}
+add_action('wp_ajax_submit_or_contact_form', 'handle_or_contact_form_submission');
+add_action('wp_ajax_nopriv_submit_or_contact_form', 'handle_or_contact_form_submission');
 /////////////////////////////////////////////////////////////////////////
 
 // Load Elementor Templates //

@@ -4,6 +4,64 @@
  * Template Name: OR Homepage Page
 */
 
+if (!defined('ABSPATH')) {exit;}
+
+$url = static function ($path) {
+    $base = function_exists('pll_home_url') ? pll_home_url() : home_url('/');
+    return trailingslashit($base) . ltrim($path, '/');
+};
+
+$paths = [
+    'walls' => 'services-features/#features-vaelma',
+    'ceiling' => 'services-features/#features-ceiling',
+    'floor' => 'services-features/#features-floor',
+    'doors' => 'services-features/#features-doors',
+    'lights' => 'services-features/#features-lights',
+    'laminar' => 'services-features/#features-laminar',
+    'gases' => 'services-features/#features-gases',
+    'control' => 'services-features/#features-control',
+    'integration' => 'services-features/#features-integration',
+    'scrub' => 'services-features/#features-scrub'
+];
+
+$systems = [
+    ['id' => 'walls', 'label' => 'VAELMA Modular Wall System',
+    'title' => 'Flush stainless steel, HPL, glass or SMS panels on a steel frame. Sealed against contaminated air and removable one panel at a time.',
+    'summary' => '±25 mm floor levelling, approximately'],
+    ['id' => 'ceiling', 'label' => 'Ceiling',
+    'title' => 'Removable panels on the same grid as the walls, sealed and flush, with no exposed edges.',
+    'summary' => 'Class 0 or 1 fire reaction of every component'],
+    ['id' => 'floor', 'label' => 'Floor System',
+    'title' => 'Antistatic and conductive flooring that carries static charge safely away from the theatre.',
+    'summary' => '5×10⁴ to 10⁶ Ω conductive floor resistance'],
+    ['id' => 'doors', 'label' => 'Hermetic Doors',
+    'title' => 'Hermetic sliding doors with an antibacterial surface. They limit air leakage between the theatre and its surroundings.',
+    'summary' => '99.9%of bacteria killed in 24 hours, as stated'],
+    ['id' => 'lights', 'label' => 'Lights',
+    'title' => 'Surgical lights with shadow management and variable light fields, plus sealed ceiling luminaires for clean rooms.',
+    'summary' => '600×600 mm recessed grid fits the opal luminaire'],
+    ['id' => 'laminar', 'label' => 'Laminar Flow System',
+    'title' => 'Vertical, turbulence-free airflow over the operating field. Axis supplies, installs and builds the full system.',
+    'summary' => 'Vertical turbulence-free airflow'],
+    ['id' => 'gases', 'label' => 'Medical Gases',
+    'title' => 'Complete medical gas systems, down to the outlets at the final delivery points.',
+    'summary' => '2-part outlets: a base and a finishing part'],
+    ['id' => 'control', 'label' => 'Control Panel',
+    'title' => 'One panel for signals, alarms and information. Technical staff reach every subsystem without opening the wall.',
+    'summary' => '1 panel for signals, alarms and information'],
+    ['id' => 'integration', 'label' => 'Integration System',
+    'title' => 'One big screen for the theatre\'s video, images and patient systems, with PACS, KIS and RIS in reach and HL7 and DICOM behind it.',
+    'summary' => '4K screen, with video and audio capture'],
+    ['id' => 'scrub', 'label' => 'Scrub Units',
+    'title' => 'Electronic hand-wash units in stainless steel or SMS, with a smooth 30° angled panel that stops dirt building up.',
+    'summary' => '30° panel angle, so dirt cannot settle'],
+];
+
+foreach ( $systems as &$system ) {
+	$system['href'] = $url( $paths[ $system['id'] ] );
+}
+unset( $system );
+
 get_header('or');
 
 ?>
