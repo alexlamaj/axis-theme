@@ -4,6 +4,23 @@
  * Template Name: OR Contact
 */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$systems = [
+	'walls'       => __( 'Modular Walls', 'axis-theme' ),
+	'ceiling'     => __( 'Ceiling', 'axis-theme' ),
+	'floor'       => __( 'Floor System', 'axis-theme' ),
+	'doors'       => __( 'Hermetic Doors', 'axis-theme' ),
+	'lights'      => __( 'Lights', 'axis-theme' ),
+	'laminar'     => __( 'Laminar Flow System', 'axis-theme' ),
+	'gases'       => __( 'Medical Gases', 'axis-theme' ),
+	'control'     => __( 'Control Panel', 'axis-theme' ),
+	'integration' => __( 'Integration System', 'axis-theme' ),
+	'scrub'       => __( 'Scrub Units', 'axis-theme' ),
+];
+
 get_header('or');
 ?>
 
@@ -14,9 +31,18 @@ get_header('or');
         <div class="or-heading"><?php _e('Tell Us About Your Room', 'axis-theme'); ?></div>
     </div>
 
-    <div class="contact-layout">
+    <section class="contact-layout">
 
         <form id="orContactForm" enctype="multipart/form-data">
+
+            <div class="ot-field">
+	            <span class="ot-field__label" id="or_systems_label"><?php _e( 'Which systems do you need?', 'axis-theme' ); ?><span><?php _e( ' Optional', 'axis-theme' ); ?></span></span>
+	            <div class="ot-pills" role="group" aria-labelledby="or_systems_label" data-ot-systems>
+		            <?php foreach ( $systems as $id => $label ) : ?>
+			            <label class="ot-pill"><input type="checkbox" name="systems[]" value="<?php echo esc_attr( $id ); ?>"><span><?php echo esc_html( $label ); ?></span></label>
+		            <?php endforeach; ?>
+	            </div>
+            </div>
 
             <div class="input-container">
                 <div class="input-wrapper">
@@ -61,9 +87,47 @@ get_header('or');
 
         </form>
 
-        <div class="or-3d-section"></div>
+        <div class="or-3d-section">
 
-    </div>
+            <figure class="ot-room" data-ot-room
+	            data-empty="<?php echo esc_attr__( 'Choose systems and they light up in the room.', 'axis-theme' ); ?>"
+	            data-one="<?php echo esc_attr__( '1 system selected.', 'axis-theme' ); ?>"
+	            data-many="<?php echo esc_attr__( '{n} systems selected.', 'axis-theme' ); ?>">
+	            <svg class="ot" role="img" aria-label="<?php esc_attr_e( 'The operating theatre, with the systems you choose highlighted', 'axis-theme' ); ?>" viewBox="160 10 780 600"></svg>
+	            <figcaption class="ot-room__cap" aria-live="polite"><?php esc_html_e( 'Choose systems and they light up in the room.', 'axis-theme' ); ?></figcaption>
+            </figure>
+
+            <div class="next-steps">
+
+                <div class="next-title"><?php _e('What Happens Next', 'axis-theme'); ?></div>
+
+                <div class="next-items">
+
+                    <div class="next-item">
+                        <div class="next-num">1</div>
+                        <div class="next-head"><?php _e('We read your brief', 'axis-theme'); ?></div>
+                        <div class="next-text"><?php _e('Room type, timing and the systems you need', 'axis-theme'); ?></div>
+                    </div>
+
+                    <div class="next-item">
+                        <div class="next-num">2</div>
+                        <div class="next-head"><?php _e('We review it with the team', 'axis-theme'); ?></div>
+                        <div class="next-text"><?php _e('Room type, timing and the systems you need', 'axis-theme'); ?></div>
+                    </div>
+
+                    <div class="next-item">
+                        <div class="next-num">3</div>
+                        <div class="next-head"><?php _e('You get a first proposal', 'axis-theme'); ?></div>
+                        <div class="next-text"><?php _e('Room type, timing and the systems you need', 'axis-theme'); ?></div>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 

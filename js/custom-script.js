@@ -1,361 +1,212 @@
 // Front Page Animation Header //
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const page = document.querySelector(".front-page");
 
-    const page = document.querySelector('.front-page');
-
-    if (page) {
-        requestAnimationFrame(() => {
-            page.classList.add('is-loaded');
-        });
-    }
-
+  if (page) {
+    requestAnimationFrame(() => {
+      page.classList.add("is-loaded");
+    });
+  }
 });
 
 // Dropdown Filter Menu (Projects) //
 
-const dropdown = document.querySelector('.subcat-dropdown');
-
-
+const dropdown = document.querySelector(".subcat-dropdown");
 
 if (dropdown) {
+  const toggleBtn = document.querySelector(".drop-toggle");
 
+  toggleBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
 
+    dropdown.classList.toggle("open");
+  });
 
-    const toggleBtn = document.querySelector('.drop-toggle');
-
-
-
-    toggleBtn.addEventListener('click', function (e) {
-
-
-
-        e.stopPropagation();
-
-        dropdown.classList.toggle('open');
-
-
-
-    });
-
-
-
-    document.addEventListener('click', function (e) {
-
-
-
-        if (!toggleBtn.contains(e.target)) {
-
-            dropdown.classList.remove('open');
-
-        }
-
-
-
-    });
-
-
-
+  document.addEventListener("click", function (e) {
+    if (!toggleBtn.contains(e.target)) {
+      dropdown.classList.remove("open");
+    }
+  });
 }
-
-
 
 // Tabbed Elements (Contact Us Page) //
 
-const tabButtons = document.querySelectorAll('.tab-toggle-buttons .btn-secondary');
+const tabButtons = document.querySelectorAll(
+  ".tab-toggle-buttons .btn-secondary",
+);
 
-const tabs = document.querySelectorAll('.tab');
-
-
+const tabs = document.querySelectorAll(".tab");
 
 tabButtons.forEach(function (button, index) {
+  button.addEventListener("click", () => {
+    tabButtons.forEach((btn) => btn.classList.remove("toggle-active"));
 
+    tabs.forEach((tab) => tab.classList.remove("tab-active"));
 
+    button.classList.add("toggle-active");
 
-    button.addEventListener('click', () => {
-
-
-
-        tabButtons.forEach(btn => btn.classList.remove('toggle-active'));
-
-        tabs.forEach(tab => tab.classList.remove('tab-active'));
-
-
-
-        button.classList.add('toggle-active');
-
-
-
-        if (tabs[index]) {
-
-            tabs[index].classList.add('tab-active');
-
-        }
-
-
-
-    });
-
-
-
+    if (tabs[index]) {
+      tabs[index].classList.add("tab-active");
+    }
+  });
 });
-
-
 
 // Tabbed Templates (Company Page) //
 
-const btnTabsCompany = document.querySelectorAll('.tab-btn-company .btn-secondary');
+const btnTabsCompany = document.querySelectorAll(
+  ".tab-btn-company .btn-secondary",
+);
 
-const customTabs = document.querySelectorAll('.elementor-custom-tab');
-
-
+const customTabs = document.querySelectorAll(".elementor-custom-tab");
 
 btnTabsCompany.forEach(function (button, index) {
+  button.addEventListener("click", () => {
+    btnTabsCompany.forEach((btn) => btn.classList.remove("active"));
 
+    customTabs.forEach((tab) => tab.classList.remove("custom-tab-active"));
 
+    button.classList.add("active");
 
-    button.addEventListener('click', () => {
-
-
-
-        btnTabsCompany.forEach(btn => btn.classList.remove('active'));
-
-        customTabs.forEach(tab => tab.classList.remove('custom-tab-active'));
-
-
-
-        button.classList.add('active');
-
-
-
-        if (customTabs[index]) {
-
-            customTabs[index].classList.add('custom-tab-active');
-
-        }
-
-
-
-    });
-
-
-
+    if (customTabs[index]) {
+      customTabs[index].classList.add("custom-tab-active");
+    }
+  });
 });
-
-
 
 // Mobile Header Toggle //
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const openHeader = document.querySelector(".mobile-toggle");
 
+  const closeHeader = document.querySelector(".close-drawer");
 
+  const headerModal = document.querySelector(".header-drawer");
 
-    const openHeader = document.querySelector('.mobile-toggle');
+  if (openHeader && headerModal) {
+    openHeader.addEventListener("click", () => {
+      headerModal.classList.add("mobile-header-active");
 
-    const closeHeader = document.querySelector('.close-drawer');
+      document.documentElement.style.overflow = "hidden";
 
-    const headerModal = document.querySelector('.header-drawer');
+      document.body.style.overflow = "hidden";
+    });
+  }
 
+  if (closeHeader && headerModal) {
+    closeHeader.addEventListener("click", () => {
+      headerModal.classList.remove("mobile-header-active");
 
+      document.documentElement.style.overflow = "";
 
-    if (openHeader && headerModal) {
-
-
-
-        openHeader.addEventListener('click', () => {
-
-
-
-            headerModal.classList.add('mobile-header-active');
-
-            document.documentElement.style.overflow = 'hidden';
-
-            document.body.style.overflow = 'hidden';
-
-        
-
-        });
-
-
-
-    }
-
-
-
-    if (closeHeader && headerModal) {
-
-
-
-        closeHeader.addEventListener('click', () => {
-
-
-
-            headerModal.classList.remove('mobile-header-active');
-
-            document.documentElement.style.overflow = '';
-
-            document.body.style.overflow = '';
-
-        
-
-        });
-
-
-
-    }
-
-
-
+      document.body.style.overflow = "";
+    });
+  }
 });
 
 // Assay List Display //
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const assays = [
+    {
+      code: "3011EU",
 
+      name: "MultiClot Analyzer",
 
+      category: "System",
+    },
 
-    const assays = [
+    {
+      code: "1081EU",
 
+      name: "EX - Extrinsic Activation",
 
+      category: "Assay",
+    },
 
-        {
+    {
+      code: "1061EU",
 
-            code: "3011EU",
+      name: "FIB - Functional Fibrinogen",
 
-            name: "MultiClot Analyzer",
+      category: "Assay",
+    },
 
-            category: "System"
+    {
+      code: "1051EU",
 
-        },
+      name: "AP - Fibrinolysis Inhibtion",
 
-        {
+      category: "Assay",
+    },
 
-            code: "1081EU",
+    {
+      code: "1031EU",
 
-            name: "EX - Extrinsic Activation",
+      name: "IN - Intrinsic + Heparin",
 
-            category: "Assay"
+      category: "Assay",
+    },
 
-        },
+    {
+      code: "1041EU",
 
-        {
+      name: "HI - Heparin Neutralisation",
 
-            code: "1061EU",
+      category: "Assay",
+    },
 
-            name: "FIB - Functional Fibrinogen",
+    {
+      code: "1021EU",
 
-            category: "Assay"
+      name: "TPA - Fibrinolysis Activation",
 
-        },
+      category: "Assay",
+    },
 
-        {
+    {
+      code: "1071EU",
 
-            code: "1051EU",
+      name: "RVV - Anti-FXa (DOACs)",
 
-            name: "AP - Fibrinolysis Inhibtion",
+      category: "Assay",
+    },
 
-            category: "Assay"
+    {
+      code: "1011EU",
 
-        },
+      name: "ECA - Anti-Ila (Dabigatran)",
 
-        {
+      category: "Assay",
+    },
 
-            code: "1031EU",
+    {
+      code: "2011EU",
 
-            name: "IN - Intrinsic + Heparin",
+      name: "QC1 - Quality Control (Normal)",
 
-            category: "Assay"
+      category: "QC",
+    },
 
-        },
+    {
+      code: "2021EU",
 
-        {
+      name: "QC2 - Quality Control (Anticoag)",
 
-            code: "1041EU",
+      category: "QC",
+    },
+  ];
 
-            name: "HI - Heparin Neutralisation",
+  const assaysContainer = document.querySelector(".assays-list");
 
-            category: "Assay"
+  if (!assaysContainer) return;
 
-        },
+  const displayAssays = function (assays) {
+    assaysContainer.innerHTML = "";
 
-        {
+    assays.forEach((assay) => {
+      const type = assay.category === "Assay" ? "green" : "red";
 
-            code: "1021EU",
-
-            name: "TPA - Fibrinolysis Activation",
-
-            category: "Assay"
-
-        },
-
-        {
-
-            code: "1071EU",
-
-            name: "RVV - Anti-FXa (DOACs)",
-
-            category: "Assay"
-
-        },
-
-        {
-
-            code: "1011EU",
-
-            name: "ECA - Anti-Ila (Dabigatran)",
-
-            category: "Assay"
-
-        },
-
-        {
-
-            code: "2011EU",
-
-            name: "QC1 - Quality Control (Normal)",
-
-            category: "QC"
-
-        },
-
-        {
-
-            code: "2021EU",
-
-            name: "QC2 - Quality Control (Anticoag)",
-
-            category: "QC"
-
-        }
-
-
-
-    ];
-
-
-
-    const assaysContainer = document.querySelector('.assays-list');
-
-    if (!assaysContainer) return;
-
-
-
-    const displayAssays = function (assays) {
-
-
-
-        assaysContainer.innerHTML = '';
-
-
-
-        assays.forEach(assay => {
-
-
-
-            const type = (assay.category === "Assay") ? 'green' : 'red';
-
-
-
-            const html = `<div class="assay-item">
+      const html = `<div class="assay-item">
 
                         <div class="assay-title">
 
@@ -369,300 +220,225 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     </div>`;
 
+      assaysContainer.insertAdjacentHTML("beforebegin", html);
+    });
+  };
 
-
-            assaysContainer.insertAdjacentHTML('beforebegin', html);
-
-
-
-        });
-
-
-
-    }
-
-
-
-    displayAssays(assays);
-
-
-
+  displayAssays(assays);
 });
-
-
 
 // Request Demo Modal
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("demoModal");
+  const form = document.getElementById("demoRequest");
+  const feedback = document.getElementById("feedbackMsg");
+  const triggers = document.getElementById("demo-popup");
+  const close = document.getElementById("closeModal");
+  const overlay = document.querySelector(".demo-modal-overlay");
 
-    const modal = document.getElementById('demoModal');
-    const form = document.getElementById('demoRequest');
-    const feedback = document.getElementById('feedbackMsg');
-    const triggers = document.getElementById('demo-popup');
-    const close = document.getElementById('closeModal');
-    const overlay = document.querySelector('.demo-modal-overlay');
+  if (!modal) return;
 
-    if (!modal) return;
-
-    if (triggers) {
-        triggers.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.classList.add('modal-active');
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-        });
-    }
-
-    const closeModal = function () {
-        modal.classList.remove('modal-active');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        
-        if (feedback) {
-            feedback.textContent = '';
-            feedback.className = 'feedback-msg';
-        }
-    };
-
-    if (close) close.addEventListener('click', closeModal);
-    if (overlay) overlay.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('modal-active')) {
-            closeModal();
-        } 
+  if (triggers) {
+    triggers.addEventListener("click", (e) => {
+      e.preventDefault();
+      modal.classList.add("modal-active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
     });
+  }
 
-    // AJAX Submission
-    if (form) {
-        form.addEventListener('submit', function (e) {
+  const closeModal = function () {
+    modal.classList.remove("modal-active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
 
-            e.preventDefault();
-            if (feedback) {
-                feedback.className = 'feedback-msg';
-                feedback.textContent = 'Sending request...';
-            }
-
-            const formData = new FormData(form);
-            formData.append('action', 'submit_demo_request');
-            if (typeof demo_ajax_obj !== 'undefined') {
-                formData.append('security', demo_ajax_obj.nonce);
-            }
-
-            fetch(demo_ajax_obj.ajax_url, {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.json())
-            .then(response => {
-                if (response.success) {
-                    if (feedback) {
-                        feedback.classList.add('success');
-                        feedback.textContent = response.data;
-                    }
-                    form.reset();
-                    setTimeout(closeModal, 2500);
-                } else {
-                    if (feedback) {
-                        feedback.classList.add('error');
-                        feedback.textContent = response.data || 'Error submitting request!';
-                    }
-                }
-            })
-            .catch(() => {
-                if (feedback) {
-                    feedback.classList.add('error');
-                    feedback.textContent = 'Network Error. Please try again later';
-                }
-            });
-
-        });
+    if (feedback) {
+      feedback.textContent = "";
+      feedback.className = "feedback-msg";
     }
+  };
 
+  if (close) close.addEventListener("click", closeModal);
+  if (overlay) overlay.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("modal-active")) {
+      closeModal();
+    }
+  });
+
+  // AJAX Submission
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (feedback) {
+        feedback.className = "feedback-msg";
+        feedback.textContent = "Sending request...";
+      }
+
+      const formData = new FormData(form);
+      formData.append("action", "submit_demo_request");
+      if (typeof demo_ajax_obj !== "undefined") {
+        formData.append("security", demo_ajax_obj.nonce);
+      }
+
+      fetch(demo_ajax_obj.ajax_url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          if (response.success) {
+            if (feedback) {
+              feedback.classList.add("success");
+              feedback.textContent = response.data;
+            }
+            form.reset();
+            setTimeout(closeModal, 2500);
+          } else {
+            if (feedback) {
+              feedback.classList.add("error");
+              feedback.textContent =
+                response.data || "Error submitting request!";
+            }
+          }
+        })
+        .catch(() => {
+          if (feedback) {
+            feedback.classList.add("error");
+            feedback.textContent = "Network Error. Please try again later";
+          }
+        });
+    });
+  }
 });
-
-
 
 // Assay Image Card Transitions //
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const assayImages = document.getElementById("assayContainer");
 
+  const assayItems = document.querySelectorAll(".assay-image-content");
 
+  assayItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const isActive = item.classList.contains("active-content");
 
-    const assayImages = document.getElementById('assayContainer');
+      assayItems.forEach((el) => el.classList.remove("active-content"));
 
-    const assayItems = document.querySelectorAll('.assay-image-content');
+      assayImages.classList.remove("active-section");
 
+      if (!isActive) {
+        item.classList.add("active-content");
 
-
-    assayItems.forEach(item => {
-
-
-
-        item.addEventListener('click', () => {
-
-
-
-            const isActive = item.classList.contains('active-content');
-
-
-
-            assayItems.forEach(el => el.classList.remove('active-content'));
-
-            assayImages.classList.remove('active-section');
-
-
-
-            if (!isActive) {
-
-                item.classList.add('active-content');
-
-                assayImages.classList.add('active-section');
-
-            }
-
-
-
-        });
-
-
-
+        assayImages.classList.add("active-section");
+      }
     });
-
-
-
+  });
 });
-
-
 
 // Sticky Header Animation //
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
+  const headerContainer = document.querySelector(".axis-header");
 
+  const scrollThreshold = 900;
 
-
-    const headerContainer = document.querySelector('.axis-header');
-
-    const scrollThreshold = 900;
-
-
-
-    window.addEventListener('scroll', function() {
-
-
-
-        if (window.scrollY > scrollThreshold) {
-
-            headerContainer.classList.add('is-sticky');
-
-        } else {
-
-            headerContainer.classList.remove('is-sticky');
-
-        }
-
-
-
-    });
-
-
-
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > scrollThreshold) {
+      headerContainer.classList.add("is-sticky");
+    } else {
+      headerContainer.classList.remove("is-sticky");
+    }
+  });
 });
 
 // Applications and Contact Forms Subsmissions AJAX //
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  // Career Form
+  const careerForm = document.getElementById("careerForm");
+  const careerSuccess = document.getElementById("careerSuccessMsg");
 
-    // Career Form
-    const careerForm = document.getElementById('careerForm');
-    const careerSuccess = document.getElementById('careerSuccessMsg');
+  if (!careerForm) {
+    return;
+  }
 
-    if (!careerForm) {
-        return;
-    }
+  careerForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    careerForm.addEventListener('submit', function (e) {
+    const formData = new FormData(careerForm);
+    formData.append("action", "submit_career_form");
 
-        e.preventDefault();
+    const ajaxUrl =
+      typeof demo_ajax_obj !== "undefined"
+        ? demo_ajax_obj.ajax_url
+        : "/wp-admin/admin-ajax.php";
 
-        const formData = new FormData(careerForm);
-        formData.append('action', 'submit_career_form');
+    fetch(ajaxUrl, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.success) {
+          if (careerSuccess) {
+            careerSuccess.style.display = "flex";
+          }
 
-        const ajaxUrl = typeof demo_ajax_obj !== 'undefined' ? demo_ajax_obj.ajax_url : '/wp-admin/admin-ajax.php';
+          careerForm.reset();
+          careerForm.style.display = "none";
+        } else {
+          alert(
+            response.data || "Error submitting application! Please try again!",
+          );
+        }
+      })
+      .catch(() => {
+        alert("Network error!");
+      });
+  });
 
-        fetch(ajaxUrl, {
+  // Contact Form
+  const contactForm = document.getElementById("contactForm");
+  const contactSuccess = document.getElementById("contactSuccessMsg");
 
-            method: 'POST',
-            body: formData
-        
-        }).then(res => res.json()).then(response => {
+  if (!contactForm) {
+    return;
+  }
 
-            if (response.success) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-                if (careerSuccess) {
-                    careerSuccess.style.display = 'flex';
-                }
-                
-                careerForm.reset();
-                careerForm.style.display = 'none';
+    const formData = new FormData(contactForm);
+    formData.append("action", "submit_contact_form");
 
-            } else {
+    const ajaxUrl =
+      typeof demo_ajax_obj !== "undefined"
+        ? demo_ajax_obj.ajax_url
+        : "/wp-admin/admin-ajax.php";
 
-                alert(response.data || 'Error submitting application! Please try again!');
+    fetch(ajaxUrl, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.success) {
+          if (contactSuccess) {
+            contactSuccess.style.display = "flex";
+          }
 
-            }
-
-        }).catch(() => {
-
-            alert('Network error!');
-
-        });
-
-    });
-
-    // Contact Form
-    const contactForm = document.getElementById('contactForm');
-    const contactSuccess = document.getElementById('contactSuccessMsg');
-
-    if (!contactForm) {
-        return;
-    }
-
-    contactForm.addEventListener('submit', function (e) {
-
-        e.preventDefault();
-
-        const formData = new FormData(contactForm);
-        formData.append('action', 'submit_contact_form');
-
-        const ajaxUrl = typeof demo_ajax_obj !== 'undefined' ? demo_ajax_obj.ajax_url : '/wp-admin/admin-ajax.php';
-
-        fetch(ajaxUrl, {
-
-            method: 'POST',
-            body: formData
-
-        }).then(res => res.json()).then(response => {
-
-            if (response.success) {
-
-                if (contactSuccess) {
-                    contactSuccess.style.display = 'flex';
-                }
-
-                contactForm.reset();
-                contactSuccess.style.display = 'none';
-
-            } else {
-
-                alert(response.data || 'Error submitting contact message! Please try again!');
-
-            }
-
-        }).catch(() => {
-
-            alert('Network error!');
-
-        });
-
-    });
-
+          contactForm.reset();
+          contactSuccess.style.display = "none";
+        } else {
+          alert(
+            response.data ||
+              "Error submitting contact message! Please try again!",
+          );
+        }
+      })
+      .catch(() => {
+        alert("Network error!");
+      });
+  });
 });
