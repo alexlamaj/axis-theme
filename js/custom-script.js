@@ -9,102 +9,85 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Dropdown Filter Menu (Projects) //
+// Mobile Drawer //
+document.addEventListener('DOMContentLoaded', () => {
 
-const dropdown = document.querySelector(".subcat-dropdown");
+  const headerDrawer = document.querySelector('.header-drawer');
+  const openDrawer = document.querySelector('.mobile-toggle');
+  const closeDrawer = document.querySelector('.close-toggle');
 
-if (dropdown) {
-  const toggleBtn = document.querySelector(".drop-toggle");
+  if (headerDrawer && openDrawer) {
 
-  toggleBtn.addEventListener("click", function (e) {
-    e.stopPropagation();
-
-    dropdown.classList.toggle("open");
-  });
-
-  document.addEventListener("click", function (e) {
-    if (!toggleBtn.contains(e.target)) {
-      dropdown.classList.remove("open");
-    }
-  });
-}
-
-// Tabbed Elements (Contact Us Page) //
-
-const tabButtons = document.querySelectorAll(
-  ".tab-toggle-buttons .btn-secondary",
-);
-
-const tabs = document.querySelectorAll(".tab");
-
-tabButtons.forEach(function (button, index) {
-  button.addEventListener("click", () => {
-    tabButtons.forEach((btn) => btn.classList.remove("toggle-active"));
-
-    tabs.forEach((tab) => tab.classList.remove("tab-active"));
-
-    button.classList.add("toggle-active");
-
-    if (tabs[index]) {
-      tabs[index].classList.add("tab-active");
-    }
-  });
-});
-
-// Tabbed Templates (Company Page) //
-
-const btnTabsCompany = document.querySelectorAll(
-  ".tab-btn-company .btn-secondary",
-);
-
-const customTabs = document.querySelectorAll(".elementor-custom-tab");
-
-btnTabsCompany.forEach(function (button, index) {
-  button.addEventListener("click", () => {
-    btnTabsCompany.forEach((btn) => btn.classList.remove("active"));
-
-    customTabs.forEach((tab) => tab.classList.remove("custom-tab-active"));
-
-    button.classList.add("active");
-
-    if (customTabs[index]) {
-      customTabs[index].classList.add("custom-tab-active");
-    }
-  });
-});
-
-// Mobile Header Toggle //
-
-document.addEventListener("DOMContentLoaded", () => {
-  const openHeader = document.querySelector(".mobile-toggle");
-
-  const closeHeader = document.querySelector(".close-drawer");
-
-  const headerModal = document.querySelector(".header-drawer");
-
-  if (openHeader && headerModal) {
-    openHeader.addEventListener("click", () => {
-      headerModal.classList.add("mobile-header-active");
-
-      document.documentElement.style.overflow = "hidden";
-
-      document.body.style.overflow = "hidden";
+    openDrawer.addEventListener('click', () => {
+      headerDrawer.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     });
+
   }
 
-  if (closeHeader && headerModal) {
-    closeHeader.addEventListener("click", () => {
-      headerModal.classList.remove("mobile-header-active");
+  if (headerDrawer && closeDrawer) {
 
-      document.documentElement.style.overflow = "";
-
-      document.body.style.overflow = "";
+    closeDrawer.addEventListener('click', () => {
+      headerDrawer.classList.remove('active');
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     });
+
   }
+
+});
+
+// Sticky Header //
+document.addEventListener('DOMContentLoaded', () => {
+
+  const headerContainer = document.querySelector('.axis-header');
+  const scrollThreshold = 900;
+
+  window.addEventListener('scroll', function () {
+
+    if (window.scrollY > scrollThreshold) {
+      headerContainer.classList.add('is-sticky');
+    } else {
+      headerContainer.classList.remove('is-sticky');
+    }
+
+  });
+
+});
+
+// Ease out Animations //
+document.addEventListener('DOMContentLoaded', () => {
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.05
+  };
+
+  const scrollObserver = new IntersectionObserver((entries, observer) => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        const target = entry.target;
+        target.classList.add('is-visible');
+
+        observer.unobserve(target);
+
+      }
+
+    });
+
+  }, observerOptions);
+
+  document.querySelectorAll('section').forEach(el => scrollObserver.observe(el));
+  document.querySelectorAll('article').forEach(el => scrollObserver.observe(el));
+
 });
 
 // Assay List Display //
-
 document.addEventListener("DOMContentLoaded", () => {
   const assays = [
     {
@@ -314,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Assay Image Card Transitions //
-
 document.addEventListener("DOMContentLoaded", () => {
   const assayImages = document.getElementById("assayContainer");
 
@@ -334,22 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
         assayImages.classList.add("active-section");
       }
     });
-  });
-});
-
-// Sticky Header Animation //
-
-document.addEventListener("DOMContentLoaded", function () {
-  const headerContainer = document.querySelector(".axis-header");
-
-  const scrollThreshold = 900;
-
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > scrollThreshold) {
-      headerContainer.classList.add("is-sticky");
-    } else {
-      headerContainer.classList.remove("is-sticky");
-    }
   });
 });
 

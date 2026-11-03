@@ -83,6 +83,7 @@ article.is-visible {
   flex-direction: row;
   align-items: center;
   gap: 25px;
+  list-style-type: none;
 }
 
 .or-menu li a {
@@ -214,12 +215,15 @@ article.is-visible {
 }
 
 .socials {
+  display: flex;
+  flex-direction: row;
   gap: 20px;
 }
 
 .socials a svg {
   width: 28px;
   height: 28px;
+  text-decoration: none;
 }
 
 .or-contact {
@@ -240,6 +244,7 @@ article.is-visible {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  list-style-type: none;
 }
 
 .or-fmenu li a,
@@ -267,6 +272,7 @@ article.is-visible {
   flex-direction: row;
   align-items: center;
   gap: 20px;
+  list-style-type: none;
 }
 
 .copyright,
@@ -1634,7 +1640,7 @@ form {
   }
 
   .axis-footer-or {
-    padding: 25px;
+    padding: 40px 25px;
     height: 100%;
     gap: 60px;
   }

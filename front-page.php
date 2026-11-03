@@ -41,7 +41,7 @@ $url = static function ($path) {
                 <div class="front-tab"><?php _e('GMP Certification', 'axis-theme'); ?></div>
             </div>
 
-            <a href="<?php echo esc_url($url('/')); ?>" class="health-btn"><?php _e('Explore Construction', 'axis-theme'); ?></a>
+            <a href="<?php echo esc_url($url('/healthcare-construction/')); ?>" class="health-btn"><?php _e('Explore Construction', 'axis-theme'); ?></a>
 
         </div>
 
