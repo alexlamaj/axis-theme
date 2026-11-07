@@ -8,10 +8,10 @@ get_header(); ?>
 
 <div class="page-layout">
 
-    <div class="page-header">
+    <section class="page-header">
         <div class="header-text"><?php _e('Alongside construction, Axis Medical supplies selected medical equipment for the operating room and ICU, the emergency department and the hospital pharmacy.', 'axis-theme'); ?></div>
         <div class="header-title"><?php _e('The equipment that goes inside the room.', 'axis-theme'); ?></div>
-    </div>
+    </section>
 
     <section class="equipment-cards">
 

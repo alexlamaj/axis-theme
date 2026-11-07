@@ -56,10 +56,10 @@ get_header(); ?>
 
 <div class="page-layout">
 
-    <div class="page-header">
+    <section class="page-header">
         <div class="header-text"><?php _e('A turn-key solution for any healthcare project: we study, supply, build, install and service the systems that make a room work.', 'axis-theme'); ?></div>
         <div class="header-title"><?php _e('Everything inside the room from one supplier', 'axis-theme'); ?></div>
-    </div>
+    </section>
 
     <section class="solution-runs">
 
