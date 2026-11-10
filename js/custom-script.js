@@ -56,6 +56,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// Careers Input Dropdown //
+document.addEventListener('DOMContentLoaded', () => {
+
+  const inputContainer = document.querySelector('.form-container');
+  if (!inputContainer) return;
+
+  const inputDropdown = inputContainer.querySelector('.form-dropdown');
+  const input = inputContainer.querySelector('input');
+  const items = inputDropdown.querySelectorAll('li');
+
+  input.addEventListener('click', () => {
+    inputDropdown.classList.add('is-open');
+  });
+
+  document.addEventListener('click', (e) => {
+
+    if (!inputContainer.contains(e.target)) {
+      inputDropdown.classList.remove('is-open');
+    }
+
+  });
+
+  items.forEach(item => {
+
+    item.addEventListener('click', () => {
+      input.value = item.textContent.trim();
+      inputDropdown.classList.remove('is-open');
+    });
+
+  });
+
+});
+
 // Ease out Animations //
 document.addEventListener('DOMContentLoaded', () => {
 

@@ -1247,6 +1247,220 @@ section.is-visible, article.is-visible {
 
 }
 
+.error-title {
+
+  color: var(--color-primary);
+  font-size: 56px;
+  font-weight: 600;
+
+}
+
+.error-text {
+
+  margin: 60px 0px;
+  color: var(--color-white);
+  font-size: 26px;
+  font-weight: 400;
+
+}
+
+.error-link {
+
+  color: var(--color-white);
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: underline;
+
+}
+
+.error-link:hover {
+
+  color: var(--color-primary);
+  text-decoration: none;
+
+}
+
+.error-linkP:active {
+
+  color: var(--color-secondary);
+  text-decoration: none;
+
+}
+
+.career-content {
+
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 80px;
+
+}
+
+form {
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+}
+
+.form-container {
+
+  position: relative;
+  width: 100%;
+
+}
+
+.form-item, .form-wrapper {
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+}
+
+label {
+
+  color: var(--color-white);
+  font-size: 18px;
+  font-weight: 400;
+
+}
+
+input {
+
+  width: 100%;
+  padding: 5px 15px;
+  box-sizing: border-box;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-white);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-white);
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  outline: none;
+
+}
+
+input:hover, input:focus {
+
+  border: 1px solid var(--color-primary);
+
+}
+
+.form-dropdown {
+
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: var(--color-background);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-main);
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s cubic-bezier(0.25, 1, 0.5, 1); 
+
+}
+
+.form-dropdown li {
+
+  padding: 3px 8px;
+  margin: 0px;
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  list-style-type: none;
+
+}
+
+.form-dropdown li:hover {
+
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--border-radius-lg);
+  color: var(--color-background);
+
+}
+
+.form-dropdown li:active {
+
+  background-color: var(--color-secondary);
+
+}
+
+.form-dropdown.is-open {
+
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+
+}
+
+.btn-submit {
+
+  max-width: 140px;
+  margin-top: 20px;
+  padding: 4px 12px;
+  box-sizing: border-box;
+  background-color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-lg);
+  color: var(--color-background);
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Manrope', sans-serif;
+  cursor: pointer;
+
+}
+
+.btn-submit:hover {
+
+  background-color: var(--color-primary);
+
+}
+
+.btn-submit:active {
+
+  background-color: var(--color-secondary);
+
+}
+
+.careers-img {
+
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.careers-img img {
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  border: none;
+  border-radius: var(--border-radius-sm);
+
+}
+
 .floating-lang {
   position: fixed;
   bottom: 25px;
@@ -1719,6 +1933,49 @@ section.is-visible, article.is-visible {
 
   }
 
+  .error-title {
+
+    font-size: 42px;
+
+  }
+
+  .error-text {
+
+    font-size: 20px;
+
+  }
+
+  .error-link {
+
+    font-size: 16px;
+
+  }
+
+  .career-content {
+
+    flex-direction: column;
+    gap: 50px;
+
+  }
+
+  form {
+
+    gap: 20px;
+
+  }
+
+  .form-item, .form-wrapper {
+
+    gap: 12px;
+
+  }
+
+  .careers-img {
+
+    height: 320px;
+
+  }
+
   .floating-lang {
     bottom: 15px;
     right: 15px;
@@ -1898,6 +2155,36 @@ section.is-visible, article.is-visible {
   .single-post-content {
 
     margin-top: 40px;
+
+  }
+
+  .career-content {
+
+    gap: 100px;
+
+  }
+
+  label {
+
+    font-size: 20px;
+
+  }
+
+  input {
+
+    font-size: 14px;
+
+  }
+
+  .careers-img {
+
+    height: 450px;
+
+  }
+
+  .careers-img img {
+
+    width: 80%;
 
   }
 

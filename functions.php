@@ -825,9 +825,7 @@ function axis_careers_form_sub()
 
 
 
-    $firstName = sanitize_text_field($_POST['applicant_first_name']);
-
-    $lastName = sanitize_text_field($_POST['applicant_last_name']);
+    $fullName = sanitize_text_field($_POST['applicant_full_name']);
 
     $email = sanitize_email($_POST['applicant_email']);
 
@@ -841,7 +839,7 @@ function axis_careers_form_sub()
 
 
 
-        'post_title' => 'Application: ' . $lastName,
+        'post_title' => 'Application: ' . $fullName,
 
         'post_type' => 'application',
 
@@ -857,7 +855,7 @@ function axis_careers_form_sub()
 
 
 
-        update_post_meta($post_id, '_applicant_first_name', $firstName);
+        update_post_meta($post_id, '_applicant_full_name', $fullName);
 
         update_post_meta($post_id, '_applicant_email', $email);
 
@@ -990,10 +988,7 @@ function axis_render_application_meta($post)
 {
 
 
-
-    $firstName = get_post_meta($post->ID, '_applicant_first_name', true);
-
-    $lastName = str_replace('Application: ', '', get_the_title($post->ID));
+    $fullName = str_replace('Application: ', '', get_the_title($post->ID));
 
     $email = get_post_meta($post->ID, '_applicant_email', true);
 
@@ -1011,9 +1006,7 @@ function axis_render_application_meta($post)
 
     <div style="padding: 12px; font-size: 14px; line-height: 1.6;">
 
-        <p><strong>First Name: </strong><?php echo esc_html($firstName); ?></p>
-
-        <p><strong>Last Name: </strong><?php echo esc_html($lastName); ?></p>
+        <p><strong>Full Name: </strong><?php echo esc_html($fullName); ?></p>
 
         <p><strong>Email: </strong><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email) ?></a></p>
 
@@ -1098,8 +1091,7 @@ function handle_career_form_submission()
         wp_send_json_error('Security check failed!');
     }
 
-    $first_name = isset($_POST['applicant_first_name']) ? sanitize_text_field($_POST['applicant_first_name']) : '';
-    $last_name = isset($_POST['applicant_last_name']) ? sanitize_text_field($_POST['applicant_last_name']) : '';
+    $full_name = isset($_POST['applicant_full_name']) ? sanitize_text_field($_POST['applicant_full_name']) : '';
     $email = isset($_POST['applicant_email']) ? sanitize_email($_POST['applicant_email']) : '';
     $phone = isset($_POST['applicant_phone']) ? sanitize_text_field($_POST['applicant_phone']) : '';
     $profession = isset($_POST['applicant_profession']) ? sanitize_text_field($_POST['applicant_profession']) : '';
@@ -1135,14 +1127,13 @@ function handle_career_form_submission()
 
     $post_id = wp_insert_post(array(
         'post_type' => 'application',
-        'post_title' => $first_name . ' ' . $last_name,
+        'post_title' => $full_name,
         'post_status' => 'publish'
     ));
 
     if ($post_id) {
 
-        update_post_meta($post_id, '_applicant_first_name', $first_name);
-        update_post_meta($post_id, '_applicant_last_name', $last_name);
+        update_post_meta($post_id, '_applicant_full_name', $full_name);
         update_post_meta($post_id, '_applicant_email', $email);
         update_post_meta($post_id, '_applicant_phone', $phone);
         update_post_meta($post_id, '_applicant_profession', $profession);
@@ -1150,10 +1141,9 @@ function handle_career_form_submission()
     }
 
     $to = 'info@axismedical.gr';
-    $subject = 'New Career Application: ' . $first_name . ' ' . $last_name;
+    $subject = 'New Career Application: ' . $full_name;
 
-    $message = "First Name: " . $first_name . "\n";
-    $message .= "Last Name: " . $last_name . "\n";
+    $message = "Full Name: " . $full_name . "\n";
     $message .= "Email Address: " . $email . "\n";
     $message .= "Phone Number: " . $phone . "\n";
     $message .= "Profession: " . $profession . "\n";
@@ -1161,7 +1151,7 @@ function handle_career_form_submission()
 
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
-        'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
+        'Reply-To: ' . $full_name . ' <' . $email . '>'
     );
 
     $sent = wp_mail($to, $subject, $message, $headers, $attachments);
