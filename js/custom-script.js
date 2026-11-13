@@ -441,3 +441,179 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
+
+// Service Cards Pop-Ups //
+document.addEventListener('DOMContentLoaded', () => {
+  
+	const popups = [...document.querySelectorAll('.service-popup')];
+
+	if (!popups.length) return;
+
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+	const shapes = 'path, line, rect, circle, ellipse, polyline, polygon';
+	const minScale = 0.7;
+	const minImageHeight = 140;
+	let current = null;
+	let trigger = null;
+	let resizeFrame = null;
+
+	const find = value => popups.find(popup => popup.dataset.serviceId === value || popup.dataset.serviceKey === value);
+
+	const lockScroll = locked => {
+
+		if (locked) {
+			document.body.style.setProperty('--service-popup-scrollbar', `${window.innerWidth - document.documentElement.clientWidth}px`);
+		}
+		document.body.classList.toggle('service-popup-open', locked);
+
+	};
+
+	const prepareDrawing = popup => {
+
+		if (reducedMotion.matches || popup.dataset.drawReady) return;
+
+		popup.querySelectorAll('.service-popup-image svg').forEach(svg => {
+			svg.querySelectorAll(shapes).forEach(shape => {
+				const style = getComputedStyle(shape);
+
+				if (typeof shape.getTotalLength !== 'function' || style.stroke === 'none' || style.strokeDasharray !== 'none') return;
+
+				shape.style.setProperty('--service-path', Math.ceil(shape.getTotalLength()) + 1);
+				shape.classList.add('service-path');
+			});
+		});
+
+		popup.dataset.drawReady = 'true';
+
+	};
+
+	const fits = popup => {
+
+		const card = popup.querySelector('.service-popup-card');
+		const image = popup.querySelector('.service-popup-image');
+		const content = popup.querySelector('.service-popup-content');
+		const stacked = content.offsetLeft === image.offsetLeft;
+
+		return content.scrollHeight <= content.clientHeight + 1
+			&& content.offsetTop + content.offsetHeight <= card.clientHeight + 1
+			&& (!stacked || image.offsetHeight >= minImageHeight);
+
+	};
+
+	const fitContent = popup => {
+
+		const scalable = [...popup.querySelectorAll('.service-popup-title, .service-popup-text, .service-popup-list')];
+
+		scalable.forEach(element => {
+			element.style.fontSize = '';
+		});
+
+		const sizes = scalable.map(element => parseFloat(getComputedStyle(element).fontSize));
+		let scale = 1;
+
+		while (!fits(popup) && scale > minScale) {
+			scale = Math.max(minScale, scale - 0.05);
+			scalable.forEach((element, index) => {
+				element.style.fontSize = `${(sizes[index] * scale).toFixed(2)}px`;
+			});
+		}
+
+	};
+
+	const open = (value, origin = null) => {
+
+		const popup = find(value);
+
+		if (!popup || popup === current) return;
+		if (current) close();
+
+		current = popup;
+		trigger = origin;
+		lockScroll(true);
+		fitContent(popup);
+		prepareDrawing(popup);
+		popup.inert = false;
+		popup.classList.add('is-open');
+		history.replaceState(null, '', `#${popup.dataset.serviceKey}`);
+		popup.querySelector('.service-popup-close').focus({ preventScroll: true });
+
+	};
+
+	const close = () => {
+
+		if (!current) return;
+
+		if (trigger && typeof trigger.focus === 'function') trigger.focus({ preventScroll: true });
+
+		current.classList.remove('is-open');
+		current.inert = true;
+		current = null;
+		trigger = null;
+		lockScroll(false);
+		history.replaceState(null, '', location.pathname + location.search);
+
+	};
+
+	const trapFocus = event => {
+
+		const items = [...current.querySelectorAll('a[href], button:not([disabled])')].filter(item => item.getClientRects().length);
+
+		if (!items.length) return;
+
+		const first = items[0];
+		const last = items[items.length - 1];
+
+		if (event.shiftKey && document.activeElement === first) {
+			event.preventDefault();
+			last.focus();
+		} else if (!event.shiftKey && document.activeElement === last) {
+			event.preventDefault();
+			first.focus();
+		}
+
+	};
+
+	const openFromHash = () => {
+
+		const key = decodeURIComponent(location.hash.slice(1));
+		if (key && find(key)) open(key);
+
+	};
+
+	document.addEventListener('click', event => {
+
+		const origin = event.target.closest('[data-service-popup]');
+
+		if (origin) {
+			event.preventDefault();
+			open(origin.dataset.servicePopup, origin);
+			return;
+		}
+
+		if (event.target.closest('[data-service-close]')) close();
+
+	});
+
+	document.addEventListener('keydown', event => {
+
+		if (!current) return;
+
+		if (event.key === 'Escape') close();
+		if (event.key === 'Tab') trapFocus(event);
+
+	});
+
+	window.addEventListener('resize', () => {
+
+		if (!current) return;
+
+		cancelAnimationFrame(resizeFrame);
+		resizeFrame = requestAnimationFrame(() => fitContent(current));
+
+	});
+
+	window.addEventListener('hashchange', openFromHash);
+
+	(document.fonts ? document.fonts.ready : Promise.resolve()).then(openFromHash);
+});

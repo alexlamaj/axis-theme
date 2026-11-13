@@ -1507,11 +1507,7 @@ function axis_team_shortcode()
 
 
 
-    <div class="container">
-
-
-
-        <div class="team-content">
+        <div class="team-grid">
 
 
 
@@ -1523,13 +1519,11 @@ function axis_team_shortcode()
 
                 $studies = get_post_meta(get_the_ID(), '_team_studies', true);
 
-
-
-                if ($query->current_post === 0) : ?>
+            ?>
 
 
 
-                    <div class="team-card">
+            <div class="team-card">
 
 
 
@@ -1573,84 +1567,14 @@ function axis_team_shortcode()
 
 
 
-                    </div>
+                    </div>    
 
 
-
-                    <div class="grid-layout">
-
+            <?php endwhile; ?>
 
 
-                    <?php else : ?>
-
-
-
-                        <div class="team-card">
-
-
-
-                            <div class="team-image">
-
-                                <?php if (has_post_thumbnail()) : ?>
-
-                                    <?php the_post_thumbnail(); ?>
-
-                                <?php else : ?>
-
-                                    <?php echo axis_icon('empty-member'); ?>
-
-                                <?php endif; ?>
 
                             </div>
-
-
-
-                            <div class="team-name">
-
-                                <?php the_title(); ?>
-
-                            </div>
-
-
-
-                            <div class="team-profession">
-
-                                <?php echo esc_html($profession); ?>
-
-                            </div>
-
-
-
-                            <div class="team-studies">
-
-                                <?php echo esc_html($studies); ?>
-
-                            </div>
-
-
-
-                        </div>
-
-
-
-                    <?php endif; ?>
-
-
-
-                <?php endwhile; ?>
-
-
-
-                    </div>
-
-
-
-        </div>
-
-
-
-    </div>
-
 
 
 <?php wp_reset_postdata();

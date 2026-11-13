@@ -1,15 +1,10 @@
 <?php 
 
 /**
-
  * Template Name: MultiClot Landing Page
+*/
 
- */
-
-
-
-get_header('product');
-
+get_header();
 ?>
 
 

@@ -6,47 +6,47 @@
 
 $systems = [
     [
-        'image' => '',
+        'image' => 'Wall-Modular-System-Cover',
         'title' => __('VAELMA Modular Walls System', 'axis-theme'),
         'text' => __('Hygienic walls that go up fast, sit perfectly flat and can be opened for service without demolition.', 'axis-theme') 
     ],
     [
-        'image' => '',
+        'image' => 'Ceiling-Cover',
         'title' => __('Ceiling', 'axis-theme'),
         'text' => __('A ceiling that matches the wall grid, so every panel lines up and every panel can come out.h', 'axis-theme') 
     ],
     [
-        'image' => '',
+        'image' => 'Floor-System-Cover',
         'title' => __('Floor System', 'axis-theme'),
         'text' => __('Operating rooms have the strictest discharge requirements in a hospital. The floor is how they are met.', 'axis-theme') 
     ],
     [
-        'image' => '',
+        'image' => 'Doors-Cover',
         'title' => __('Hermetic Doors', 'axis-theme'),
         'text' => __('Operating rooms and ICUs need doors that seal, so contamination stays out and equipment works safely.', 'axis-theme') 
     ],
     [
-        'image' => '',
+        'image' => 'Lights-Cover',
         'title' => __('Surgical Lights', 'axis-theme'),
         'text' => __('Light intensity, field size and colour temperature decide how precisely a surgeon sees, and how tired they get.', 'axis-theme') 
     ],
     [
-        'image' => '',
+        'image' => 'Laminar-Flow-System-Cover',
         'title' => __('Laminar Flow System', 'axis-theme'),
         'text' => __('Clean air moves straight down over the patient and out, with no turbulence to carry contamination across.', 'axis-theme') 
     ],
     [
-        'image' => '',
+        'image' => 'Medical-Gases-Cover',
         'title' => __('Medical Gases', 'axis-theme'),
         'text' => __('Every part needed for a full medical gas installation, from the pipeline to the outlet the clinician uses.', 'axis-theme') 
     ],
     [
-        'image' => '',
+        'image' => 'CONTROL-PANEL-INTEGRATION-SYSTEM-cover',
         'title' => __('Control Panel & Integration System', 'axis-theme'),
         'text' => __('The OPT Control Panel gives the surgical team a single, familiar source of information. One big screen for the room\'s video, images and patient data.', 'axis-theme') 
     ],
     [
-        'image' => '',
+        'image' => 'Lavamani_elettronici_acciaio_inox_C614_soema_1',
         'title' => __('Scrub Units', 'axis-theme'),
         'text' => __('A single-block scrub station designed to be cleaned, with no sharp corners or edges.', 'axis-theme') 
     ]
@@ -103,7 +103,7 @@ get_header(); ?>
 
     <section class="or-redirect">
 
-        <div class="redirect-img"></div>
+        <div class="redirect-img"><?php echo axis_icon('Refined digital operating theatre at dusk'); ?></div>
 
         <div class="redirect-content">
 
