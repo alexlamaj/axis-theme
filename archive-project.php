@@ -9,76 +9,81 @@
             <div class="header-title"><?php _e('Hospitals, units and rooms we have built', 'axis-theme'); ?></div>
         </div>
 
-        <div class="arc-categories">
-            <?php 
-                $post_type          = 'project';
-                $taxonomy           = 'project_category';
-                $archive_url        = get_post_type_archive_link($post_type);
-                $is_tax             = is_tax($taxonomy);
-                $current_id         = $is_tax ? get_queried_object_id() : 0;
-                $current_term       = $current_id ? get_term($current_id, $taxonomy) : null;
-                $archive_parent_id = 0;
+        <div class="arc-filters">
 
-                if ($current_term) {
-                    $archive_parent_id = ($current_term->parent == 0) ? $current_term->term_id : $current_term->parent;
-                }
+            <div class="arc-categories">
+                <?php 
+                    $post_type          = 'project';
+                    $taxonomy           = 'project_category';
+                    $archive_url        = get_post_type_archive_link($post_type);
+                    $is_tax             = is_tax($taxonomy);
+                    $current_id         = $is_tax ? get_queried_object_id() : 0;
+                    $current_term       = $current_id ? get_term($current_id, $taxonomy) : null;
+                    $archive_parent_id = 0;
 
-                $all_active = !$is_tax;
-            ?>
+                    if ($current_term) {
+                        $archive_parent_id = ($current_term->parent == 0) ? $current_term->term_id : $current_term->parent;
+                    }
 
-            <a href="<?php echo esc_url($archive_url); ?>" class="btn-primary <?php echo $all_active ? 'active' : ''; ?>"><?php _e('All', 'axis-theme'); ?></a>
+                    $all_active = !$is_tax;
+                ?>
 
-            <?php
-                $parent_terms = get_terms(array(
-                    'taxonomy'   => $taxonomy,
-                    'parent'     => 0,
-                    'hide_empty' => false
-                ));
+                <a href="<?php echo esc_url($archive_url); ?>" class="btn-primary <?php echo $all_active ? 'active' : ''; ?>"><?php _e('All', 'axis-theme'); ?></a>
 
-                if (!empty($parent_terms) && !is_wp_error($parent_terms)) : 
-                    foreach ($parent_terms as $parent_term) :
-                        $is_active = ($archive_parent_id === $parent_term->term_id) ? 'active' : '';
-                    ?>
-                    <a href="<?php echo esc_url(get_term_link($parent_term)); ?>" class="btn-primary <?php echo $is_active; ?>"><?php echo esc_html($parent_term->name); ?></a>
-                    <?php endforeach;
-                endif;
-            ?>
-
-            <?php
-                if ($archive_parent_id) : 
-                    $child_terms = get_terms(array(
+                <?php
+                    $parent_terms = get_terms(array(
                         'taxonomy'   => $taxonomy,
-                        'parent'     => $archive_parent_id,
+                        'parent'     => 0,
                         'hide_empty' => false
                     ));
 
-                    if (!empty($child_terms) && !is_wp_error($child_terms)) :
-                        $active_sub_name = ($current_term && $current_term->parent != 0) ? $current_term->name : __('Select Sub-Category', 'axis-theme');
-            ?>
-                <div class="sub-dropdown">
-                    <button type="button" class="btn-dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span><?php echo esc_html($active_sub_name); ?></span>
-                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                    <div class="dropdown-content" aria-label="Subcategories">
-                        <a href="<?php echo esc_url(get_term_link($archive_parent_id)); ?>" class="<?php echo ($current_id === $archive_parent_id) ? 'active' : ''; ?>">
-                            <?php _e('All ', 'axis-theme'); echo esc_html(get_term($archive_parent_id)->name); ?>
-                        </a>
-                        <?php foreach ($child_terms as $child) : 
-                            $is_child_active = ($current_id === $child->term_id) ? 'active' : '';
+                    if (!empty($parent_terms) && !is_wp_error($parent_terms)) : 
+                        foreach ($parent_terms as $parent_term) :
+                            $is_active = ($archive_parent_id === $parent_term->term_id) ? 'active' : '';
                         ?>
-                        <a href="<?php echo esc_url(get_term_link($child)); ?>" class="<?php echo $is_child_active; ?>">
-                            <?php echo esc_html($child->name); ?>
-                        </a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            <?php 
+                        <a href="<?php echo esc_url(get_term_link($parent_term)); ?>" class="btn-primary <?php echo $is_active; ?>"><?php echo esc_html($parent_term->name); ?></a>
+                        <?php endforeach;
                     endif;
-                endif; 
-            ?>
+                ?>
+            </div>
+
+                <?php
+                    if ($archive_parent_id) : 
+                        $child_terms = get_terms(array(
+                            'taxonomy'   => $taxonomy,
+                            'parent'     => $archive_parent_id,
+                            'hide_empty' => false
+                        ));
+
+                        if (!empty($child_terms) && !is_wp_error($child_terms)) :
+                            $sub_is_active   = ($current_term && $current_term->parent != 0);
+                            $active_sub_name = $sub_is_active ? $current_term->name : __('Select Sub-Category', 'axis-theme');
+                ?>
+                    <div class="sub-dropdown">
+                        <button type="button" class="btn-dropdown<?php echo $sub_is_active ? ' active' : ''; ?>" aria-haspopup="true" aria-expanded="false" aria-controls="axisSubCategories">
+                            <span><?php echo esc_html($active_sub_name); ?></span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="dropdown-content" id="axisSubCategories" aria-label="<?php esc_attr_e('Subcategories', 'axis-theme'); ?>">
+                            <a href="<?php echo esc_url(get_term_link($archive_parent_id)); ?>" class="<?php echo ($current_id === $archive_parent_id) ? 'active' : ''; ?>">
+                                <?php printf(esc_html__('All %s', 'axis-theme'), esc_html(get_term($archive_parent_id)->name)); ?>
+                            </a>
+                            <?php foreach ($child_terms as $child) : 
+                                $is_child_active = ($current_id === $child->term_id) ? 'active' : '';
+                            ?>
+                            <a href="<?php echo esc_url(get_term_link($child)); ?>" class="<?php echo $is_child_active; ?>">
+                                <?php echo esc_html($child->name); ?>
+                            </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php 
+                        endif;
+                    endif; 
+                ?>
+
         </div>
 
     </section>
@@ -129,4 +134,3 @@
 </div>
 
 <?php get_footer(); ?>
-

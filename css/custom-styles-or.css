@@ -57,6 +57,14 @@ article.is-visible {
   box-shadow: var(--shadow-main);
 }
 
+.admin-bar .axis-header-or {
+  top: var(--wp-admin--admin-bar--height, 32px);
+}
+
+.admin-bar .axis-header-or.is-sticky {
+  top: calc(var(--wp-admin--admin-bar--height, 32px) - 150px);
+}
+
 .or-header-content {
   width: 100%;
   padding: 15px 50px;
@@ -72,7 +80,15 @@ article.is-visible {
   height: 70px;
 }
 
-.or-header-logo a img {
+.or-header-logo a,
+.or-header-logo .axis-svg-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.or-header-logo img,
+.or-header-logo svg {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -210,7 +226,14 @@ article.is-visible {
   height: 90px;
 }
 
-.or-footer-logo img {
+.or-footer-logo .axis-svg-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.or-footer-logo img,
+.or-footer-logo svg {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -293,7 +316,7 @@ article.is-visible {
 }
 
 .policies li a:active {
-  color: var(--color-secondary) "";
+  color: var(--color-secondary);
 }
 
 .intro-section {
@@ -1337,7 +1360,7 @@ form {
   display: block;
   grid-column: span 5;
   overflow: hidden;
-  background-color: #222222;
+  background-color: var(--color-black);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1395,7 +1418,7 @@ form {
 
 .system-pill {
   padding: 4px 14px;
-  background-color: white;
+  background-color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-main);
@@ -1611,9 +1634,17 @@ form {
   .or-axis-logo {
     width: 120px;
     height: 55px;
+    display: block;
   }
 
-  .or-axis-logo img {
+  .or-axis-logo .axis-svg-icon {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .or-axis-logo img,
+  .or-axis-logo svg {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -2559,7 +2590,7 @@ svg.ot .part--gases.is-active .ping{animation:ot-ping 1.6s ease-out infinite;ani
 .ot-pill input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
 .ot-pill span{
   position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:96px;padding:7px 14px;border:1px solid var(--color-black);border-radius:999px;
-  background:transparent;color:var(--color-black);font-size:16px;font-weight:400;line-height:1.4;white-space:nowrap;
+  background:transparent;color:var(--color-black);font-size:16px;font-weight:400;line-height:1.4;white-space:nowrap;opacity:1;
   transition:background .2s,color .2s,border-color .2s;
 }
 .ot-pill:hover span{border-color:var(--color-primary)}

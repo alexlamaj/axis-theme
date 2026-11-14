@@ -9,12 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $systems = [
-	'walls'       => __( 'Modular Walls', 'axis-theme' ),
+	'walls'       => __( 'VAELMA Modular Walls', 'axis-theme' ),
 	'ceiling'     => __( 'Ceiling', 'axis-theme' ),
 	'floor'       => __( 'Floor System', 'axis-theme' ),
 	'doors'       => __( 'Hermetic Doors', 'axis-theme' ),
-	'lights'      => __( 'Lights', 'axis-theme' ),
-    'recessed' => __( 'Recessed LED Lighting', 'axis-theme' ),
+	'lights'      => __( 'Surgical Lights', 'axis-theme' ),
+	'recessed'    => __( 'Recessed LED Lighting', 'axis-theme' ),
 	'laminar'     => __( 'Laminar Flow System', 'axis-theme' ),
 	'gases'       => __( 'Medical Gases', 'axis-theme' ),
 	'control'     => __( 'Control Panel', 'axis-theme' ),

@@ -31,7 +31,7 @@
                 <div class="service-popup-actions">
                     <a href="<?php echo esc_url($axis_service['projects_url']); ?>" class="service-popup-button"><?php _e('View Projects', 'axis-theme'); ?></a>
                     <?php if ($axis_service['redirect']) : ?>
-                        <a href="<?php echo esc_url($axis_service['redirect']); ?>" class="service-popup-btn-sec"><?php _e('Visit the Operating Rooms Site', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url($axis_service['redirect']); ?>" class="service-popup-button secondary"><?php _e('Visit the Operating Rooms Site', 'axis-theme'); ?></a>
                     <?php endif; ?>
                 </div>
 

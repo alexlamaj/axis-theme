@@ -141,7 +141,7 @@ get_header('or');
         <?php endif; ?>
 
         <?php if ($has_gallery) : ?>
-            <a href="#sol-gallery" class="sol-navlink">Gallery</a>
+            <a href="#sol-gallery" class="sol-navlink"><?php _e('Gallery', 'axis-theme'); ?></a>
         <?php endif; ?>
 
     </div>
@@ -240,7 +240,7 @@ get_header('or');
     <section class="sol-section" id="sol-gallery">
         <div class="section-content">
 
-            <div class="section-title">Gallery</div>
+            <div class="section-title"><?php _e('Gallery', 'axis-theme'); ?></div>
 
             <div class="sol-gallery">
                 <?php the_content(); ?>

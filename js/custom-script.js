@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const headerContainer = document.querySelector('.axis-header');
   const scrollThreshold = 900;
 
+  if (!headerContainer) return;
+
   window.addEventListener('scroll', function () {
 
     if (window.scrollY > scrollThreshold) {
@@ -657,4 +659,77 @@ document.addEventListener('DOMContentLoaded', () => {
 		requestAnimationFrame(() => hero.classList.add('is-loaded'));
 	});
   
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const dropdowns = document.querySelectorAll('.sub-dropdown');
+
+  if (!dropdowns.length) return;
+
+  const closeDropdowns = (except) => {
+
+    dropdowns.forEach(dropdown => {
+
+      if (dropdown === except) return;
+
+      dropdown.classList.remove('is-open');
+
+      const button = dropdown.querySelector('.btn-dropdown');
+      if (button) button.setAttribute('aria-expanded', 'false');
+
+    });
+
+  };
+
+  dropdowns.forEach(dropdown => {
+
+    const button = dropdown.querySelector('.btn-dropdown');
+
+    if (!button) return;
+
+    button.addEventListener('click', (event) => {
+
+      event.stopPropagation();
+
+      const isOpen = !dropdown.classList.contains('is-open');
+
+      closeDropdowns(dropdown);
+      dropdown.classList.toggle('is-open', isOpen);
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+    });
+
+    dropdown.addEventListener('focusout', (event) => {
+
+      if (event.relatedTarget && !dropdown.contains(event.relatedTarget)) {
+        dropdown.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'false');
+      }
+
+    });
+
+  });
+
+  document.addEventListener('click', (event) => {
+
+    if (!event.target.closest('.sub-dropdown')) closeDropdowns();
+
+  });
+
+  document.addEventListener('keydown', (event) => {
+
+    if (event.key !== 'Escape') return;
+
+    const openDropdown = document.querySelector('.sub-dropdown.is-open');
+
+    if (!openDropdown) return;
+
+    closeDropdowns();
+
+    const button = openDropdown.querySelector('.btn-dropdown');
+    if (button) button.focus();
+
+  });
+
 });

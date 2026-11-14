@@ -17,7 +17,7 @@ get_header(); ?>
 
         <div class="equip-card">
 
-            <div class="equip-image"></div>
+            <div class="equip-image"><?php echo axis_equipment_visual('equip-card-or-icu', 'equip-or-icu'); ?></div>
 
             <div class="equip-content">
 
@@ -61,13 +61,13 @@ get_header(); ?>
 
             </div>
 
-            <div class="equip-image"></div>
+            <div class="equip-image"><?php echo axis_equipment_visual('equip-card-emergency', 'equip-emergency'); ?></div>
 
         </div>
 
         <div class="equip-card">
 
-            <div class="equip-image"></div>
+            <div class="equip-image"><?php echo axis_equipment_visual('equip-card-pharmacy', 'equip-pharmacy'); ?></div>
 
             <div class="equip-content">
 

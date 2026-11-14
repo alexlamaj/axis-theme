@@ -25,7 +25,7 @@
             <div class="systems">
                 <?php foreach ($systems as $system): ?>
                     <span class="system-pill">
-                        <?php echo esc_html($system); ?>
+                        <?php echo esc_html(axis_or_system_label($system)); ?>
                     </span>
                 <?php endforeach; ?>
             </div>
@@ -46,4 +46,3 @@
 </div>
 
 <?php get_footer('or'); ?>
-

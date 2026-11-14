@@ -584,7 +584,8 @@ function or_cpt_render_systems_meta_box($post)
         'Ceiling',
         'Floor System',
         'Hermetic Doors',
-        'Lights',
+        'Surgical Lights',
+        'Recessed LED Lighting',
         'Laminar Flow System',
         'Medical Gases',
         'Control Panel',
@@ -594,7 +595,7 @@ function or_cpt_render_systems_meta_box($post)
 
     echo '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">';
     foreach ($available_systems as $system) {
-        $checked = in_array($system, $saved_systems, true) ? 'checked="checked"' : '';
+        $checked = in_array($system, array_map('axis_or_system_label', $saved_systems), true) ? 'checked="checked"' : '';
         echo '<label>';
         echo '<input type="checkbox" name="or_systems[]" value="' . esc_attr($system) . '" ' . $checked . '> ';
         echo esc_html($system);
@@ -764,6 +765,53 @@ add_action('admin_enqueue_scripts', 'custom_enqueue_or_admin_scripts');
 /////////////////////////////////////////////////////////////////////////
 
 // Fetch Media Library //
+function axis_svg_viewbox($svg)
+{
+    if (!preg_match('/<svg\b[^>]*>/i', $svg, $tag) || preg_match('/\sviewBox\s*=/i', $tag[0])) {
+        return $svg;
+    }
+
+    if (!preg_match('/\swidth\s*=\s*["\']?\s*([\d.]+)(?:px)?\s*["\'\s\/>]/i', $tag[0], $width) || !preg_match('/\sheight\s*=\s*["\']?\s*([\d.]+)(?:px)?\s*["\'\s\/>]/i', $tag[0], $height)) {
+        return $svg;
+    }
+
+    $new_tag = preg_replace('/^<svg\b/i', '<svg viewBox="0 0 ' . $width[1] . ' ' . $height[1] . '"', $tag[0]);
+
+    return substr_replace($svg, $new_tag, strpos($svg, $tag[0]), strlen($tag[0]));
+}
+
+function axis_theme_svg($name)
+{
+    $file = get_theme_file_path('assets/svg/' . sanitize_file_name($name) . '.svg');
+
+    if (!is_readable($file)) {
+        return '';
+    }
+
+    return '<span class="axis-svg-icon">' . file_get_contents($file) . '</span>';
+}
+
+function axis_equipment_visual($media_slug, $fallback)
+{
+    $media = axis_icon($media_slug);
+
+    if (strpos($media, '<!--') === 0) {
+        return axis_theme_svg($fallback);
+    }
+
+    return $media;
+}
+
+function axis_or_system_label($system)
+{
+    $legacy = array(
+        'Lights' => 'Surgical Lights',
+        'Modular Walls' => 'VAELMA Modular Walls',
+    );
+
+    return isset($legacy[$system]) ? $legacy[$system] : $system;
+}
+
 function axis_icon($slug, $custom_class = '')
 {
 
@@ -801,7 +849,7 @@ function axis_icon($slug, $custom_class = '')
 
             if ($file_path && file_exists($file_path)) {
 
-                return '<span class="' . esc_attr(trim('axis-svg-icon ' . $custom_class)) . '">' . file_get_contents($file_path) . '</span>';
+                return '<span class="' . esc_attr(trim('axis-svg-icon ' . $custom_class)) . '">' . axis_svg_viewbox(file_get_contents($file_path)) . '</span>';
             }
         }
 
@@ -870,11 +918,11 @@ function axis_contact_options()
                 'or-digitalization' => __('OR Digitalization', 'axis-theme'),
                 'surgical-lights' => __('Surgical Lights', 'axis-theme'),
                 'surgical-tables' => __('Surgical Tables', 'axis-theme'),
+                'multiclot' => __('Hemostasis', 'axis-theme'),
                 'anesthesia' => __('Anesthesia', 'axis-theme'),
                 'icu-pendants' => __('ICU Pendants', 'axis-theme'),
                 'robotic-pharmacy' => __('Robotic Pharmacy', 'axis-theme'),
-                'multiclot' => __('MultiClot', 'axis-theme'),
-                'chemomaker' => __('Chemomaker+', 'axis-theme'),
+                'chemomaker' => __('Oncology Drug Compounding', 'axis-theme'),
             ),
         ),
     );
@@ -1452,11 +1500,11 @@ function handle_or_contact_form_submission()
         'ceiling' => 'Ceiling',
         'floor' => 'Floor System',
         'doors' => 'Hermetic Doors',
-        'lights' => 'Lights',
+        'lights' => 'Surgical Lights',
         'recessed' => 'Recessed LED Lighting',
         'laminar' => 'Laminar Flow System',
         'gases' => 'Medical Gases',
-        'control' => 'Control System',
+        'control' => 'Control Panel',
         'integration' => 'Integration System',
         'scrub' => 'Scrub Units'
     );

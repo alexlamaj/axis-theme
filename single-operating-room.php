@@ -56,11 +56,11 @@
 
             <div class="post-systems">
 
-                <div class="post-systems-text">Systems Used</div>
+                <div class="post-systems-text"><?php _e('Systems Used', 'axis-theme'); ?></div>
 
                 <div class="post-systems-container">
                     <?php foreach ($systems as $system) : ?>
-                        <span class="post-pill"><?php echo esc_html($system); ?></span>
+                        <span class="post-pill"><?php echo esc_html(axis_or_system_label($system)); ?></span>
                     <?php endforeach; ?>
                 </div>
 
@@ -72,7 +72,7 @@
 
     <section class="post-gallery">
 
-        <div class="gallery-heading">Project Gallery</div>
+        <div class="gallery-heading"><?php _e('Project Gallery', 'axis-theme'); ?></div>
 
         <div class="gallery-grid">
 
@@ -94,4 +94,3 @@
 <?php endwhile; endif; ?>
 
 <?php get_footer('or'); ?>
-

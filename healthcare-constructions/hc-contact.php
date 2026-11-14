@@ -83,31 +83,31 @@ get_header(); ?>
                 <div class="tab-cards">
 
                     <div class="tab-card active">
-                        <a href="https://share.google/oKI5b7cyB0CKLcJiC"><?php _e('G. Karavaggeli 4, Kalamaria, Thessaloniki, Greece', 'axis-theme'); ?></a>
+                        <a href="https://share.google/oKI5b7cyB0CKLcJiC" target="_blank" rel="noopener"><?php _e('G. Karavaggeli 4, Kalamaria, Thessaloniki, Greece', 'axis-theme'); ?></a>
                         <a href="tel:+302313036458">+ 30 2313 036 458</a>
                         <a href="mailto:info@axismedical.gr">info@axismedical.gr</a>
                     </div>
 
                     <div class="tab-card">
-                        <a href="https://share.google/FPg6gkrftfU8GVSqD"><?php _e('Efkalipton 39, Votanikos, Athens, Greece', 'axis-theme'); ?></a>
+                        <a href="https://share.google/FPg6gkrftfU8GVSqD" target="_blank" rel="noopener"><?php _e('Efkalipton 39, Votanikos, Athens, Greece', 'axis-theme'); ?></a>
                         <a href="tel:+302130413685">+30 2130 413 685</a>
                         <a href="mailto:info@axismedical.gr">info@axismedical.gr</a>
                     </div>
 
                     <div class="tab-card">
-                        <a href="https://share.google/AvkVFQvxYJWYjl4co">Arndtstraße 18 60325 Frankfurt am Main Germany</a>
+                        <a href="https://share.google/AvkVFQvxYJWYjl4co" target="_blank" rel="noopener">Arndtstraße 18 60325 Frankfurt am Main Germany</a>
                         <a href="tel:+496994948770">+49 699 494 8770</a>
                         <a href="mailto:info@axismedical.gr">info@axismedical.gr</a>
                     </div>
 
                     <div class="tab-card">
-                        <a href="https://share.google/WTk1TvTAuBuASPsCP">96 Jalan Jurong Kechil Singapore 598599</a>
+                        <a href="https://share.google/WTk1TvTAuBuASPsCP" target="_blank" rel="noopener">96 Jalan Jurong Kechil Singapore 598599</a>
                         <a href="tel:+6564683948">+65 6468 3948</a>
                         <a href="mailto:pohguan@axismedical.com.sg">pohguan@axismedical.com.sg</a>
                     </div>
 
                     <div class="tab-card">
-                        <a href="https://share.google/zdemXtVHgHEpdIsDw">B8 Ahmad Aljabar Street, KW Kuwait</a>
+                        <a href="https://share.google/zdemXtVHgHEpdIsDw" target="_blank" rel="noopener">B8 Ahmad Aljabar Street, KW Kuwait</a>
                         <a href="tel:+96597289404">+965 972 89404</a>
                     </div>
 
