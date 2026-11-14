@@ -109,7 +109,7 @@ get_header(); ?>
 
             <div class="redirect-heading"><?php _e('The Same Systems, Explored Room by Room', 'axis-theme'); ?></div>
             <div class="redirect-text"><?php _e('Each system has its own page on the operating theatres site, with specifications, materials and an interactive room.', 'axis-theme'); ?></div>
-            <a href="<?php echo esc_url(home_url('/turn-key-solutions/')); ?>" class="redirect-link"><?php _e('View Operating Rooms', 'axis-theme'); ?> &rarr;</a>
+            <a href="<?php echo esc_url(axis_url('turn-key-solutions/')); ?>" class="redirect-link"><?php _e('View Operating Rooms', 'axis-theme'); ?> &rarr;</a>
 
         </div>
 
@@ -118,4 +118,3 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
-

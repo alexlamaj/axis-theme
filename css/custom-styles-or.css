@@ -1515,7 +1515,7 @@ form {
   color: var(--color-black);
   font-size: 18px;
   font-weight: 400;
-  letter-spacing: 0.3;
+  letter-spacing: 0.3px;
   line-height: 1.4;
 }
 
@@ -2062,7 +2062,7 @@ form {
 
   .project-card {
     min-height: 250px;
-    grid-column: 0;
+    grid-column: auto;
   }
 
   .systems {

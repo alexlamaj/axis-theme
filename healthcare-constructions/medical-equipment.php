@@ -29,11 +29,11 @@ get_header(); ?>
                     <div class="equip-view"><?php _e('View More', 'axis-theme'); ?></div>
 
                     <div class="equip-links">
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="equip-link"><?php _e('OR Digitalization', 'axis-theme'); ?></a>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="equip-link"><?php _e('Surgical Lights', 'axis-theme'); ?></a>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="equip-link"><?php _e('Surgical Tables', 'axis-theme'); ?></a>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="equip-link"><?php _e('Hemostasis', 'axis-theme'); ?></a>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="equip-link"><?php _e('Anesthesia and ICU Pendants', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url(axis_url('medical-equipment/or-digitalization/')); ?>" class="equip-link"><?php _e('OR Digitalization', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url(axis_url('medical-equipment/surgical-lights/')); ?>" class="equip-link"><?php _e('Surgical Lights', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url(axis_url('medical-equipment/surgical-tables/')); ?>" class="equip-link"><?php _e('Surgical Tables', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url(axis_url('medical-equipment/multiclot/')); ?>" class="equip-link"><?php _e('Hemostasis', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url(axis_url('medical-equipment/anesthesia-and-icu-pendants/')); ?>" class="equip-link"><?php _e('Anesthesia and ICU Pendants', 'axis-theme'); ?></a>
                     </div>
 
                 </div>
@@ -54,7 +54,7 @@ get_header(); ?>
                     <div class="equip-view"><?php _e('View More', 'axis-theme'); ?></div>
 
                     <div class="equip-links">
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="equip-link"><?php _e('Hemostasis', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url(axis_url('medical-equipment/multiclot/')); ?>" class="equip-link"><?php _e('Hemostasis', 'axis-theme'); ?></a>
                     </div>
 
                 </div>
@@ -79,8 +79,8 @@ get_header(); ?>
                     <div class="equip-view"><?php _e('View More', 'axis-theme'); ?></div>
 
                     <div class="equip-links">
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="equip-link"><?php _e('Robotic Pharmacy', 'axis-theme'); ?></a>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="equip-link"><?php _e('Oncology Drug Compounding', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url(axis_url('medical-equipment/robotic-pharmacy/')); ?>" class="equip-link"><?php _e('Robotic Pharmacy', 'axis-theme'); ?></a>
+                        <a href="<?php echo esc_url(axis_url('medical-equipment/chemomaker/')); ?>" class="equip-link"><?php _e('Oncology Drug Compounding', 'axis-theme'); ?></a>
                     </div>
 
                 </div>
@@ -94,4 +94,3 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
-

@@ -188,7 +188,7 @@ $axis_hero_rooms = [
 
     <div class="hc-hero-actions">
         <a href="<?php echo esc_url(get_post_type_archive_link('project')); ?>" class="hc-hero-button"><?php _e('View Projects', 'axis-theme'); ?></a>
-        <a href="<?php echo esc_url(home_url('/services/')); ?>" class="hc-hero-button secondary"><?php _e('Explore Our Services', 'axis-theme'); ?></a>
+        <a href="<?php echo esc_url(axis_url('services/')); ?>" class="hc-hero-button secondary"><?php _e('Explore Our Services', 'axis-theme'); ?></a>
     </div>
 
 </section>
@@ -202,7 +202,7 @@ $axis_hero_rooms = [
     <div class="first-section-content">
         <div class="first-title"><?php _e('A planning, construction and trading company that only thinks in hospitals.', 'axis-theme'); ?></div>
         <div class="first-text"><?php _e('Axis Medical has many years of experience in the construction market. Our expertise is the healthcare sector: operating theatres, intensive care units, cleanrooms and aseptic areas in general.', 'axis-theme') ?></div>
-        <a href="<?php echo esc_url(home_url('/company/')); ?>" class="btn-primary" style="max-width: 160px;"><?php _e('About the Company', 'axis-theme'); ?></a>
+        <a href="<?php echo esc_url(axis_url('company/')); ?>" class="btn-primary" style="max-width: 160px;"><?php _e('About the Company', 'axis-theme'); ?></a>
     </div>
 
 </section>
@@ -247,7 +247,7 @@ $axis_hero_rooms = [
 
         <div class="our-team-header">
             <div class="comp-section-title"><?php _e('Recent Healthcare Projects', 'axis-theme'); ?></div>
-            <a href="<?php echo esc_url(home_url('/project/')); ?>" class="btn-primary"><?php _e('View Projects', 'axis-theme'); ?></a>
+            <a href="<?php echo esc_url(get_post_type_archive_link('project')); ?>" class="btn-primary"><?php _e('View Projects', 'axis-theme'); ?></a>
         </div>
 
         <?php 
@@ -274,9 +274,9 @@ $axis_hero_rooms = [
             $latest = new WP_Query(array(
                 'post_type' => 'project',
                 'posts_per_page' => 3,
-                'order_by' => 'date',
+                'orderby' => 'date',
                 'order' => 'DESC',
-                'no_rows_found' => true,
+                'no_found_rows' => true,
                 'fields' => 'ids'
             ));
 
@@ -311,7 +311,7 @@ $axis_hero_rooms = [
 
         <div class="our-team-header">
             <div class="comp-section-title"><?php _e('Recent News and Articles', 'axis-theme'); ?></div>
-            <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="btn-primary"><?php _e('View All Articles', 'axis-theme'); ?></a>
+            <a href="<?php echo esc_url(axis_url('blog/')); ?>" class="btn-primary"><?php _e('View All Articles', 'axis-theme'); ?></a>
         </div>
 
         <?php
@@ -341,7 +341,7 @@ $axis_hero_rooms = [
             'posts_per_page' => 3,
             'orderby' => 'date',
             'order' => 'DESC',
-            'no_rows_found' => true,
+            'no_found_rows' => true,
             'fields' => 'ids'
         ));
 
@@ -378,4 +378,3 @@ $axis_hero_rooms = [
 </div>
 
 <?php get_footer(); ?>
-

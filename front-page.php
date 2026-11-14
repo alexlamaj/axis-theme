@@ -10,10 +10,6 @@
 <?php
 if (!defined('ABSPATH')) {exit;}
 
-$url = static function ($path) {
-    $base = function_exists('pll_home_url') ? pll_home_url() : home_url('/');
-    return trailingslashit($base) . ltrim($path, '/');
-};
 ?>
 
 <?php wp_body_open(); ?>
@@ -41,7 +37,7 @@ $url = static function ($path) {
                 <div class="front-tab"><?php _e('GMP Certification', 'axis-theme'); ?></div>
             </div>
 
-            <a href="<?php echo esc_url($url('/healthcare-construction/')); ?>" class="health-btn"><?php _e('Explore Healthcare Construction', 'axis-theme'); ?></a>
+            <a href="<?php echo esc_url(axis_url('healthcare-construction/')); ?>" class="health-btn"><?php _e('Explore Healthcare Construction', 'axis-theme'); ?></a>
 
         </div>
 
@@ -64,7 +60,7 @@ $url = static function ($path) {
                 <div class="front-tab" style="background: linear-gradient(135deg, rgba(34, 34, 34, 0.1) 0%, rgba(255, 255, 255, 0.5)); border: 1px solid rgba(34, 34, 34, 0.25); color: #222222 !important; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 30px rgba(255, 255, 255, 0.4)"><?php _e('Medical Gases', 'axis-theme'); ?></div> 
             </div>
 
-            <a href="<?php echo esc_url($url('turn-key-solutions/')); ?>" class="front-or-btn"><?php _e('Explore Operating Rooms', 'axis-theme'); ?></a>
+            <a href="<?php echo esc_url(axis_url('turn-key-solutions/')); ?>" class="front-or-btn"><?php _e('Explore Operating Rooms', 'axis-theme'); ?></a>
 
         </div>
 

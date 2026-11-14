@@ -1,5 +1,8 @@
 <?php
 
+require_once get_theme_file_path('inc/axis-links.php');
+
+
 
 
 // Theme Support //
@@ -44,14 +47,20 @@ add_action('after_setup_theme', 'axis_theme_setup');
 
 // CSS and JavaScript Implementation //
 
+function axis_asset_version($path)
+{
+    $file = get_theme_file_path($path);
+    return file_exists($file) ? (string) filemtime($file) : wp_get_theme()->get('Version');
+}
+
 function axis_enqueue_scripts()
 {
 
 
 
-    wp_enqueue_style('axis-custom-style', get_template_directory_uri() . '/css/custom-styles.css', array(), time(), 'all');
+    wp_enqueue_style('axis-custom-style', get_template_directory_uri() . '/css/custom-styles.css', array(), axis_asset_version('css/custom-styles.css'), 'all');
 
-    wp_enqueue_script('axis-custom-script', get_template_directory_uri() . '/js/custom-script.js', array(), time(), true);
+    wp_enqueue_script('axis-custom-script', get_template_directory_uri() . '/js/custom-script.js', array(), axis_asset_version('js/custom-script.js'), true);
 
 
 
@@ -84,7 +93,7 @@ function axis_enqueue_or_assets()
             'axis-or-css',
             get_template_directory_uri() . '/css/custom-styles-or.css',
             array(),
-            time(),
+            axis_asset_version('css/custom-styles-or.css'),
             'all'
         );
 
@@ -92,7 +101,7 @@ function axis_enqueue_or_assets()
             'axis-or-js',
             get_template_directory_uri() . '/js/custom-script-or.js',
             array(),
-            time(),
+            axis_asset_version('js/custom-script-or.js'),
             true
         );
     }
@@ -792,7 +801,7 @@ function axis_icon($slug, $custom_class = '')
 
             if ($file_path && file_exists($file_path)) {
 
-                return '<span class="axis-svg-icon' . esc_attr(trim($custom_class)) . '">' . file_get_contents($file_path) . '</span>';
+                return '<span class="' . esc_attr(trim('axis-svg-icon ' . $custom_class)) . '">' . file_get_contents($file_path) . '</span>';
             }
         }
 
@@ -837,6 +846,82 @@ function axis_post_categories()
 /////////////////////////////////////////////////////////////////////////
 
 
+
+// Contact Form Selections //
+
+function axis_contact_options()
+{
+    return array(
+        'services' => array(
+            'name'  => 'contact_units',
+            'label' => __('Which units do you need?', 'axis-theme'),
+            'items' => array(
+                'cleanrooms' => __('Cleanrooms', 'axis-theme'),
+                'healthcare-units' => __('Healthcare Units', 'axis-theme'),
+                'pharma-cannabis' => __('Pharma Cannabis', 'axis-theme'),
+                'intensive-care-units' => __('Intensive Care Units', 'axis-theme'),
+                'in-vitro-fertilization' => __('In-Vitro Fertilization', 'axis-theme'),
+            ),
+        ),
+        'products' => array(
+            'name'  => 'contact_products',
+            'label' => __('Which products do you need?', 'axis-theme'),
+            'items' => array(
+                'or-digitalization' => __('OR Digitalization', 'axis-theme'),
+                'surgical-lights' => __('Surgical Lights', 'axis-theme'),
+                'surgical-tables' => __('Surgical Tables', 'axis-theme'),
+                'anesthesia' => __('Anesthesia', 'axis-theme'),
+                'icu-pendants' => __('ICU Pendants', 'axis-theme'),
+                'robotic-pharmacy' => __('Robotic Pharmacy', 'axis-theme'),
+                'multiclot' => __('MultiClot', 'axis-theme'),
+                'chemomaker' => __('Chemomaker+', 'axis-theme'),
+            ),
+        ),
+    );
+}
+
+function axis_contact_selection($group)
+{
+    $options = axis_contact_options();
+
+    if (empty($options[$group])) {
+        return;
+    }
+
+    $option = $options[$group];
+    ?>
+    <fieldset class="selection-group selection-<?php echo esc_attr($group); ?>">
+        <legend class="selection-label">
+            <?php echo esc_html($option['label']); ?>
+            <span class="selection-optional"><?php _e('Optional', 'axis-theme'); ?></span>
+        </legend>
+        <div class="selection-pills">
+            <?php foreach ($option['items'] as $key => $item) : ?>
+                <label class="selection-pill">
+                    <input type="checkbox" name="<?php echo esc_attr($option['name']); ?>[]" value="<?php echo esc_attr($key); ?>">
+                    <span><?php echo esc_html($item); ?></span>
+                </label>
+            <?php endforeach; ?>
+        </div>
+    </fieldset>
+    <?php
+}
+
+function axis_contact_posted_selection($group)
+{
+    $options = axis_contact_options();
+
+    if (empty($options[$group])) {
+        return array();
+    }
+
+    $option = $options[$group];
+    $posted = isset($_POST[$option['name']]) ? array_map('sanitize_key', (array) wp_unslash($_POST[$option['name']])) : array();
+
+    return array_values(array_intersect_key($option['items'], array_flip($posted)));
+}
+
+/////////////////////////////////////////////////////////////////////////
 
 // Creating CPTs for Contact Form and Careers Form (Admin Only Viewing) //
 
@@ -1206,8 +1291,8 @@ function handle_career_form_submission()
     $phone = isset($_POST['applicant_phone']) ? sanitize_text_field($_POST['applicant_phone']) : '';
     $profession = isset($_POST['applicant_profession']) ? sanitize_text_field($_POST['applicant_profession']) : '';
 
-    if (empty($first_name) || empty($last_name) || empty($email) || !is_email($email)) {
-        wp_send_json_error('Please fill in all required fields!');
+    if (empty($full_name) || empty($profession) || empty($email) || !is_email($email)) {
+        wp_send_json_error(__('Please fill in all required fields!', 'axis-theme'));
     }
 
     $attachments = array();
@@ -1981,11 +2066,14 @@ if (!function_exists('axis_get_services')) {
         }
 
         foreach ($data as $key => $entry) {
-            if (empty($entry['en']) || !is_array($entry['en'])) {
+            $lang = axis_lang();
+            $content = (!empty($entry[$lang]) && is_array($entry[$lang])) ? $entry[$lang] : ($entry['en'] ?? null);
+
+            if (empty($content) || !is_array($content)) {
                 continue;
             }
 
-            $service = wp_parse_args($entry['en'], array(
+            $service = wp_parse_args($content, array(
                 'id'       => $key,
                 'image'    => '',
                 'title'    => '',
@@ -2021,9 +2109,8 @@ if (!function_exists('axis_service_project_url')) {
 
         $archive = get_post_type_archive_link('project');
 
-        return $archive ? $archive : home_url('/');
+        return $archive ? $archive : axis_home_url();
 
     }
 
 }
-

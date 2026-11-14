@@ -10,9 +10,11 @@ if (!defined('ABSPATH')) {
 
 $axis_equipment_file = get_theme_file_path('data/data-equip.json');
 $axis_equipment_all = is_readable($axis_equipment_file) ? json_decode(file_get_contents($axis_equipment_file), true) : array();
-$axis_equipment_slug = get_post_field('post_name', get_queried_object_id());
+$axis_equipment_slug = axis_base_slug(get_queried_object_id());
+$axis_equipment_entry = (is_array($axis_equipment_all) && isset($axis_equipment_all[$axis_equipment_slug]) && is_array($axis_equipment_all[$axis_equipment_slug])) ? $axis_equipment_all[$axis_equipment_slug] : array();
+$axis_equipment_lang = axis_lang();
 
-$axis_equip = isset($axis_equipment_all[$axis_equipment_slug]['en']) && is_array($axis_equipment_all[$axis_equipment_slug]['en']) ? $axis_equipment_all[$axis_equipment_slug]['en'] : array();
+$axis_equip = (!empty($axis_equipment_entry[$axis_equipment_lang]) && is_array($axis_equipment_entry[$axis_equipment_lang])) ? $axis_equipment_entry[$axis_equipment_lang] : ((isset($axis_equipment_entry['en']) && is_array($axis_equipment_entry['en'])) ? $axis_equipment_entry['en'] : array());
 
 $axis_equip = wp_parse_args($axis_equip, array(
     'up-title' => '',
@@ -34,7 +36,7 @@ get_header(); ?>
             <div class="equipment-up-title"><?php echo esc_html($axis_equip['up-title']); ?></div>
             <div class="equipment-title"><?php echo esc_html($axis_equip['title']); ?></div>
             <div class="equipment-text"><?php echo esc_html($axis_equip['sub-title']); ?></div>
-            <a href="<?php echo esc_url(home_url('/contact-us/')); ?>" class="equipment-button"><?php _e('Ask About this Product', 'axis-theme'); ?></a>
+            <a href="<?php echo esc_url(axis_url('contact-us/')); ?>" class="equipment-button"><?php _e('Ask About this Product', 'axis-theme'); ?></a>
         </div>
 
         <div class="equipment-image">
@@ -49,11 +51,12 @@ get_header(); ?>
 
             <div class="equipment-gallery">
 
-                <?php foreach ($axis_equip['image'] as $img) : ?>
-                    <div class="equipment-img"><?php echo axis_icon($img['img1']); ?></div>
+                <?php foreach ((array) $axis_equip['images'] as $img) : ?>
+                    <?php if (!is_array($img)) continue; ?>
+                    <?php if (!empty($img['img1'])) : ?><div class="equipment-img"><?php echo axis_icon($img['img1']); ?></div><?php endif; ?>
                     <div class="equipment-img-row">
-                        <div class="equipment-img"><?php echo axis_icon($img['img2']); ?></div>
-                        <div class="equipment-img"><?php echo axis_icon($img['img3']); ?></div>
+                        <?php if (!empty($img['img2'])) : ?><div class="equipment-img"><?php echo axis_icon($img['img2']); ?></div><?php endif; ?>
+                        <?php if (!empty($img['img3'])) : ?><div class="equipment-img"><?php echo axis_icon($img['img3']); ?></div><?php endif; ?>
                     </div>
                 <?php endforeach; ?>
 
@@ -92,4 +95,3 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
-

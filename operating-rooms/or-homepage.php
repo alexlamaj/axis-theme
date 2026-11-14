@@ -10,23 +10,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$url = static function ( $path ) {
-	$base = function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' );
-	return trailingslashit( $base ) . ltrim( $path, '/' );
-};
 
 $paths = [
-	'walls'       => 'features/walls/',
-	'ceiling'     => 'features/ceiling/',
-	'floor'       => 'features/floor/',
-	'doors'       => 'features/doors/',
-	'lights'      => 'features/lights/',
-	'recessed'    => 'features/recessed-led-lighting/',
-	'laminar'     => 'features/laminar/',
-	'gases'       => 'features/gases/',
-	'control'     => 'features/control/',
-	'integration' => 'features/integration/',
-	'scrub'       => 'features/scrub/',
+	'walls'       => 'vaelma-modular-wall-system/',
+	'ceiling'     => 'ceiling/',
+	'floor'       => 'floor-system/',
+	'doors'       => 'hermetic-doors/',
+	'lights'      => 'lights/',
+	'recessed'    => 'recessed-led-lighting/',
+	'laminar'     => 'laminar-flow-system/',
+	'gases'       => 'medical-gases/',
+	'control'     => 'control-panel/',
+	'integration' => 'integration-system/',
+	'scrub'       => 'scrub-units/',
 ];
 
 $model_file = get_theme_file_path( 'assets/models/ot.glb' );
@@ -103,7 +99,7 @@ $systems = [
 ];
 
 foreach ( $systems as &$system ) {
-	$system['href'] = $url( $paths[ $system['id'] ] );
+	$system['href'] = axis_url( $paths[ $system['id'] ] );
 }
 unset( $system );
 
@@ -133,7 +129,7 @@ get_header('or');
 
 			<div class="stage__foot">
 				<div class="ot-hero__cta">
-					<a class="btn btn--solid" href="<?php echo esc_url( $url( 'operating-rooms/' ) ); ?>"><?php esc_html_e( 'View Our Projects', 'axis-theme' ); ?></a>
+					<a class="btn btn--solid" href="<?php echo esc_url( get_post_type_archive_link( 'operating-room' ) ); ?>"><?php esc_html_e( 'View Our Projects', 'axis-theme' ); ?></a>
 					<a class="btn" href="<?php echo esc_url( $brochure_url ); ?>"><?php esc_html_e( 'Download Brochure', 'axis-theme' ); ?></a>
 				</div>
 				<div class="stage__detail" aria-live="polite"></div>

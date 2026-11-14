@@ -8,82 +8,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function axis_contact_options() {
-
-    return [
-        'services' => [
-            'name' => 'contact_units',
-            'meta' => '_contact_units',
-            'title' => 'Units',
-            'label' => __('Which units do you need?', 'axis-theme'),
-            'items' => [
-                __('Cleanrooms', 'axis-theme'),
-                __('Healthcare Units', 'axis-theme'),
-                __('Pharma Cannabis', 'axis-theme'),
-                __('Intensive Care Units', 'axis-theme'),
-                __('In-Vitro Fertilization', 'axis-theme')
-            ]
-        ],
-        'products' => [
-            'name' => 'contact_products',
-            'meta' => '_contact_products',
-            'title' => 'Products',
-            'label' => __('Which products do you need?', 'axis-theme'),
-            'items' => [
-                __('OR Digitalization', 'axis-theme'),
-                __('Surgical Lights', 'axis-theme'),
-                __('Surgical Tables', 'axis-theme'),
-                __('Anesthesia', 'axis-theme'),
-                __('ICU Pendants', 'axis-theme'),
-                __('Robotic Pharmacy', 'axis-theme'),
-                __('MultiClot', 'axis-theme'),
-                __('Chemomaker+', 'axis-theme')
-            ]
-        ]
-    ];
-
-}
-
-function axis_contact_selection($group) {
-
-    $options = axis_contact_options();
-    if (empty($options[$group])) return;
-
-    $option = $options[$group];
-
-    ?>
-
-    <fieldset class="selection-group selection-<?php echo esc_attr($group); ?>">
-
-        <legend class="selection-label">
-            <?php echo esc_html($option['label']); ?>
-            <span class="selection-optional"><?php _e('Optional', 'axis-theme'); ?></span>
-        </legend>
-
-        <div class="selection-pills">
-            <?php foreach ($option['items'] as $item) : ?>
-                <label class="selection-pill">
-                    <input type="checkbox" name="<?php echo esc_attr($option['name']); ?>[]" value="<?php echo esc_attr($item); ?>">
-                    <span><?php echo esc_html($item); ?></span>
-                </label>
-            <?php endforeach; ?>
-        </div>
-
-    </fieldset>
-
-    <?php
-
-}
-
-function axis_contact_posted_selection($group) {
-
-    $option = axis_contact_options()[$group];
-    $posted = isset($_POST[$option['name']]) ? array_map('sanitize_text_field', (array) wp_unslash($_POST[$option['name']])) : [];
-
-    return array_values(array_intersect($option['items'], $posted));
-
-}
-
 get_header(); ?>
 
 <div class="page-layout">
@@ -136,6 +60,11 @@ get_header(); ?>
             <button type="submit" class="btn-primary" style="width: 160px; margin-top: 40px;"><?php _e('Send Message', 'axis-theme'); ?></button>
 
         </form>
+
+        <div id="contactSuccessMsg" class="form-success" role="status" style="display: none;">
+            <div class="form-success-title"><?php _e('Thank you, your message is on its way.', 'axis-theme'); ?></div>
+            <div class="form-success-text"><?php _e('An architect or project manager from our team will come back to you soon.', 'axis-theme'); ?></div>
+        </div>
 
         <div class="contact-column">
 
@@ -193,4 +122,3 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
-

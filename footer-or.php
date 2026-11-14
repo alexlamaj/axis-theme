@@ -10,10 +10,10 @@
 
             <div class="socials">
 
-                <a href="https://www.facebook.com/axismedical.gr/"><?php echo axis_icon('facebook-icon'); ?></a>
-                <a href="https://www.instagram.com/axismedical.gr/"><?php echo axis_icon('instagram-icon'); ?></a>
-                <a href="https://www.linkedin.com/company/axis-medical/"><?php echo axis_icon('linkedin-icon'); ?></a>
-                <a href="https://www.tiktok.com/@axismedical"><?php echo axis_icon('tiktok-icon'); ?></a>
+                <a href="https://www.facebook.com/axismedical.gr/" aria-label="Facebook" target="_blank" rel="noopener"><?php echo axis_icon('facebook-icon'); ?></a>
+                <a href="https://www.instagram.com/axismedical.gr/" aria-label="Instagram" target="_blank" rel="noopener"><?php echo axis_icon('instagram-icon'); ?></a>
+                <a href="https://www.linkedin.com/company/axis-medical/" aria-label="LinkedIn" target="_blank" rel="noopener"><?php echo axis_icon('linkedin-icon'); ?></a>
+                <a href="https://www.tiktok.com/@axismedical" aria-label="TikTok" target="_blank" rel="noopener"><?php echo axis_icon('tiktok-icon'); ?></a>
 
             </div>
 
@@ -21,7 +21,7 @@
 
         <div class="footer-column">
 
-            <div class="fheading">Operation Rooms</div>
+            <div class="fheading"><?php _e('Operating Rooms', 'axis-theme'); ?></div>
 
             <nav>
                 <?php wp_nav_menu(array(
@@ -29,7 +29,7 @@
                     'container' => false,
                     'menu_class' => 'or-fmenu',
                     'depth' => 0,
-                    'fallback' => false
+                    'fallback_cb' => false
                 )); ?>
             </nav>
 
@@ -45,7 +45,7 @@
                     'container' => false,
                     'menu_class' => 'or-fmenu',
                     'depth' => 0,
-                    'fallback' => false
+                    'fallback_cb' => false
                 )); ?>
             </nav>
 
@@ -53,10 +53,10 @@
 
         <div class="footer-column">
 
-            <div class="fheading">Contact Information</div>
+            <div class="fheading"><?php _e('Contact Information', 'axis-theme'); ?></div>
 
             <div class="or-contact">
-                <a href="https://share.google/oKI5b7cyB0CKLcJiC" class="or-link">G. Karavaggeli 4, Kalamaria, Thessaloniki, Greece</a>
+                <a href="https://share.google/oKI5b7cyB0CKLcJiC" class="or-link"><?php _e('G. Karavaggeli 4, Kalamaria, Thessaloniki, Greece', 'axis-theme'); ?></a>
                 <a href="tel:+302313036458" class="or-link">+ 30 2313 036 458</a>
                 <a href="mailto:info@axismedical.gr" class="or-link">info@axismedical.gr</a>
                 <div class="or-link">128456304000</div>
@@ -68,7 +68,7 @@
 
     <div class="bottom-footer-content">
 
-        <div class="copyright">Copyright, 2026, AXIS Medical</div>
+        <div class="copyright"><?php echo esc_html(sprintf(__('Copyright, %s, AXIS Medical', 'axis-theme'), date_i18n('Y'))); ?></div>
 
         <nav>
             <?php wp_nav_menu(array(
@@ -76,11 +76,11 @@
                 'container' => false,
                 'menu_class' => 'policies',
                 'depth' => 0,
-                'fallback' => false
+                'fallback_cb' => false
             )); ?>
         </nav>
 
-        <div class="designed">Developed by Alessandro Lamaj</div>
+        <div class="designed"><?php _e('Developed by Alessandro Lamaj', 'axis-theme'); ?></div>
 
     </div>
 
@@ -90,4 +90,3 @@
 
 </body>
 </html>
-

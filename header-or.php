@@ -14,8 +14,8 @@
 
     <div class="drawer-content">
 
-        <button class="or-close-toggle"><?php echo axis_icon('left-arrow'); ?></button>
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="or-axis-logo"><?php echo axis_icon('AXIS LOGO NO BACKGROUND') ?></a>
+        <button type="button" class="or-close-toggle" aria-label="<?php esc_attr_e('Close menu', 'axis-theme'); ?>"><?php echo axis_icon('left-arrow'); ?></button>
+        <a href="<?php echo esc_url(axis_home_url()); ?>" class="or-axis-logo"><?php echo axis_icon('AXIS LOGO NO BACKGROUND') ?></a>
 
         <nav>
             <?php wp_nav_menu(array(
@@ -23,7 +23,7 @@
                 'container' => false,
                 'menu_class' => 'or-menu',
                 'depth' => 0,
-                'fallback' => false
+                'fallback_cb' => false
             )); ?>
         </nav>
 
@@ -35,7 +35,7 @@
 
     <div class="or-header-content">
 
-        <div class="or-header-logo"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('AXIS LOGO NO BACKGROUND'); ?></a></div>
+        <div class="or-header-logo"><a href="<?php echo esc_url(axis_home_url()); ?>"><?php echo axis_icon('AXIS LOGO NO BACKGROUND'); ?></a></div>
 
         <div class="or-header-nav">
 
@@ -46,7 +46,7 @@
                     'container' => false,
                     'menu_class' => 'or-menu',
                     'depth' => 0,
-                    'fallback' => false
+                    'fallback_cb' => false
 
                 )); ?>
             </nav>
@@ -57,12 +57,11 @@
 
     <div class="or-mobile-header">
 
-        <button class="or-mobile-toggle"><?php echo axis_icon('hamburger-icon'); ?></button>
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="or-axis-logo"><?php echo axis_icon('AXIS LOGO NO BACKGROUND') ?></a>
+        <button type="button" class="or-mobile-toggle" aria-label="<?php esc_attr_e('Open menu', 'axis-theme'); ?>"><?php echo axis_icon('hamburger-icon'); ?></button>
+        <a href="<?php echo esc_url(axis_home_url()); ?>" class="or-axis-logo"><?php echo axis_icon('AXIS LOGO NO BACKGROUND') ?></a>
 
     </div>
 
 </header>
 
 <main class="main-content">
-

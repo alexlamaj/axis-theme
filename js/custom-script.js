@@ -358,11 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const careerForm = document.getElementById("careerForm");
   const careerSuccess = document.getElementById("careerSuccessMsg");
 
-  if (!careerForm) {
-    return;
-  }
-
-  careerForm.addEventListener("submit", function (e) {
+  if (careerForm) careerForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const formData = new FormData(careerForm);
@@ -401,11 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contactForm");
   const contactSuccess = document.getElementById("contactSuccessMsg");
 
-  if (!contactForm) {
-    return;
-  }
-
-  contactForm.addEventListener("submit", function (e) {
+  if (contactForm) contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const formData = new FormData(contactForm);
@@ -428,7 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           contactForm.reset();
-          contactSuccess.style.display = "none";
+          contactForm.style.display = "none";
         } else {
           alert(
             response.data ||
@@ -666,6 +658,3 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
   
 });
-
-
-

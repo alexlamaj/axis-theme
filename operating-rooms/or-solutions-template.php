@@ -53,10 +53,10 @@ if (!function_exists('axis_sol_list')) {
 global $wp_query;
 
 $page_id = get_queried_object_id();
-$slug = (string) get_post_field('post_name', $page_id);
+$slug = axis_base_slug($page_id);
 $all = axis_sol_all_data();
 $entry = (isset($all[$slug]) && is_array($all[$slug])) ? $all[$slug] : array();
-$lang = (string) pll_current_language();
+$lang = axis_lang();
 $content = !empty($entry[$lang]) ? $entry[$lang] : ($entry['en'] ?? array());
 
 // Data Preparation //
@@ -115,7 +115,7 @@ get_header('or');
                 <div class="sol2"><?php echo esc_html($stat2); ?></div>
             </div>
 
-            <a href="<?php echo esc_url(home_url('/or-contact/')); ?>" class="sol-btn"><?php _e('Ask About This System', 'axis-theme'); ?></a>
+            <a href="<?php echo esc_url(axis_url('or-contact/')); ?>" class="sol-btn"><?php _e('Ask About This System', 'axis-theme'); ?></a>
 
         </div>
 
@@ -253,4 +253,3 @@ get_header('or');
 </div>
 
 <?php get_footer('or'); ?>
-

@@ -12,8 +12,8 @@
 
     <div class="drawer-content">
 
-        <button class="close-toggle"><?php echo axis_icon('left-arrow'); ?></button>
-        <a class="header-logo" href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a>
+        <button type="button" class="close-toggle" aria-label="<?php esc_attr_e('Close menu', 'axis-theme'); ?>"><?php echo axis_icon('left-arrow'); ?></button>
+        <a class="header-logo" href="<?php echo esc_url(axis_home_url()); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a>
 
         <nav>
             <?php wp_nav_menu(array(
@@ -21,7 +21,7 @@
                 'container' => false,
                 'menu_class' => 'main-menu',
                 'depth' => 0,
-                'fallback' => false
+                'fallback_cb' => false
             )); ?>
         </nav>
 
@@ -33,7 +33,7 @@
 
     <div class="header-content">
 
-        <div class="header-logo"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a></div>
+        <div class="header-logo"><a href="<?php echo esc_url(axis_home_url()); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a></div>
 
         <div class="header-nav">
             <nav>
@@ -42,7 +42,7 @@
                     'container' => false,
                     'menu_class' => 'main-menu',
                     'depth' => 0,
-                    'fallback' => false
+                    'fallback_cb' => false
                 )); ?>
             </nav>
         </div>
@@ -50,11 +50,10 @@
     </div>
 
     <div class="axis-mobile">
-        <button class="mobile-toggle"><?php echo axis_icon('hamburger-icon'); ?></button>
-        <a class="header-logo" href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a>
+        <button type="button" class="mobile-toggle" aria-label="<?php esc_attr_e('Open menu', 'axis-theme'); ?>"><?php echo axis_icon('hamburger-icon'); ?></button>
+        <a class="header-logo" href="<?php echo esc_url(axis_home_url()); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a>
     </div>
 
 </header>
 
 <main class="main-content">
-

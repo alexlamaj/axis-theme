@@ -5,10 +5,6 @@
 
 if (!defined('ABSPATH')) {exit;}
 
-$url = static function ($path) {
-    $base = function_exists('pll_home_url') ? pll_home_url() : home_url('/');
-    return trailingslashit($base) . ltrim($path, '/');
-};
 
 get_header('or');
 ?>
@@ -73,12 +69,12 @@ get_header('or');
             <nav class="features-nav">
 
                 <ul class="features-list">
-                    <li><a href="#features-vaelma" class="features-link" data-target="features-vaelma"><?php _e('Modular Walls', 'axis-theme'); ?></a></li>
+                    <li><a href="#features-vaelma" class="features-link" data-target="features-vaelma"><?php _e('VAELMA Modular Walls', 'axis-theme'); ?></a></li>
                     <li><a href="#features-ceiling" class="features-link" data-target="features-ceiling"><?php _e('Ceiling', 'axis-theme'); ?></a></li>
                     <li><a href="#features-floor" class="features-link" data-target="features-floor"><?php _e('Floor System', 'axis-theme'); ?></a></li>
                     <li><a href="#features-doors" class="features-link" data-target="features-doors"><?php _e('Hermetic Doors', 'axis-theme'); ?></a></li>
                     <li><a href="#features-lights" class="features-link" data-target="features-lights"><?php _e('Surgical Lights', 'axis-theme'); ?></a></li>
-                    <li><a href="#features-led" class="features-link" data-target="features-led"><?php _e('LED Lighting', 'axis-theme'); ?></a></li>
+                    <li><a href="#features-led" class="features-link" data-target="features-led"><?php _e('Recessed LED Lighting', 'axis-theme'); ?></a></li>
                     <li><a href="#features-laminar" class="features-link" data-target="features-laminar"><?php _e('Laminar Flow', 'axis-theme'); ?></a></li>
                     <li><a href="#features-gases" class="features-link" data-target="features-gases"><?php _e('Medical Gases', 'axis-theme'); ?></a></li>
                     <li><a href="#features-control" class="features-link" data-target="features-control"><?php _e('Control Panel', 'axis-theme'); ?></a></li>
@@ -130,7 +126,7 @@ get_header('or');
                     <div class="ftab"><?php _e('u-PVC antibacterial cladding', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('vaelma-modular-wall-system/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('vaelma-modular-wall-system/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -169,7 +165,7 @@ get_header('or');
                     <div class="ftab"><?php _e('Antimicrobial Finish', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('ceiling/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('ceiling/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -207,7 +203,7 @@ get_header('or');
                     <div class="ftab"><?php _e('Homogenous Vinyl', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('floor-system/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('floor-system/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -245,7 +241,7 @@ get_header('or');
                     <div class="ftab"><?php _e('Easy  Cleaning', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('hermetic-doors/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('hermetic-doors/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -284,7 +280,7 @@ get_header('or');
                     <div class="ftab"><?php _e('Adjustable Light Field', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('lights/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('lights/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -322,7 +318,7 @@ get_header('or');
                     <div class="ftab"><?php _e('DALI Control', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('recessed-led-lighting/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('recessed-led-lighting/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -362,7 +358,7 @@ get_header('or');
                     <div class="ftab"><?php _e('Vertical Airflow', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('laminar-flow-system/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('laminar-flow-system/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -401,7 +397,7 @@ get_header('or');
                     <div class="ftab"><?php _e('EN ISO 9170', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('medical-gases/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('medical-gases/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -441,7 +437,7 @@ get_header('or');
                     <div class="ftab"><?php _e('Alarm Monitoring', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('control-panel/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('control-panel/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -481,7 +477,7 @@ get_header('or');
                     <div class="ftab"><?php _e('HL7 / DICOM', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('integration-system/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('integration-system/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 
@@ -518,7 +514,7 @@ get_header('or');
                     <div class="ftab"><?php _e('1–3 Stations', 'axis-theme'); ?></div>
                 </div>
 
-                <a href="<?php echo esc_url($url('scrub-units/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
+                <a href="<?php echo esc_url(axis_url('scrub-units/')); ?>" class="feature-btn"><?php _e('See Full Specification', 'axis-theme'); ?></a>
 
             </article>
 

@@ -18,7 +18,7 @@ get_header();
 
         <form id="careerForm" enctype="multipart/form-data">
 
-            <?php wp_nonce_field('submit_career_form', 'axis_career_form'); ?>
+            <?php wp_nonce_field('submit_career_form', 'axis_career_nonce'); ?>
             <input type="hidden" name="action" value="submit_career_form">
 
             <div class="form-container">
@@ -57,6 +57,11 @@ get_header();
 
         </form>
 
+        <div id="careerSuccessMsg" class="form-success" role="status" style="display: none;">
+            <div class="form-success-title"><?php _e('Thank you, your application has been sent.', 'axis-theme'); ?></div>
+            <div class="form-success-text"><?php _e('We read every application and will contact you if there is a match.', 'axis-theme'); ?></div>
+        </div>
+
         <div class="careers-img"><?php echo axis_icon('career-image'); ?></div>
 
     </section>
@@ -64,4 +69,3 @@ get_header();
 </div>
 
 <?php get_footer(); ?>
-

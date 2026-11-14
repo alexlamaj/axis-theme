@@ -135,7 +135,7 @@ get_header(); ?>
                 <div class="row-content">
                     <div class="row-title"><?php _e('Our Mission', 'axis-theme'); ?></div>
                     <div class="row-text"><?php _e('Is to give clients superior service, put safety first, create opportunities for our people and deliver exceptional work on time. Axis Medical, General Commercial Register No. 128456304000.', 'axis-theme'); ?></div>
-                    <a href="<?php echo esc_url(home_url('/project/')); ?>"><?php _e('What we build', 'axis-theme'); ?> &rarr;</a>
+                    <a href="<?php echo esc_url(get_post_type_archive_link('project')); ?>"><?php _e('What we build', 'axis-theme'); ?> &rarr;</a>
                 </div>
             </div>
 
@@ -159,7 +159,7 @@ get_header(); ?>
         <section class="our-team" id="our-team">
             <div class="our-team-header">
                 <div class="comp-section-title"><?php _e('Engineers, Architects and Planners', 'axis-theme'); ?></div>
-                <a href="<?php echo esc_url(home_url('/careers/')); ?>" class="btn-primary"><?php _e('Join the Team', 'axis-theme'); ?> &rarr;</a>
+                <a href="<?php echo esc_url(axis_url('careers/')); ?>" class="btn-primary"><?php _e('Join the Team', 'axis-theme'); ?> &rarr;</a>
             </div>
             <?php echo do_shortcode('[axis_team_cards]'); ?>
         </section>
@@ -198,4 +198,3 @@ get_header(); ?>
 </div>
 
 <?php get_footer(); ?>
-

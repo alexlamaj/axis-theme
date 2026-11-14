@@ -1,7 +1,3 @@
-<?php
-wp_enqueue_style('axis-custom-style', get_template_directory_uri() . '/css/custom-styles.css', array(), time(), 'all');
-wp_enqueue_script('axis-custom-script', get_template_directory_uri() . '/js/custom-script.js', array(), time(), true);
-?>
 
 <?php foreach (axis_get_services() as $axis_service) : ?>
 
@@ -11,7 +7,7 @@ wp_enqueue_script('axis-custom-script', get_template_directory_uri() . '/js/cust
 
         <div class="service-popup-card">
 
-            <button type="button" class="service-popup-close" data-service-close aria-label="Close"></button>
+            <button type="button" class="service-popup-close" data-service-close aria-label="<?php esc_attr_e('Close', 'axis-theme'); ?>"></button>
             <div class="service-popup-image"><?php echo $axis_service['image'] ? axis_icon($axis_service['image']) : ''; ?></div>
 
             <div class="service-popup-content">
@@ -46,4 +42,3 @@ wp_enqueue_script('axis-custom-script', get_template_directory_uri() . '/js/cust
     </div>
 
 <?php endforeach; ?>
-
