@@ -162,8 +162,6 @@ get_header();
 
     </div>
 
-
-
     <!-- Main Content -->
 
     <div class="product-layout">

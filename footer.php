@@ -6,7 +6,7 @@
 
         <div class="footer-column">
 
-            <div class="footer-logo"><?php echo axis_icon('logo negative'); ?></div>
+            <div class="footer-logo"><?php echo axis_icon('logo-negative-300x147'); ?></div>
 
             <div class="socials">
                 <a href="https://www.facebook.com/axismedical.gr/"><?php echo axis_icon('facebook-icon'); ?></a>
@@ -90,3 +90,4 @@
 
 </body>
 </html>
+

@@ -13,7 +13,7 @@
     <div class="drawer-content">
 
         <button class="close-toggle"><?php echo axis_icon('left-arrow'); ?></button>
-        <a class="header-logo" href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo negative'); ?></a>
+        <a class="header-logo" href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a>
 
         <nav>
             <?php wp_nav_menu(array(
@@ -33,7 +33,7 @@
 
     <div class="header-content">
 
-        <div class="header-logo"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo negative'); ?></a></div>
+        <div class="header-logo"><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a></div>
 
         <div class="header-nav">
             <nav>
@@ -51,9 +51,10 @@
 
     <div class="axis-mobile">
         <button class="mobile-toggle"><?php echo axis_icon('hamburger-icon'); ?></button>
-        <a class="header-logo" href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo negative'); ?></a>
+        <a class="header-logo" href="<?php echo esc_url(home_url('/')); ?>"><?php echo axis_icon('logo-negative-300x147'); ?></a>
     </div>
 
 </header>
 
 <main class="main-content">
+

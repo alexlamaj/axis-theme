@@ -1368,6 +1368,7 @@ function handle_or_contact_form_submission()
         'floor' => 'Floor System',
         'doors' => 'Hermetic Doors',
         'lights' => 'Lights',
+        'recessed' => 'Recessed LED Lighting',
         'laminar' => 'Laminar Flow System',
         'gases' => 'Medical Gases',
         'control' => 'Control System',
@@ -2025,3 +2026,4 @@ if (!function_exists('axis_service_project_url')) {
     }
 
 }
+

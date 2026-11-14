@@ -49,25 +49,6 @@ section.is-visible, article.is-visible {
 
 }
 
-a {
-
-  color: var(--color-white);
-  text-decoration: none;
-
-}
-
-a:hover {
-
-  color: var(--color-primary);
-
-}
-
-a:active {
-
-  color: var(--color-secondary);
-
-}
-
 .axis-header {
 
   position: absolute;
@@ -2642,17 +2623,17 @@ body.service-popup-open {
 
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 
 }
 
 .client-logo {
 
   width: 100%;
-  height: 80px;
+  height: 100px;
 
 }
 
@@ -3346,6 +3327,7 @@ body.service-popup-open {
 }
 
 .floating-lang {
+  display: none;
   position: fixed;
   bottom: 25px;
   left: 25px;
@@ -7141,3 +7123,4 @@ body.service-popup-open {
 		transition-delay: 0s !important;
 	}
 }
+

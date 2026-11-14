@@ -14,6 +14,7 @@ $systems = [
 	'floor'       => __( 'Floor System', 'axis-theme' ),
 	'doors'       => __( 'Hermetic Doors', 'axis-theme' ),
 	'lights'      => __( 'Lights', 'axis-theme' ),
+    'recessed' => __( 'Recessed LED Lighting', 'axis-theme' ),
 	'laminar'     => __( 'Laminar Flow System', 'axis-theme' ),
 	'gases'       => __( 'Medical Gases', 'axis-theme' ),
 	'control'     => __( 'Control Panel', 'axis-theme' ),
@@ -96,34 +97,6 @@ get_header('or');
 	            <svg class="ot" role="img" aria-label="<?php esc_attr_e( 'The operating theatre, with the systems you choose highlighted', 'axis-theme' ); ?>" viewBox="160 10 780 600"></svg>
 	            <figcaption class="ot-room__cap" aria-live="polite"><?php esc_html_e( 'Choose systems and they light up in the room.', 'axis-theme' ); ?></figcaption>
             </figure>
-
-            <div class="next-steps">
-
-                <div class="next-title"><?php _e('What Happens Next', 'axis-theme'); ?></div>
-
-                <div class="next-items">
-
-                    <div class="next-item">
-                        <div class="next-num">1</div>
-                        <div class="next-head"><?php _e('We read your brief', 'axis-theme'); ?></div>
-                        <div class="next-text"><?php _e('Room type, timing and the systems you need', 'axis-theme'); ?></div>
-                    </div>
-
-                    <div class="next-item">
-                        <div class="next-num">2</div>
-                        <div class="next-head"><?php _e('We review it with the team', 'axis-theme'); ?></div>
-                        <div class="next-text"><?php _e('Room type, timing and the systems you need', 'axis-theme'); ?></div>
-                    </div>
-
-                    <div class="next-item">
-                        <div class="next-num">3</div>
-                        <div class="next-head"><?php _e('You get a first proposal', 'axis-theme'); ?></div>
-                        <div class="next-text"><?php _e('Room type, timing and the systems you need', 'axis-theme'); ?></div>
-                    </div>
-                    
-                </div>
-
-            </div>
 
         </div>
 

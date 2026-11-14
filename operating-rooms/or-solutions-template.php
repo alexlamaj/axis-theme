@@ -88,7 +88,6 @@ foreach (axis_sol_list($content, 'specifications') as $group) {
 
 $materials = axis_sol_list($content, 'materials');
 $installation = axis_sol_list($content, 'installation');
-$contact_url = apply_filters('axis_solution_contact_url', home_url('/contact/'), $slug, $lang);
 
 $has_gallery = false;
 $post_content = get_the_content();
@@ -116,7 +115,7 @@ get_header('or');
                 <div class="sol2"><?php echo esc_html($stat2); ?></div>
             </div>
 
-            <a href="<?php echo esc_url($contact_url); ?>" class="sol-btn"><?php _e('Ask About This System', 'axis-theme'); ?></a>
+            <a href="<?php echo esc_url(home_url('/or-contact/')); ?>" class="sol-btn"><?php _e('Ask About This System', 'axis-theme'); ?></a>
 
         </div>
 
@@ -254,3 +253,4 @@ get_header('or');
 </div>
 
 <?php get_footer('or'); ?>
+
