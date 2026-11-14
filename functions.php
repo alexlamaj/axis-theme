@@ -324,7 +324,7 @@ function axis_render_project_gallery_meta_box($post)
                 if ($image_url) {
                     echo '<div class="gallery-image-wrapper" data-id="' . esc_attr($img_id) . '" style="position: relative; display: inline-block; cursor: move;">';
                     echo '<img src="' . esc_url($image_url) . '" style="width:100px; height:100px; object-fit:cover; border:1px solid #ccc; border-radius:4px;" />';
-                    echo '<a href="#" class="remove-gallery-image" style="position:absolute; top:2px; right:2px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;">&times;</a>';
+                    echo '<a href="#" class="remove-gallery-image" style="position:absolute; top:2px; right:2px; background:#e74c3c; color:var(--color-white); text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;">&times;</a>';
                     echo '</div>';
                 }
             }
@@ -431,7 +431,7 @@ function axis_enqueue_project_admin_scripts($hook)
                             container.append(
                                 '<div class=\"gallery-image-wrapper\" data-id=\"' + attachment.id + '\" style=\"position:relative; display:inline-block; cursor:move;\">' +
                                 '<img src=\"' + imgUrl + '\" style=\"width:100px; height:100px; object-fit:cover; border:1px solid #ccc; border-radius:4px;\" />' +
-                                '<a href=\"#\" class=\"remove-gallery-image\" style=\"position:absolute; top:2px; right:2px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;\">&times;</a>' +
+                                '<a href=\"#\" class=\"remove-gallery-image\" style=\"position:absolute; top:2px; right:2px; background:#e74c3c; color:var(--color-white); text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;\">&times;</a>' +
                                 '</div>'
                             );
                         }
@@ -612,7 +612,7 @@ function or_cpt_render_gallery_meta_box($post)
                 if ($image_url) {
                     echo '<div class="gallery-image-wrapper" data-id="' . esc_attr($img_id) . '" style="position: relative; display: inline-block;">';
                     echo '<img src="' . esc_url($image_url) . '" style="width:100px; height:100px; object-fit:cover; border:1px solid #ccc; border-radius:4px;" />';
-                    echo '<a href="#" class="remove-gallery-image" style="position:absolute; top:2px; right:2px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;">&times;</a>';
+                    echo '<a href="#" class="remove-gallery-image" style="position:absolute; top:2px; right:2px; background:#e74c3c; color:var(--color-white); text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;">&times;</a>';
                     echo '</div>';
                 }
             }
@@ -723,7 +723,7 @@ function custom_enqueue_or_admin_scripts($hook)
                             container.append(
                                 '<div class=\"gallery-image-wrapper\" data-id=\"' + attachment.id + '\" style=\"position:relative; display:inline-block;\">' +
                                 '<img src=\"' + imgUrl + '\" style=\"width:100px; height:100px; object-fit:cover; border:1px solid #ccc; border-radius:4px;\" />' +
-                                '<a href=\"#\" class=\"remove-gallery-image\" style=\"position:absolute; top:2px; right:2px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;\">&times;</a>' +
+                                '<a href=\"#\" class=\"remove-gallery-image\" style=\"position:absolute; top:2px; right:2px; background:#e74c3c; color:var(--color-white); text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;\">&times;</a>' +
                                 '</div>'
                             );
                         }
@@ -1954,3 +1954,74 @@ function axis_language_switcher()
 }
 add_action('wp_footer', 'axis_language_switcher');
 /////////////////////////////////////////////////////////////////////////
+
+// Services Template Functions //
+if (!function_exists('axis_get_services')) {
+
+    function axis_get_services() {
+
+        static $services = null;
+
+        if (null !== $services) {
+            return $services;
+        }
+
+        $services = array();
+        $file = get_theme_file_path('data/data-service.json');
+
+        if (!is_readable($file)) {
+            return $services;
+        }
+
+        $data = json_decode(file_get_contents($file), true);
+
+        if (!is_array($data)) {
+            return $services;
+        }
+
+        foreach ($data as $key => $entry) {
+            if (empty($entry['en']) || !is_array($entry['en'])) {
+                continue;
+            }
+
+            $service = wp_parse_args($entry['en'], array(
+                'id'       => $key,
+                'image'    => '',
+                'title'    => '',
+                'summary'  => '',
+                'text'     => '',
+                'list'     => array(),
+                'link'     => '',
+                'redirect' => ''
+            ));
+
+            $service['key'] = $key;
+            $service['summary'] = '' !== $service['summary'] ? $service['summary'] : $service['text'];
+            $service['projects_url'] = '' !== $service['link'] ? $service['link'] : axis_service_project_url($key);
+
+            $services[$key] = $service;
+
+        }
+
+        return $services;
+    }
+
+}
+
+if (!function_exists('axis_service_project_url')) {
+
+    function axis_service_project_url($slug) {
+
+        $link = get_term_link($slug, 'project_category');
+
+        if (!is_wp_error($link)) {
+            return $link;
+        }
+
+        $archive = get_post_type_archive_link('project');
+
+        return $archive ? $archive : home_url('/');
+
+    }
+
+}

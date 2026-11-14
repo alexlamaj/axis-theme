@@ -642,3 +642,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+// Hero Script //
+document.addEventListener('DOMContentLoaded', () => {
+
+	const hero = document.querySelector('.hc-hero');
+
+	if (!hero || !hero.classList.contains('is-animated')) return;
+
+	const shapes = hero.querySelectorAll('.hc-hero-walls path, .hc-hero-walls rect, .hc-hero-room-drawing path, .hc-hero-room-drawing line, .hc-hero-room-drawing rect, .hc-hero-room-drawing circle, .hc-hero-room-drawing polyline');
+
+	shapes.forEach(shape => {
+
+		if (typeof shape.getTotalLength !== 'function' || getComputedStyle(shape).strokeDasharray !== 'none') return;
+
+		shape.style.setProperty('--hc-length', Math.ceil(shape.getTotalLength()) + 1);
+		shape.classList.add('hc-hero-path');
+    
+	});
+
+	requestAnimationFrame(() => {
+		requestAnimationFrame(() => hero.classList.add('is-loaded'));
+	});
+  
+});

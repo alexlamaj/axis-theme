@@ -403,6 +403,7 @@ article.is-visible {
 .circle {
   width: 100px;
   height: 100px;
+  background-color: var(--color-black);
   border: 2px solid var(--color-background);
   border-radius: var(--border-radius-lg);
   display: flex;
@@ -849,7 +850,7 @@ form {
 .input-wrapper textarea {
   width: 100%;
   max-width: 600px;
-  padding: 5px 15px;
+  padding: 4px 14px;
   box-sizing: border-box;
   background-color: var(--color-background);
   border: 1px solid var(--color-black);
@@ -898,6 +899,7 @@ form {
   font-weight: 400;
   text-decoration: none;
   cursor: pointer;
+  list-style-type: none;
 }
 
 .input-dropdown li:hover {
@@ -2353,7 +2355,7 @@ form {
 .ot-hero,
 .ot-field,
 .ot-room {
-  --ot-paper: #fff;
+  --ot-paper: var(--color-white);
   --ot-muted: color-mix(
     in srgb,
     var(--color-black) 75%,
@@ -2423,7 +2425,7 @@ svg.ot .hit {
   pointer-events: stroke;
 }
 svg.ot .f-t {
-  fill: #fff;
+  fill: var(--color-white);
 }
 svg.ot .f-l {
   fill: #efefef;
@@ -2449,7 +2451,7 @@ svg.ot .f-gap {
 svg.ot .f-leaf,
 svg.ot .f-panel,
 svg.ot .f-lamp {
-  fill: #fff;
+  fill: var(--color-white);
 }
 svg.ot .part {
   cursor: pointer;
@@ -3083,6 +3085,7 @@ svg.ot .part--gases.is-active .ping {
     background 0.2s,
     color 0.2s,
     border-color 0.2s;
+    opacity: 1;
 }
 .ot-pill:hover span {
   border-color: var(--color-primary);

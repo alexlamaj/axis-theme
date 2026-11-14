@@ -3,66 +3,6 @@
  * Template Name: HC Services
  */
 
-function axis_get_services() {
-
-    static $services = null;
-
-    if (null !== $services) {
-        return $services;
-    }
-
-    $services = array();
-    $file = get_theme_file_path('data/data-service.json');
-
-    if (!is_readable($file)) {
-        return $services;
-    }
-
-    $data = json_decode(file_get_contents($file), true);
-
-    if (!is_array($data)) {
-        return $services;
-    }
-
-    foreach ($data as $key => $entry) {
-        if (empty($entry['en']) || !is_array($entry['en'])) {
-            continue;
-        }
-
-        $service = wp_parse_args($entry['en'], array(
-            'id'       => $key,
-            'image'    => '',
-            'title'    => '',
-            'text'     => '',
-            'list'     => array(),
-            'link'     => '',
-            'redirect' => ''
-        ));
-
-        $service['key'] = $key;
-        $service['projects_url'] = '' !== $service['link'] ? $service['link'] : axis_service_project_url($key);
-
-        $services[$key] = $service;
-
-    }
-
-    return $services;
-}
-
-function axis_service_project_url($slug) {
-
-    $link = get_term_link($slug, 'project_category');
-
-    if (!is_wp_error($link)) {
-        return $link;
-    }
-
-    $archive = get_post_type_archive_link('project');
-
-    return $archive ? $archive : home_url('/');
-    
-}
-
 $axis_services = axis_get_services();
 
 get_header();
