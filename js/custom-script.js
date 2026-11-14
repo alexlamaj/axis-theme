@@ -617,3 +617,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	(document.fonts ? document.fonts.ready : Promise.resolve()).then(openFromHash);
 });
+
+// Contact Tabs //
+document.addEventListener('DOMContentLoaded', () => {
+
+  const tabButtons = document.querySelectorAll('.tabs .tab');
+  const tabs = document.querySelectorAll('.tab-card');
+
+  tabButtons.forEach(function (button, index) {
+
+    button.addEventListener('click', () => {
+
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabs.forEach(tab => tab.classList.remove('active'));
+
+      button.classList.add('active');
+
+      if (tabs[index]) {
+        tabs[index].classList.add('active');
+      }
+
+    });
+
+  });
+
+});

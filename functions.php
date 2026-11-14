@@ -256,123 +256,215 @@ add_action('init', 'axis_register_custom_post_types');
 
 
 
-// Custom Meta Box for Projects (Client and Location) //
+/// Custom Meta Box for Projects (Client and Location) //
 function axis_projects_meta_boxes()
 {
-
-
-
+ 
     add_meta_box(
-
-
-
         'project_details_box',
-
         'Project Details',
-
         'axis_render_project_meta_box',
-
         'project',
-
         'side',
-
         'default'
-
-
-
+    );
+ 
+    add_meta_box(
+        'project_gallery_box',
+        'Project Gallery',
+        'axis_render_project_gallery_meta_box',
+        'project',
+        'normal',
+        'default'
     );
 };
-
+ 
 add_action('add_meta_boxes', 'axis_projects_meta_boxes');
-
-
-
+ 
+ 
 // Render the input fields for Client and Location //
 function axis_render_project_meta_box($post)
 {
-
-
-
+ 
     $client = get_post_meta($post->ID, '_axis_project_client', true);
-
     $location = get_post_meta($post->ID, '_axis_project_location', true);
-
-
-
+ 
     wp_nonce_field('axis_save_project_meta', 'axis_project_meta_nonce');
-
 ?>
-
-
-
+ 
     <p>
-
         <label for="axis_project_client"><strong>Client Name</strong></label><br>
-
         <input type="text" id="axis_project_client" name="axis_project_client" value="<?php echo esc_attr($client); ?>"
             style="width: 100%;">
-
     </p>
-
-
-
+ 
     <p>
-
         <label for="axis_project_location"><strong>Location</strong></label><br>
-
         <input type="text" id="axis_project_location" name="axis_project_location"
             value="<?php echo esc_attr($location); ?>" style="width: 100%;">
-
     </p>
-
-
-
+ 
 <?php
-
-
-
+ 
 };
-
-
-
+ 
+ 
+function axis_render_project_gallery_meta_box($post)
+{
+ 
+    $gallery_ids = get_post_meta($post->ID, '_axis_project_gallery', true);
+    $gallery_arr = ! empty($gallery_ids) ? explode(',', $gallery_ids) : array();
+?>
+ 
+    <div id="axis_project_gallery_container" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+        <?php
+        if (! empty($gallery_arr)) {
+            foreach ($gallery_arr as $img_id) {
+                $image_url = wp_get_attachment_image_url($img_id, 'thumbnail');
+                if ($image_url) {
+                    echo '<div class="gallery-image-wrapper" data-id="' . esc_attr($img_id) . '" style="position: relative; display: inline-block; cursor: move;">';
+                    echo '<img src="' . esc_url($image_url) . '" style="width:100px; height:100px; object-fit:cover; border:1px solid #ccc; border-radius:4px;" />';
+                    echo '<a href="#" class="remove-gallery-image" style="position:absolute; top:2px; right:2px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;">&times;</a>';
+                    echo '</div>';
+                }
+            }
+        }
+        ?>
+    </div>
+    <input type="hidden" id="axis_project_gallery_ids" name="axis_project_gallery_ids" value="<?php echo esc_attr($gallery_ids); ?>">
+    <button type="button" class="button button-secondary"
+        id="axis_project_gallery_upload_btn"><?php _e('Add Media Gallery', 'axis-theme'); ?></button>
+ 
+<?php
+ 
+}
+ 
+ 
 // Saving the values of Client and Location //
 function axis_save_project_meta($post_id)
 {
-
-
-
+ 
     if (!isset($_POST['axis_project_meta_nonce']) || !wp_verify_nonce($_POST['axis_project_meta_nonce'], 'axis_save_project_meta')) {
         return;
     }
-
-
-
+ 
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return;
     }
-
-
-
+ 
     if (!current_user_can('edit_post', $post_id)) {
         return;
     }
-
-
-
+ 
     if (isset($_POST['axis_project_client'])) {
-
         update_post_meta($post_id, '_axis_project_client', sanitize_text_field($_POST['axis_project_client']));
     }
-
-
-
+ 
     if (isset($_POST['axis_project_location'])) {
-
         update_post_meta($post_id, '_axis_project_location', sanitize_text_field($_POST['axis_project_location']));
     }
+ 
+    if (isset($_POST['axis_project_gallery_ids'])) {
+        $raw_ids = explode(',', sanitize_text_field($_POST['axis_project_gallery_ids']));
+        $clean_ids = array_unique(array_filter(array_map('absint', $raw_ids)));
+        update_post_meta($post_id, '_axis_project_gallery', implode(',', $clean_ids));
+    }
 };
-
+ 
 add_action('save_post', 'axis_save_project_meta');
+ 
+ 
+function axis_enqueue_project_admin_scripts($hook)
+{
+ 
+    global $post_type;
+ 
+    if (('post.php' === $hook || 'post-new.php' === $hook) && 'project' === $post_type) {
+        wp_enqueue_media();
+ 
+        $custom_js = "
+        jQuery(document).ready(function($) {
+            var frame;
+            var container = $('#axis_project_gallery_container');
+            var input = $('#axis_project_gallery_ids');
+ 
+            function syncIds() {
+                var ids = container.children('.gallery-image-wrapper').map(function() {
+                    return $(this).data('id');
+                }).get();
+                input.val(ids.join(','));
+            }
+ 
+            container.sortable({
+                items: '.gallery-image-wrapper',
+                cursor: 'move',
+                tolerance: 'pointer',
+                update: syncIds
+            });
+ 
+            $('#axis_project_gallery_upload_btn').on('click', function(e) {
+                e.preventDefault();
+ 
+                if (frame) {
+                    frame.open();
+                    return;
+                }
+ 
+                frame = wp.media({
+                    title: 'Select Project Images',
+                    button: { text: 'Add to Gallery' },
+                    library: { type: 'image' },
+                    multiple: true
+                });
+ 
+                frame.on('select', function() {
+                    var selection = frame.state().get('selection');
+                    var currentIds = input.val() ? input.val().split(',') : [];
+ 
+                    selection.each(function(attachment) {
+                        attachment = attachment.toJSON();
+                        var idStr = attachment.id.toString();
+ 
+                        if (currentIds.indexOf(idStr) === -1) {
+                            currentIds.push(idStr);
+                            var imgUrl = attachment.sizes && attachment.sizes.thumbnail ? attachment.sizes.thumbnail.url : attachment.url;
+                            container.append(
+                                '<div class=\"gallery-image-wrapper\" data-id=\"' + attachment.id + '\" style=\"position:relative; display:inline-block; cursor:move;\">' +
+                                '<img src=\"' + imgUrl + '\" style=\"width:100px; height:100px; object-fit:cover; border:1px solid #ccc; border-radius:4px;\" />' +
+                                '<a href=\"#\" class=\"remove-gallery-image\" style=\"position:absolute; top:2px; right:2px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:50%; width:20px; height:20px; text-align:center; line-height:18px; font-weight:bold;\">&times;</a>' +
+                                '</div>'
+                            );
+                        }
+                    });
+ 
+                    syncIds();
+                });
+ 
+                frame.open();
+            });
+ 
+            container.on('click', '.remove-gallery-image', function(e) {
+                e.preventDefault();
+                $(this).closest('.gallery-image-wrapper').remove();
+                syncIds();
+            });
+        });
+        ";
+ 
+        wp_add_inline_script('media-editor', $custom_js);
+    }
+}
+ 
+add_action('admin_enqueue_scripts', 'axis_enqueue_project_admin_scripts');
+ 
+ 
+function axis_get_project_gallery($post_id = null)
+{
+ 
+    $gallery_ids = get_post_meta($post_id ? $post_id : get_the_ID(), '_axis_project_gallery', true);
+ 
+    return ! empty($gallery_ids) ? array_map('absint', explode(',', $gallery_ids)) : array();
+}
 /////////////////////////////////////////////////////////////////////////
 
 // CPT for Operating Rooms Registration //
@@ -908,17 +1000,24 @@ function axis_contact_form_sub()
 
 
 
-    $firstName = sanitize_text_field($_POST['contact_first_name']);
-
-    $lastName = sanitize_text_field($_POST['contact_last_name']);
+    $full_name = sanitize_text_field($_POST['contact_full_name']);
+    $profession = sanitize_text_field($_POST['contact_profession']);
 
     $company = sanitize_text_field($_POST['contact_company']);
 
-    $subject = sanitize_text_field($_POST['contact_subject']);
-
+    $phone = sanitize_text_field($_POST['contact_phone']);
     $email = sanitize_email($_POST['contact_email']);
 
     $message = sanitize_textarea_field($_POST['contact_message']);
+    $units = axis_contact_posted_selection('services');
+    $products = axis_contact_posted_selection('products');
+
+    $referer = remove_query_arg(array('success', 'error'), wp_get_referer() ? wp_get_referer() : home_url('/'));
+
+    if (empty($full_name) || empty($phone) || empty($email) || !is_email($email)) {
+        wp_safe_redirect(add_query_arg('error', 'contact', $referer));
+        exit;
+    }
 
 
 
@@ -926,7 +1025,7 @@ function axis_contact_form_sub()
 
 
 
-        'post_title' => 'Message: ' . $subject,
+        'post_title' => 'Message: ' . $full_name,
 
         'post_type' => 'contact',
 
@@ -942,15 +1041,20 @@ function axis_contact_form_sub()
 
 
 
-        update_post_meta($post_id, '_contact_first_name', $firstName);
+        update_post_meta($post_id, '_contact_full_name', $full_name);
 
-        update_post_meta($post_id, '_contact_last_name', $lastName);
+        update_post_meta($post_id, '_contact_profession', $profession);
+
+        update_post_meta($post_id, '_contact_phone', $phone);
 
         update_post_meta($post_id, '_contact_company', $company);
 
         update_post_meta($post_id, '_contact_email', $email);
 
         update_post_meta($post_id, '_contact_message', $message);
+
+        update_post_meta($post_id, '_contact_units', $units);
+        update_post_meta($post_id, '_contact_products', $products);
 
 
 
@@ -1038,15 +1142,18 @@ function axis_render_contact_meta($post)
 
 
 
-    $firstName = get_post_meta($post->ID, '_contact_first_name', true);
-
-    $lastName = get_post_meta($post->ID, '_contact_last_name', true);
+    $full_name = get_post_meta($post->ID, '_contact_full_name', true);
 
     $company = get_post_meta($post->ID, '_contact_company', true);
 
-    $subject = str_replace('Message: ', '', get_the_title($post->ID));
+    $profession = get_post_meta($post->ID, '_contact_profession', true);
+
+    $phone = get_post_meta($post->ID, '_contact_phone', true);
 
     $email = get_post_meta($post->ID, '_contact_email', true);
+
+    $units = get_post_meta($post->ID, '_contact_units', true);
+    $products = get_post_meta($post->ID, '_contact_products', true);
 
     $message = get_post_meta($post->ID, '_contact_message', true);
 
@@ -1058,16 +1165,19 @@ function axis_render_contact_meta($post)
 
     <div style="padding: 12px; font-size: 14px; line-height: 1.6;">
 
-        <p><strong>First Name: </strong><?php echo esc_html($firstName); ?></p>
+        <p><strong>Full Name: </strong><?php echo esc_html($full_name); ?></p>
 
-        <p><strong>Last Name: </strong><?php echo esc_html($lastName); ?></p>
+        <p><strong>Profession: </strong><?php echo esc_html($profession); ?></p>
 
         <p><strong>Company Name: </strong><?php echo esc_html($company); ?></p>
 
-        <p><strong>Subject: </strong><?php echo esc_html($subject); ?></p>
+        <p><strong>Email Address: </strong><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a></p>
 
-        <p><strong>Email Address: </strong><a
-                href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a></p>
+        <p><strong>Phone Number: </strong><?php echo esc_html($phone); ?></p>
+
+        <p><strong>Units: </strong><?php echo esc_html(!empty($units) && is_array($units) ? implode(', ', $units) : '-'); ?></p>
+
+        <p><strong>Products: </strong><?php echo esc_html(!empty($products) && is_array($products) ? implode(', ', $products) : '-'); ?></p>
 
         <p><strong>Message: </strong><?php echo esc_html($message); ?></p>
 
@@ -1176,45 +1286,53 @@ function handle_contact_form_submission()
         wp_send_json_error('Security Check Failed!');
     }
 
-    $first_name = isset($_POST['contact_first_name']) ? sanitize_text_field($_POST['contact_first_name']) : '';
-    $last_name = isset($_POST['contact_last_name']) ? sanitize_text_field($_POST['contact_last_name']) : '';
+    $full_name = isset($_POST['contact_full_name']) ? sanitize_text_field($_POST['contact_full_name']) : '';
+    $profession = isset($_POST['contact_profession']) ? sanitize_text_field($_POST['contact_profession']) : '';
     $company = isset($_POST['contact_company']) ? sanitize_text_field($_POST['contact_company']) : '';
-    $subject = isset($_POST['contact_subject']) ? sanitize_text_field($_POST['contact_subject']) : '';
+    $phone = isset($_POST['contact_phone']) ? sanitize_text_field($_POST['contact_phone']) : '';
     $email = isset($_POST['contact_email']) ? sanitize_email($_POST['contact_email']) : '';
     $message_txt = isset($_POST['contact_message']) ? sanitize_textarea_field($_POST['contact_message']) : '';
+    $units = axis_contact_posted_selection('services');
+    $products = axis_contact_posted_selection('products');
 
-    if (empty($first_name) || empty($last_name) || empty($email) || !is_email($email)) {
+    if (empty($full_name) || empty($email) || !is_email($email) || empty($phone)) {
         wp_send_json_error('Please fill in all required fields!');
     }
 
     $post_id = wp_insert_post(array(
         'post_type' => 'contact',
-        'post_title' => $first_name . ' ' . $last_name,
+        'post_title' => $full_name . ' Message',
         'post_status' => 'publish'
     ));
 
     if ($post_id) {
 
-        update_post_meta($post_id, '_contact_first_name', $first_name);
-        update_post_meta($post_id, '_contact_last_name', $last_name);
+        update_post_meta($post_id, '_contact_full_name', $full_name);
+        update_post_meta($post_id, '_contact_profession', $profession);
         update_post_meta($post_id, '_contact_company', $company);
-        update_post_meta($post_id, '_contact_subject', $subject);
+        update_post_meta($post_id, '_contact_phone', $phone);
         update_post_meta($post_id, '_contact_email', $email);
         update_post_meta($post_id, '_contact_message', $message_txt);
+        update_post_meta($post_id, '_contact_units', $units);
+        update_post_meta($post_id, '_contact_products', $products);
+
     }
 
     $to = 'info@axismedical.gr';
-    $subject_email = 'New Contact Message: ' . $subject;
+    $subject_email = 'New Contact Message from: ' . $full_name; 
 
-    $message = "First Name: " . $first_name . "\n";
-    $message .= "Last Name: " . $last_name . "\n";
+    $message = "Full Name: " . $full_name . "\n";
+    $message .= "Profession: " . (($profession) ? $profession : 'No Profession Provided!') . "\n";
     $message .= "Company: " . (($company) ? $company : 'No Company Provided!') . "\n";
     $message .= "Email Address: " . $email . "\n";
+    $message .= "Phone Number: " . $phone . "\n";
+    $message .= "Units: " . (($units) ? implode(', ', $units) : 'No Units Provided') . "\n";
+    $message .= "Products: " . (($products) ? implode(', ', $products) : 'No Products Provided!') . "\n";
     $message .= "Message: " . $message_txt . "\n";
 
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
-        'Reply-To: ' . $first_name . ' ' . $last_name . ' <' . $email . '>'
+        'Reply-To: ' . $full_name . ' <' . $email . '>'
     );
 
     $sent = wp_mail($to, $subject_email, $message, $headers);
@@ -1297,46 +1415,6 @@ function handle_or_contact_form_submission()
 add_action('wp_ajax_submit_or_contact_form', 'handle_or_contact_form_submission');
 add_action('wp_ajax_nopriv_submit_or_contact_form', 'handle_or_contact_form_submission');
 /////////////////////////////////////////////////////////////////////////
-
-// Load Elementor Templates //
-
-function axis_get_elementor_templates($template_id)
-{
-
-
-
-    if (!class_exists('\Elementor\Plugin')) {
-
-        return '';
-    }
-
-
-
-    if (empty(\Elementor\Plugin::$instance->frontend)) {
-
-
-
-        if (class_exists('\Elementor\Frontend')) {
-
-
-
-            \Elementor\Plugin::$instance->frontend = new \Elementor\Frontend();
-        } else {
-
-
-
-            return '';
-        }
-    }
-
-
-
-    return \Elementor\Plugin::$instance->frontend->get_builder_content_for_display($template_id, true);
-}
-
-/////////////////////////////////////////////////////////////////////////
-
-
 
 // Creating CPT for Team Members //
 
